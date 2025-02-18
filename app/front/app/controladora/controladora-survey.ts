@@ -19,6 +19,11 @@ export class ControladoraSurvey{
         this.repoSurvey.clear();
     }
 
+    prev(){
+        const index = this.visao.prevIndex();
+        const perguntas = this.repoSurvey.get();
+        perguntas[index] ? this.visao.desenharPergunta(perguntas[index]) : this.visao.inicio();
+    }
 
     next() {
         const index = this.visao.nextIndex();

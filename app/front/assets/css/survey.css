@@ -16,12 +16,10 @@ h5, h6{
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.1), 0 6px 10px 5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   transition: transform 0.1s ease-in-out; }
 
-#form-box.close {
-  width: 0;
-  padding: 0;
-  overflow: hidden;
-  transition: 0.8s ease-in-out;
-  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0); }
+.close {
+  color: lightgrey;
+  pointer-events: none;
+}
 
 #next-btn {
   position: absolute;
