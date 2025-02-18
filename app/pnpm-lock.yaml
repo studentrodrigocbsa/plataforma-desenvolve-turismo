@@ -8,12 +8,18 @@ importers:
 
   .:
     devDependencies:
+      '@popperjs/core':
+        specifier: ^2.11.8
+        version: 2.11.8
       bootstrap:
         specifier: ^5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
       feather-icons:
         specifier: ^4.29.2
         version: 4.29.2
+      jquery:
+        specifier: ^3.7.1
+        version: 3.7.1
       json-server:
         specifier: 1.0.0-beta.3
         version: 1.0.0-beta.3
@@ -423,6 +429,9 @@ packages:
   ipaddr.js@2.2.0:
     resolution: {integrity: sha512-Ag3wB2o37wslZS19hZqorUnrnzSkpOVy+IiiDEiTqNubEYpYuHWIf6K4psgN2ZWKExS4xhVCrRVfb/wfW8fWJA==}
     engines: {node: '>= 10'}
+
+  jquery@3.7.1:
+    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
 
   json-server@1.0.0-beta.3:
     resolution: {integrity: sha512-DwE69Ep5ccwIJZBUIWEENC30Yj8bwr4Ax9W9VoIWAYnB8Sj4ReptscO8/DRHv/nXwVlmb3Bk73Ls86+VZdYkkA==}
@@ -841,6 +850,8 @@ snapshots:
   inflection@3.0.2: {}
 
   ipaddr.js@2.2.0: {}
+
+  jquery@3.7.1: {}
 
   json-server@1.0.0-beta.3:
     dependencies:

@@ -20,7 +20,7 @@ export class ControladoraMenu{
         switch(opcaoPesquisa){
             case 'aav' : 
                 const perguntas = await this.repoMASA.buscarPerguntasAcessibilidadeAtitudinal();
-                this.repoSurvey.salvarPerguntasLocalmenteParaVisitantes(perguntas);
+                this.repoSurvey.save(perguntas);
                 window.location.href = 'http://localhost:5173/front/pages/survey.html';
             break;
             default :

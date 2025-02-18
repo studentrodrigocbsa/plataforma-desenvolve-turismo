@@ -12,8 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "feather-icons": "^4.29.2",
+    "jquery": "^3.7.1",
     "json-server": "1.0.0-beta.3",
     "simple-notify": "^1.0.6",
     "typescript": "^5.7.3",

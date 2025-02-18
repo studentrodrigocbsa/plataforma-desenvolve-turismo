@@ -6,16 +6,19 @@ export class VisaoMenu{
     iniciar() {
         const controladora = new ControladoraMenu(this);
 
-        if(document.readyState == 'complete'){
-            document.getElementById('iniciar')?.addEventListener('click', () => {
-                controladora.carregarSurvey();
-            });
-        }
+        const botao = document.getElementById('iniciar') as HTMLButtonElement;
+        botao.addEventListener('click', (event) => {
+            event.preventDefault();
+            controladora.carregarSurvey();
+        });
         
+        const select = document.getElementById('pesquisas') as HTMLSelectElement;
+        if(select.value === '')
+            this.exibirNotificacaoSelecioneUmaPesquisa();
     }
 
     valorPesquisaSelecionada(): string{
-        const select = document.getElementById('pesquisa') as HTMLSelectElement;
+        const select = document.getElementById('pesquisas') as HTMLSelectElement;
         return select.value ? select.value : 'aav';
     }
 

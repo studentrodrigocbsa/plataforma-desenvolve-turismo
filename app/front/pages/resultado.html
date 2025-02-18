@@ -1,130 +1,142 @@
 <!doctype html>
 <html lang="pt-br">
+
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Resultado MASA | Desenvolve Turismo</title>
-    <meta name="description"
-          content="Desenvolve Turismo é uma plataforma de avaliação de destinos turísticos sustentáveis com base na MASA (Matriz Avaliativa de Sustentabilidade Acessível). Veja os dados da MASA."/>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Resultado MASA | Desenvolve Turismo</title>
+  <meta name="description"
+    content="Desenvolve Turismo é uma plataforma de avaliação de destinos turísticos sustentáveis com base na MASA (Matriz Avaliativa de Sustentabilidade Acessível). Veja os dados da MASA." />
 
-    <!--Inter UI font-->
-    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
+  <!--Inter UI font-->
+  <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
 
-    <!--vendors styles-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
+  <!-- JQuery, Popper, Bootstrap -->
+  <script src="../../node_modules/jquery/dist/jquery.min.js" type="module"></script>
+  <script src="../../node_modules/@popperjs/core/dist/umd/popper.min.js" type="module"></script>
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" type="module"/>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" type="module"></script>
 
-    <!-- css -->
-    <link rel="stylesheet" href="../assets/css/default.css" id="theme-color">
+  <!-- Feather icons -->
+  <script src="../../node_modules/feather-icons/dist/feather.min.js" type="module"></script>
+
+  <!-- css -->
+  <link rel="stylesheet" href="../assets/css/default.css" id="theme-color">
+
+  <!-- Own -->
+  <script src="../assets/js/print.js" type="module" defer></script>
 </head>
+
 <body>
 
-    <section class="py-7 py-md-0 bg-hero d-print-none" id="home">
-        <div class="container">
-            <div class="row vh-md-100">
-                <div class="my-auto text-left">
-                    <h2 class="text-white heading-black">Seu resultado está pronto!</h2>
-                    <p class="text-light lead">Confira o seu desempenho.</p>
-                </div>
-                <div class="text-center scroll-indicator">
-                    <i class="fa fa-arrow-circle-down text-muted" aria-hidden="true"></i>
-                    <p class="text-muted">Role para baixo</p>
-                </div>
-            </div>
+  <section class="py-7 py-md-0 bg-hero d-print-none" id="home">
+    <div class="container">
+      <div class="row vh-md-100">
+        <div class="my-auto text-left">
+          <h2 class="text-white heading-black">Seu resultado está pronto!</h2>
+          <p class="text-light lead">Confira o seu desempenho.</p>
         </div>
-    </section>
+        <div class="text-center scroll-indicator">
+          <i class="fa fa-arrow-circle-down text-muted" aria-hidden="true"></i>
+          <p class="text-muted">Role para baixo</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- Relatório -->
-<section class="w-50 mt-6 p-4 mx-auto bg-dark d-print-block">
+  <!-- Relatório -->
+  <section class="w-50 mt-6 p-4 mx-auto bg-dark d-print-block">
     <div class="container">
 
-        <!-- Disclaimer -->
-        <div class="text-center">
-            <hr>
-            <p class="text-muted my-2">Aviso de isenção de responsabilidade</p>
-            <p class="text-muted">Este relatório foi elaborado com base em informações disponíveis até a data de sua publicação. Embora todos os esforços tenham sido feitos para garantir a precisão dos dados e das análises aqui contidos, não podemos garantir que todas as informações sejam completas ou isentas de erros. As opiniões expressas neste relatório são de responsabilidade dos autores e não refletem necessariamente a nossa opinião. Nós não nos responsabilizamos por quaisquer decisões tomadas com base nas informações fornecidas neste relatório. O mesmo possui caráter meramente descritivo e não prescritivo. Recomenda-se que os leitores consultem profissionais qualificados antes de tomar qualquer decisão com base no conteúdo deste documento.</p>
-            <hr>
-        </div>
+      <!-- Disclaimer -->
+      <div class="text-center">
+        <hr>
+        <p class="text-muted my-2">Aviso de isenção de responsabilidade</p>
+        <p class="text-muted">Este relatório foi elaborado com base em informações disponíveis até a data de sua
+          publicação. Embora todos os esforços tenham sido feitos para garantir a precisão dos dados e das análises aqui
+          contidos, não podemos garantir que todas as informações sejam completas ou isentas de erros. As opiniões
+          expressas neste relatório são de responsabilidade dos autores e não refletem necessariamente a nossa opinião.
+          Nós não nos responsabilizamos por quaisquer decisões tomadas com base nas informações fornecidas neste
+          relatório. O mesmo possui caráter meramente descritivo e não prescritivo. Recomenda-se que os leitores
+          consultem profissionais qualificados antes de tomar qualquer decisão com base no conteúdo deste documento.</p>
+        <hr>
+      </div>
 
-        <!-- Dados do avaliado -->
-        <div class="table-responsive my-6">
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Avaliado</th>
-                    <th scope="col">UF</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Data</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="table-active">
-                    <th scope="row">1</th>
-                    <td>Marks Pousada</td>
-                    <td>AM</td>
-                    <td>Manaus</td>
-                    <td>12/09/2024</td>
-                  </tr>
-                </tbody>
-            </table>
-        </div>
+      <!-- Dados do avaliado -->
+      <div class="table-responsive my-6">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Avaliado</th>
+              <th scope="col">UF</th>
+              <th scope="col">Cidade</th>
+              <th scope="col">Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-active">
+              <th scope="row">1</th>
+              <td>Marks Pousada</td>
+              <td>AM</td>
+              <td>Manaus</td>
+              <td>12/09/2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- Dados -->
-        <div>
-            <canvas id="myChart"></canvas>
-          </div>
-          
-          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-          
-          <script>
-            const ctx = document.getElementById('myChart');
-          
-            new Chart(ctx, {
-              type: 'bar',
-              data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                  label: '# of Votes',
-                  data: [12, 19, 3, 5, 2, 3],
-                  borderWidth: 1
-                }]
-              },
-              options: {
-                scales: {
-                  y: {
-                    beginAtZero: true
-                  }
-                }
+      <!-- Dados -->
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+      <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+              label: '# of Votes',
+              data: [12, 19, 3, 5, 2, 3],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
               }
-            });
-          </script>
-        
-    </div>
-</section>
+            }
+          }
+        });
+      </script>
 
-<section class="m-2 py-7 bg-dark d-print-none">
+    </div>
+  </section>
+
+  <section class="m-2 py-7 bg-dark d-print-none">
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 mx-auto text-center">
-                <h2 class="text-white heading-black">Obrigado!</h2>
-                <p class="text-light lead">Sua pesquisa acaba de contribuir para o desenvolvimento do turismo sustentável</p>
-                <p class="text-muted">Ao sair desta página, este relatório será perdido. Imprima-o clicando <u id="download">AQUI</u> ou teclando CTRL+P.</p>
-                <a class="btn btn-primary" href="{% url 'forms:desenvolveturismo-home' %}">
-                    Finalizar
-                </a>
-            </div>
+      <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+          <h2 class="text-white heading-black">Obrigado!</h2>
+          <p class="text-light lead">Sua pesquisa acaba de contribuir para o desenvolvimento do turismo sustentável</p>
+          <p class="text-muted">Ao sair desta página, este relatório será perdido. Imprima-o clicando <u
+              id="download">AQUI</u> ou teclando CTRL+P.</p>
+          <a class="btn btn-primary" href="{% url 'forms:desenvolveturismo-home' %}">
+            Finalizar
+          </a>
         </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-<!-- js -->
-<script src="{% static 'js/print.js' %}"></script>
+  
 </body>
+
 </html>

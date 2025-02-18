@@ -11,7 +11,7 @@ $app->use(cors([ 'origin' => [ 'http://localhost:5173', 'http://localhost:8080' 
 $pdo = Conexao::pdo();
 
 
-require_once 'Rotas.php';
+require_once 'src/Rotas.php';
 
 
 $app->listen();
