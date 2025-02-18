@@ -1,0 +1,22 @@
+{
+  "name": "app",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^5.3.3",
+    "feather-icons": "^4.29.2",
+    "json-server": "1.0.0-beta.3",
+    "simple-notify": "^1.0.6",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  }
+}
