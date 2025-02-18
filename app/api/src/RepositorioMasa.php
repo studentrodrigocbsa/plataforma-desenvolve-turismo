@@ -33,7 +33,46 @@ class RepositorioMasa
     }
   }
 
-  public function contabilizarVotosVisitante(){
+  public function contabilizarVotosRespondente($dados = []): bool{
+    try {
+      $sql = 
+      '
+        UPDATE opcao SET votos = votos + :voto WHERE opcao = :opcao AND pergunta = :id
+      ';
+      $ps1 = $this->pdo->prepare( $sql );
+
+      foreach($dados as $resposta){
+
+        $sql1 = 
+        '
+          SELECT id from pergunta WHERE titulo = :titulo
+        ';
+        $ps2 = $this->pdo->prepare($sql1);
+        $ps2->execute(
+          [
+            'titulo' => $resposta->titulo
+          ]
+        );
+        $id = $ps2->fetch();
+
+        foreach($resposta->opcoes as $opcao){
+          $ps1->execute( 
+            [ 
+              'id' => $id['id'],
+              'opcao' => $opcao->opcao,
+              'voto' => $opcao->voto
+            ] 
+          );
+        }
+
+      }
+
+      
+      return true;
+
+    } catch ( Exception $ex ) {
+      throw new Exception( $ex->getMessage(), (int) $ex->getCode(), $ex );
+    }
 
   }
 }

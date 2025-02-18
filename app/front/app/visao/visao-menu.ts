@@ -19,7 +19,7 @@ export class VisaoMenu{
 
     valorPesquisaSelecionada(): string{
         const select = document.getElementById('pesquisas') as HTMLSelectElement;
-        return select.value ? select.value : 'aav';
+        return select.value ? select.value : '';
     }
 
     exibirNotificacaoSelecioneUmaPesquisa() {

@@ -11,9 +11,6 @@
 
     <script type="module" src="../app/index-menu.ts" defer></script>
 
-    <!--Inter UI font-->
-    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
-
     <!-- JQuery, Popper, Bootstrap -->
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
@@ -37,7 +34,7 @@
     <nav aria-label="breadcrumb" class="m-4">
         <ol class="breadcrumb bg-transparent">
             <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Pesquisa</li>
+            <li class="breadcrumb-item active" aria-current="page">Menu</li>
         </ol>
     </nav>
 
@@ -51,14 +48,13 @@
 
                     <select class="form-select" aria-label="Selecione uma pesquisa" id="pesquisas" name="pesquisas">
                         <option value="" selected>-- Selecione uma pesquisa --</option>
-                        <option value="aav">Acessibilidade Atitudinal Visitantes</option>
+                        <option value="aag">Acessibilidade Atitudinal Gestor</option>
                     </select>
-                    <i data-feather="help-circle"></i>
 
                     <hr>
 
-                    <p class="text-muted mt-4">Dica: acione os ícones de pergunta para esclarecer dúvidas.</p>
-                    <p class="text-muted">Nota: apenas a pesquisa Acessibilidade Atitudinal Visitantes está
+                    <p class="text-muted mt-4">Dica: acione os ícones de informação <i data-feather="info"></i> para esclarecer dúvidas.</p>
+                    <p class="text-muted">Nota: apenas a pesquisa Acessibilidade Atitudinal Gestor está
                         disponível no momento.</p>
 
                     <button id="iniciar" class="btn btn-primary">INICIAR!</button>

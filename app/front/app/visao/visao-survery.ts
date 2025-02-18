@@ -8,16 +8,39 @@ export class VisaoSurvey{
     iniciar() {
         const controladora = new ControladoraSurvey(this);
 
-        /*
         window.onbeforeunload = () => {
-            controladora.limpar()
+            controladora.limpar();
         }
-        */
 
         const nxt = document.getElementById('next-btn') as HTMLButtonElement;
         nxt.addEventListener('click', () => {
             controladora.next();
         });
+    }
+
+    
+    exibirNotificacaoVocePossuiPerguntasNaoRespondidas() {
+        Notificacao.exibirNotificacao(['Você possui perguntas ainda não respondidas... volte para concluí-las!'],TIPOS_NOTIFICACAO.AVISO);
+    }
+    exibirNotificacaoSurveyContabilizado(msg: string) {
+        Notificacao.exibirNotificacao([msg],TIPOS_NOTIFICACAO.SUCESSO);
+    }
+    exibirNotificacaoOcorreuUmErro(msg: string) {
+        Notificacao.exibirNotificacao([msg],TIPOS_NOTIFICACAO.ERRO);
+    }
+
+    telaAgradecimento(){
+        const divConteudo = document.getElementById('conteudo') as HTMLDivElement;
+        divConteudo.innerHTML = '';
+        const obrigado = document.createElement('h5');
+        obrigado.innerText = "Obrigado!!";
+        const btn = document.createElement('button');
+        btn.classList.add('btn','btn-primary');
+        btn.innerText = 'Concluir';
+        btn.addEventListener('click', () => {
+            window.location.href = 'http://localhost:5173/'
+        });
+        divConteudo.append(obrigado,btn);
     }
 
     
@@ -31,7 +54,6 @@ export class VisaoSurvey{
     }
 
     desenharPergunta(pergunta: {titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}) {
-        console.log(VisaoSurvey.INDEX_ATUAL);
         const divConteudo = document.getElementById('conteudo') as HTMLDivElement;
         divConteudo.innerHTML = '';
         const progresso = document.createElement('h6');
@@ -46,8 +68,8 @@ export class VisaoSurvey{
                 divConteudo.innerHTML +=
                 `
                 <div class="form-check form-check-inline p-1">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" checked id="${pergunta.titulo},${opcao.opcao}">
-                    <label class="form-check-label" for="${pergunta.titulo},${opcao.opcao}">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" checked id="${pergunta.titulo}=${opcao.opcao}">
+                    <label class="form-check-label" for="${pergunta.titulo}=${opcao.opcao}">
                         ${opcao.opcao}
                     </label>
                 </div>
@@ -56,8 +78,8 @@ export class VisaoSurvey{
                 divConteudo.innerHTML +=
                 `
                 <div class="form-check form-check-inline p-1">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="${pergunta.titulo},${opcao.opcao}">
-                    <label class="form-check-label" for="${pergunta.titulo},${opcao.opcao}">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="${pergunta.titulo}=${opcao.opcao}">
+                    <label class="form-check-label" for="${pergunta.titulo}=${opcao.opcao}">
                         ${opcao.opcao}
                     </label>
                 </div>
@@ -103,6 +125,7 @@ export class VisaoSurvey{
         msg.innerText = "Você chegou ao fim! Agora, clique no botão abaixo para enviar suas respostas. Ou volte para revisar suas escolhas.";
         const btn = document.createElement('button');
         btn.classList.add('btn','btn-primary');
+        btn.id = 'enviar';
         btn.innerText = 'Enviar!';
 
         divConteudo.append(title,msg,btn);
@@ -118,6 +141,10 @@ export class VisaoSurvey{
         prev.addEventListener('click', () => {
             controladora.prev();
         });
+        const botaoEnviar = document.getElementById('enviar') as HTMLButtonElement;
+        botaoEnviar.addEventListener('click', () => {
+            controladora.enviar();
+        })
     }
 
     inicio(){

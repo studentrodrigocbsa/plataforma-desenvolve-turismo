@@ -18,7 +18,7 @@ export class ControladoraMenu{
     async carregarSurvey() {
         const opcaoPesquisa = this.visao.valorPesquisaSelecionada();
         switch(opcaoPesquisa){
-            case 'aav' : 
+            case 'aag' : 
                 const perguntas = await this.repoMASA.buscarPerguntasAcessibilidadeAtitudinal();
                 this.repoSurvey.save(perguntas);
                 window.location.href = 'http://localhost:5173/front/pages/survey.html';

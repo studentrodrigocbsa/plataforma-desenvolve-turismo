@@ -15,6 +15,29 @@ export class ControladoraSurvey{
     }
 
 
+    async enviar(){
+        let prontoParaEnviar = true;
+        const survey = this.repoSurvey.get();
+        survey.forEach(pergunta => {
+            if(pergunta.respondida == false){
+                prontoParaEnviar = false;
+            }
+        });
+
+        if(prontoParaEnviar){
+            // TODO: pegar dados do respondente e enviar junto
+            const resposta = await this.repoMASA.enviar(survey)
+            if(resposta.success){
+                this.visao.exibirNotificacaoSurveyContabilizado(resposta.message);
+                this.visao.telaAgradecimento();
+            } else{ // Espero que não chegue aqui :(
+                this.visao.exibirNotificacaoOcorreuUmErro(resposta.message);
+            }
+        } else{
+            this.visao.exibirNotificacaoVocePossuiPerguntasNaoRespondidas();
+        }
+    }
+
     limpar(){
         this.repoSurvey.clear();
     }
@@ -34,10 +57,11 @@ export class ControladoraSurvey{
     atualizarVoto(e: Event) {
         // Só pode um voto por pergunta, então, a cada 'change' resetar onde tiver voto 1 --> 0 e alterar o voto na pergunta de 0 --> 1
         const input = e.target as HTMLInputElement;
-        const [titulo,opcao] = input.id.split(',');
+        const [titulo,opcao] = input.id.split('=');
         const perguntas = this.repoSurvey.get();
         perguntas.forEach(p => {
             if(p.titulo == titulo){
+                p.respondida = true;
                 p.opcoes.forEach(o => {
                     o.voto = 0;
                     if(o.opcao == opcao){
