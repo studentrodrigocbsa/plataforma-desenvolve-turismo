@@ -32,10 +32,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no -p $WSL_PORT $WSL_USER@$WSL_HOST << 'EOF'
             cd ~/tcc/plataforma-desenvolve-turismo
             git pull origin main
-            cd ~/tcc/plataforma-desenvolve-turismo/app/forms/front
-            pnpm add curl
-            cd ~/tcc/plataforma-desenvolve-turismo/app/forms/api
-            composer install
-            composer dump-autoload
-            sudo systemctl restart nginx 
+            sudo systemctl restart nginx
           EOF
