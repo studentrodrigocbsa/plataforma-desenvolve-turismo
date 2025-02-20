@@ -13,16 +13,27 @@ jobs:
       - name: Clonar o repositório
         uses: actions/checkout@v3
 
+      - name: Testar conexão SSH
+        env:
+          WSL_USER: "deploy"
+          WSL_HOST: "0.tcp.sa.ngrok.io"
+          WSL_PORT: "19141"
+        run: |
+          ssh -v -p $WSL_PORT -o StrictHostKeyChecking=no $WSL_USER@$WSL_HOST "echo 'Conexão SSH bem-sucedida'"
+
+
       - name: Configurar SSH e Deploy
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WSL_USER: "deploy"
           WSL_HOST: "0.tcp.sa.ngrok.io"
-          WSL_PORT: "13281"
+          WSL_PORT: "19141"
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no -p $WSL_PORT $WSL_USER@$WSL_HOST << 'EOF'
             cd ~/tcc/plataforma-desenvolve-turismo
             git pull origin main
@@ -31,5 +42,5 @@ jobs:
             cd ~/tcc/plataforma-desenvolve-turismo/app/forms/api
             composer install
             composer dump-autoload
-            sudo systemctl restart nginx  # Se estiver usando Nginx
+            sudo systemctl restart nginx 
           EOF
