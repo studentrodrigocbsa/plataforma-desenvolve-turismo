@@ -1,0 +1,31 @@
+name: Deploy para WSL
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar o repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar SSH e Deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          WSL_USER: "deploy"
+          WSL_HOST: "172.22.94.198" 
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -o StrictHostKeyChecking=no $WSL_USER@$WSL_HOST << 'EOF'
+            cd /caminho/do/seu/projeto
+            git pull origin main
+            source venv/bin/activate  # Se for um projeto Python
+            pip install -r requirements.txt
+            sudo systemctl restart nginx  # Se estiver usando Nginx
+          EOF
