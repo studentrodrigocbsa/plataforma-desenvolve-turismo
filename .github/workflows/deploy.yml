@@ -23,9 +23,12 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no $WSL_USER@$WSL_HOST << 'EOF'
-            cd /caminho/do/seu/projeto
+            cd ~/tcc/plataforma-desenvolve-turismo
             git pull origin main
-            source venv/bin/activate  # Se for um projeto Python
-            pip install -r requirements.txt
+            cd ~/tcc/plataforma-desenvolve-turismo/app/forms/front
+            pnpm add curl
+            cd ~/tcc/plataforma-desenvolve-turismo/app/forms/api
+            composer install
+            composer dump-autoload
             sudo systemctl restart nginx  # Se estiver usando Nginx
           EOF
