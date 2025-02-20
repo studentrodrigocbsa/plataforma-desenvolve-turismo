@@ -17,12 +17,13 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WSL_USER: "deploy"
-          WSL_HOST: "tcp://0.tcp.sa.ngrok.io:10016" 
+          WSL_HOST: "0.tcp.sa.ngrok.io"
+          WSL_PORT: "10016"
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -o StrictHostKeyChecking=no $WSL_USER@$WSL_HOST << 'EOF'
+          ssh -o StrictHostKeyChecking=no -p $WSL_PORT $WSL_USER@$WSL_HOST << 'EOF'
             cd ~/tcc/plataforma-desenvolve-turismo
             git pull origin main
             cd ~/tcc/plataforma-desenvolve-turismo/app/forms/front
