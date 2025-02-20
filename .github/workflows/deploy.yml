@@ -18,7 +18,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WSL_USER: "deploy"
           WSL_HOST: "0.tcp.sa.ngrok.io"
-          WSL_PORT: "17161"
+          WSL_PORT: "17292"
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
