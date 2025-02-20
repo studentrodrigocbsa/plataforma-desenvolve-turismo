@@ -15,7 +15,8 @@ export class RepositorioMASA{
     }
 
     async buscarPerguntasAcessibilidadeAtitudinal() {
-        const response = await fetch( `${API}/masa/aa`, { method: 'get' } );
+        const response = await fetch( `${API}/masa/aa`, { method: 'get', headers: {'ngrok-skip-browser-warning':'yoloo'} } );
+        console.log(response);
         const text = await response.text();
         if(response.status >= 400){
             console.log(text);

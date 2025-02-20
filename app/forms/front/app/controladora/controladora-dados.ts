@@ -1,3 +1,4 @@
+import { DOMAIN } from "../infra/DOMAIN";
 import { Respondente } from "../modelo/respondente";
 import { RepositorioMASA } from "../repositorio/repositorio-masa";
 import { RepositorioSurvey } from "../repositorio/repositorio-survey";
@@ -24,7 +25,7 @@ export class ControladoraDados{
             const cargo = this.visao.valorCargo();
             const dados = new Respondente(perfil,idade,escolaridade,cargo);
             this.repoSurvey.salvarDadosRespondente(dados);
-            window.location.href = 'http://localhost:5173/front/pages/survey.html';
+            window.location.href = `${DOMAIN}/front/pages/survey.html`;
         }
     }
 }

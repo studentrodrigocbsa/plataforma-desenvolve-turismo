@@ -1,3 +1,4 @@
+import { DOMAIN } from "../infra/DOMAIN";
 import { RepositorioMASA } from "../repositorio/repositorio-masa";
 import { RepositorioSurvey } from "../repositorio/repositorio-survey";
 import { VisaoMenu } from "../visao/visao-menu";
@@ -21,7 +22,7 @@ export class ControladoraMenu{
             case '1' : 
                 const perguntas = await this.repoMASA.buscarPerguntasAcessibilidadeAtitudinal();
                 this.repoSurvey.save(perguntas);
-                window.location.href = 'http://localhost:5173/front/pages/dados.html';
+                window.location.href = `${DOMAIN}/front/pages/dados.html`;
             break;
             default :
                 this.visao.exibirNotificacaoSelecioneUmaPesquisa();

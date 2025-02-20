@@ -1,4 +1,5 @@
 import { ControladoraSurvey } from "../controladora/controladora-survey";
+import { DOMAIN } from "../infra/DOMAIN";
 import { Notificacao, TIPOS_NOTIFICACAO } from "../infra/notificacao";
 
 export class VisaoSurvey{
@@ -48,21 +49,21 @@ export class VisaoSurvey{
         botaoHome.classList.add('btn','btn-secondary');
         botaoHome.innerText = 'Voltar p/ Home';
         botaoHome.addEventListener('click', () => {
-            window.location.href = 'http://localhost:5173/'
+            window.location.href = `${DOMAIN}`
         });
 
         const botaoPagInicial = document.createElement('button');
         botaoPagInicial.classList.add('btn','btn-primary');
         botaoPagInicial.innerText = "Responder Novamente";
         botaoPagInicial.addEventListener('click', () => {
-            window.location.href = 'http://localhost:5173/front/pages/menu.html'
+            window.location.href = `${DOMAIN}/front/pages/menu.html`
         });
 
         const botaoRelatorio = document.createElement('button');
         botaoRelatorio.classList.add('btn','btn-secondary');
         botaoRelatorio.innerText = "Pág. Relatório";
         botaoRelatorio.addEventListener('click', () => {
-            window.location.href = 'http://localhost:5173/front/pages/relatorio.html'
+            window.location.href = `${DOMAIN}/front/pages/relatorio.html`
         });
 
         divBotoes.append(botaoHome,botaoPagInicial,botaoRelatorio);
