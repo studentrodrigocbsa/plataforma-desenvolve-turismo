@@ -24,7 +24,7 @@ jobs:
           echo -e "${SSH_PRIVATE_KEY//'\n'/$'\n'}" > ~/.ssh/id_rsa  # Salva a chave corretamente
           chmod 600 ~/.ssh/id_rsa  # Permissões corretas para a chave privada
           
-          ssh-keyscan -H $WSL_HOST >> ~/.ssh/known_hosts  # Evita erro de host desconhecido
+          ssh-keyscan -p $WSL_PORT -H $WSL_HOST >> ~/.ssh/known_hosts
           
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
