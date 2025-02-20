@@ -3,7 +3,7 @@ name: Deploy para WSL
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
