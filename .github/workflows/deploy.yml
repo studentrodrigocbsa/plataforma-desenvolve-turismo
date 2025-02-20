@@ -13,10 +13,27 @@ jobs:
       - name: Clonar o repositório
         uses: actions/checkout@v3
 
+
+      - name: Configurar SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh  # Cria o diretório se não existir
+          chmod 700 ~/.ssh  # Define a permissão correta
+          
+          echo -e "${SSH_PRIVATE_KEY//'\n'/$'\n'}" > ~/.ssh/id_rsa  # Salva a chave corretamente
+          chmod 600 ~/.ssh/id_rsa  # Permissões corretas para a chave privada
+          
+          ssh-keyscan -H $WSL_HOST >> ~/.ssh/known_hosts  # Evita erro de host desconhecido
+          
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+
+
       - name: Verificar chave SSH
         run: |
           ls -lah ~/.ssh
-          cat ~/.ssh/id_rsa | head -n 5  # Apenas para verificar se a chave existe (sem expor tudo)
+          cat ~/.ssh/id_rsa | head -n 5  # Exibe parte da chave para confirmar
 
 
       - name: Testar conexão SSH
@@ -26,17 +43,6 @@ jobs:
           WSL_PORT: "11683"
         run: |
           ssh -v -p $WSL_PORT -o StrictHostKeyChecking=no $WSL_USER@$WSL_HOST "echo 'Conexão SSH bem-sucedida'"
-
-      - name: Configurar SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo -e "${SSH_PRIVATE_KEY//'\n'/$'\n'}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-
 
 
       - name: Deploy
