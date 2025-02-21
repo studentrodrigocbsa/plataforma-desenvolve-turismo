@@ -10,7 +10,7 @@ class RepositorioMasa
 
   public function dadosRespondentesPesquisa($id){
     try {
-      $ps = $this->pdo->prepare('');
+      $ps = $this->pdo->prepare('SELECT r.tipo,r.faixa_etaria,r.escolaridade,r.cargo,r.nota,s.categoria,p.titulo,o.opcao,o.votos FROM respondente r JOIN survey s ON r.survey=s.id JOIN pergunta p ON s.id = p.survey JOIN opcao o ON p.id = o.pergunta');
       $ps->execute();
       $dados = $ps->fetchAll(PDO::FETCH_ASSOC);
 
@@ -84,10 +84,9 @@ class RepositorioMasa
 
       $this->pdo->beginTransaction();
 
-
       $sqlContabilizarVotos = 
       '
-        UPDATE opcao SET votos = votos + :voto WHERE opcao = :opcao AND pergunta = (SELECT id from survey WHERE categoria = "Acessibilidade Atitudinal - Escala de Capacitismo");
+        UPDATE opcao SET votos = votos + :voto WHERE opcao = :opcao AND pergunta = (SELECT p.id from pergunta p JOIN survey s ON p.survey = s.id WHERE s.categoria = "Acessibilidade Atitudinal - Escala de Capacitismo" AND p.titulo = :titulo);
       ';
       $psContabilizarVotos = $this->pdo->prepare( $sqlContabilizarVotos );
     
@@ -98,7 +97,8 @@ class RepositorioMasa
           $sucesso = $psContabilizarVotos->execute( 
             [ 
               'opcao' => $opcao->opcao,
-              'voto' => $opcao->voto
+              'voto' => $opcao->voto,
+              'titulo' => $resposta->titulo
             ] 
           );
           if($sucesso === false){

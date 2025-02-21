@@ -23,18 +23,20 @@ export class ControladoraSurvey{
                 prontoParaEnviar = false;
             }
         });
-
-        if(prontoParaEnviar){
-            const respondente = this.repoSurvey.getDadosRespondente();
-            const resposta = await this.repoMASA.enviar(survey,respondente);
-            if(resposta.success){
-                this.visao.exibirNotificacaoSurveyConcluidoSucesso(resposta.message);
-                this.visao.telaAgradecimento();
-            } else{ // Espero que não chegue aqui :(
-                this.visao.exibirNotificacaoOcorreuUmErro(resposta.message);
+        try{
+            if(prontoParaEnviar){
+                const respondente = this.repoSurvey.getDadosRespondente();
+                const resposta = await this.repoMASA.enviar(survey,respondente);
+                if(resposta.success){
+                    this.visao.exibirNotificacaoSurveyConcluidoSucesso(resposta.message);
+                    this.visao.telaAgradecimento();
+                }
+            } else{
+                this.visao.exibirNotificacaoVocePossuiPerguntasNaoRespondidas();
             }
-        } else{
-            this.visao.exibirNotificacaoVocePossuiPerguntasNaoRespondidas();
+        }
+        catch(e:any){
+            this.visao.exibirNotificacaoOcorreuUmErro(e.message);
         }
     }
 
