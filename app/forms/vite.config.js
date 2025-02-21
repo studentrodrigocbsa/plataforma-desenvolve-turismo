@@ -7,8 +7,10 @@ export default defineConfig({
     strictPort: true, // Garante que a porta escolhida será usada
     allowedHosts: ["93eb-177-55-205-120.ngrok-free.app"], // Define a origem permitida
     cors: true, // Habilita CORS
+    /*
     hmr: {
       clientPort: 443, // Necessário para funcionar corretamente com ngrok
     }
+    */
   }
 });

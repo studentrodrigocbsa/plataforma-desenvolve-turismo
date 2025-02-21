@@ -36,7 +36,7 @@ class RepositorioMasa
 
   public function buscarPesquisaAA(): array{
     try {
-        $ps = $this->pdo->prepare('SELECT p.titulo,o.opcao FROM pergunta p JOIN opcao o ON o.pergunta = p.id ORDER BY p.id');
+        $ps = $this->pdo->prepare('SELECT p.titulo,o.opcao FROM pergunta p JOIN opcao o ON o.pergunta = p.id ORDER BY p.ordem');
         $ps->execute();
         $dados = $ps->fetchAll(PDO::FETCH_ASSOC);
   
@@ -60,7 +60,7 @@ class RepositorioMasa
     }
   }
 
-  public function contabilizarRespondenteSurvey($respondente): bool{
+  public function salvarRespondenteSurvey($respondente): bool{
     try{
       $sql = 'INSERT INTO respondente(tipo,faixa_etaria,escolaridade,cargo,nota,survey) VALUES (:tipo,:faixa_etaria,:escolaridade,:cargo,:nota,:survey)';
       $ps = $this->pdo->prepare($sql);
@@ -79,46 +79,42 @@ class RepositorioMasa
     }
   }
 
-  public function contabilizarVotosSurvey($survey): bool{
+  public function contabilizarVotosSurveyAA($survey): bool{
     try {
+
+      $this->pdo->beginTransaction();
+
+
       $sqlContabilizarVotos = 
       '
-        UPDATE opcao SET votos = votos + :voto WHERE opcao = :opcao AND pergunta = :id;
+        UPDATE opcao SET votos = votos + :voto WHERE opcao = :opcao AND pergunta = (SELECT id from survey WHERE categoria = "Acessibilidade Atitudinal - Escala de Capacitismo");
       ';
       $psContabilizarVotos = $this->pdo->prepare( $sqlContabilizarVotos );
+    
 
       foreach($survey as $resposta){
 
-        $sqlIdPergunta = 
-        '
-          SELECT id from pergunta WHERE titulo = :titulo
-        ';
-        $psIdPergunta = $this->pdo->prepare($sqlIdPergunta);
-        $psIdPergunta->execute(
-          [
-            'titulo' => $resposta->titulo
-          ]
-        );
-        $id = $psIdPergunta->fetch();
-        $idPergunta = $id['id'];
-
         foreach($resposta->opcoes as $opcao){
-          $psContabilizarVotos->execute( 
+          $sucesso = $psContabilizarVotos->execute( 
             [ 
-              'id' => $idPergunta,
               'opcao' => $opcao->opcao,
               'voto' => $opcao->voto
             ] 
           );
+          if($sucesso === false){
+            throw new Exception('Ocorreu um erro interno na contabilização de votos e por isso sua pesquisa não foi considerada. :(');
+          }
         }
 
       }
 
+      $this->pdo->commit();
       
       return true;
 
     } catch ( Exception $ex ) {
-      throw new Exception( $ex->getMessage(), (int) $ex->getCode(), $ex );
+      $this->pdo->rollBack();
+      throw $ex;
     }
 
   }

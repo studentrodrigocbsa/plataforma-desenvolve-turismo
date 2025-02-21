@@ -13,7 +13,7 @@ export class ControladoraRelatorio{
 
 
     async carregarRelatorio(){
-        const dados = await this.repoMASA.pegarDadosPesquisaId(1);
+        const dados = await this.repoMASA.pegarDadosPesquisaId(1); // só tem 1 pesquisa por enquanto, survey de id 1.
         
     }
 }

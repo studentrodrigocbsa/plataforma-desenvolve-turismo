@@ -11,6 +11,7 @@ CREATE TABLE survey(
 
 CREATE TABLE pergunta(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ordem INT NOT NULL,
     titulo VARCHAR(250) NOT NULL,
     survey INT NOT NULL,
     CONSTRAINT unq_pergunta__titulo UNIQUE (titulo),
@@ -39,23 +40,23 @@ CREATE TABLE respondente(
 /* Dados do app admin Dashboard (TODO) */
 INSERT INTO survey(categoria) VALUES ('Acessibilidade Atitudinal - Escala de Capacitismo');
 
-INSERT INTO pergunta (titulo,survey) 
+INSERT INTO pergunta (ordem,titulo,survey) 
     VALUES 
-        ("As pessoas com deficiência têm conseguido mais do que merecem",1),
-        ("As pessoas com deficiência recebem muito respeito e consideração",1),
-        ("Elas são exigentes em relação aos seus direitos",1),
-        ("A discriminação dessas pessoas é um problema no Brasil",1),
-        ("As pessoas com deficiência têm muita influência política",1),
-        ("Quando se esforçam, pessoas com deficiência acabam não necessitando de ajuda",1),
-        ("As pessoas com deficiência devem superar eventuais preconceitos sem apoio como aconteceu com outros grupos",1),
-        ("Tem-se dado demasiada importância aos movimentos de protesto de pessoas com deficiência",1),
-        ("Parece pouco prudente dar importância às suas queixas",1),
-        ("Pessoas com deficiência possuem uma beleza diferente",1),
-        ("Pessoas com deficiência dificultam a prestação de serviços das empresas de turismo",1),
-        ("Pessoas com deficiência devem ser tratadas de modo diferente por serem diferentes",1),
-        ("A maioria das pessoas com deficiência são incapazes de fazer turismo sozinhas (sem companhia)",1),
-        ("Os prestadores de serviços turísticos gastam mais para atendê-las",1),
-        ("Outros visitantes se incomodam em compartilhar os equipamentos e/ou ambientes com essas pessoas",1);
+        (1,"As pessoas com deficiência têm conseguido mais do que merecem",1),
+        (2,"As pessoas com deficiência recebem muito respeito e consideração",1),
+        (3,"Elas são exigentes em relação aos seus direitos",1),
+        (4,"A discriminação dessas pessoas é um problema no Brasil",1),
+        (5,"As pessoas com deficiência têm muita influência política",1),
+        (6,"Quando se esforçam, pessoas com deficiência acabam não necessitando de ajuda",1),
+        (7,"As pessoas com deficiência devem superar eventuais preconceitos sem apoio como aconteceu com outros grupos",1),
+        (8,"Tem-se dado demasiada importância aos movimentos de protesto de pessoas com deficiência",1),
+        (9,"Parece pouco prudente dar importância às suas queixas",1),
+        (10,"Pessoas com deficiência possuem uma beleza diferente",1),
+        (11,"Pessoas com deficiência dificultam a prestação de serviços das empresas de turismo",1),
+        (12,"Pessoas com deficiência devem ser tratadas de modo diferente por serem diferentes",1),
+        (13,"A maioria das pessoas com deficiência são incapazes de fazer turismo sozinhas (sem companhia)",1),
+        (14,"Os prestadores de serviços turísticos gastam mais para atendê-las",1),
+        (15,"Outros visitantes se incomodam em compartilhar os equipamentos e/ou ambientes com essas pessoas",1);
 
 INSERT INTO opcao (pergunta, opcao) 
     VALUES 
@@ -148,3 +149,4 @@ INSERT INTO opcao (pergunta, opcao)
         (15,'Nem Concordo/Nem Discordo'),
         (15,'Concordo'),
         (15,'Concordo Totalmente');
+
