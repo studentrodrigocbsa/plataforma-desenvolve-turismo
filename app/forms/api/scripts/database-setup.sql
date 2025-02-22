@@ -26,7 +26,7 @@ CREATE TABLE opcao(
 ) ENGINE=INNODB;
 
 CREATE TABLE respondente(
-    tipo ENUM('Gestor','Visitante','Residente Local') NOT NULL,
+    perfil ENUM('Gestor','Visitante','Residente Local') NOT NULL,
     faixa_etaria ENUM('18...21','22...25','26...29','30...33','34...37','38...41','42+') NOT NULL,
     escolaridade ENUM('Ensino Fundamental Incompleto','Ensino Fundamental Completo','Ensino Médio Incompleto','Ensino Médio Completo','Ensino Superior Incompleto','Ensino Superior Completo') NOT NULL,
     cargo ENUM('Operacional','Gerencial','Administrativo','Nenhum') DEFAULT 'Nenhum' NOT NULL,

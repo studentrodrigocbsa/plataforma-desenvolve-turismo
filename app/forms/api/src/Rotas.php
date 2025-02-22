@@ -10,11 +10,19 @@ function criarControladoraMASA(PDO $pdo): ControladoraMasa {
 }
 
 
-$app->get( '/masa/resultados', function( $req, $res ) use ( $pdo ) 
+$app->get( '/masa/generic/resultados', function( $req, $res ) use ( $pdo ) 
 {
-    $id = $_GET['id'];
+    $id = isset($_GET['id']) ? $_GET['id'] : ''; // não faço nada... (ler controladora-relatorio.ts)
     $controller = criarControladoraMASA($pdo);
-    $content = $controller->getResultadosPesquisa($id);
+    $content = $controller->getTotaisGenericosPesquisa();
+    $res->json( $content );
+});
+
+$app->get( '/masa/aa/filtro', function( $req, $res ) use ( $pdo ) 
+{
+    $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : '';
+    $controller = criarControladoraMASA($pdo);
+    $content = $controller->getTotaisPorFiltro($filtro);
     $res->json( $content );
 });
 

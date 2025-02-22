@@ -26,3 +26,9 @@ export enum CARGO {
     GERENCIAL = 'Gerencial',
     ADMINISTRATIVO = 'Administrativo'
 }
+export enum DADOS_RESPONDENTE{
+    ESCOLARIDADE = 'Escolaridade',
+    FAIXA_ETARIA = 'Faixa Etária',
+    CARGO = 'Cargo',
+    PERFIL = 'Perfil'
+}

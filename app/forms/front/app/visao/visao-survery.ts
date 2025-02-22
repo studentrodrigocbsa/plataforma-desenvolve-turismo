@@ -22,7 +22,7 @@ export class VisaoSurvey{
 
     
     exibirNotificacaoVocePossuiPerguntasNaoRespondidas() {
-        Notificacao.exibirNotificacao(['Você possui perguntas ainda não respondidas... volte para respondê-las.'],TIPOS_NOTIFICACAO.AVISO);
+        Notificacao.exibirNotificacao(['Você possui ainda perguntas não respondidas...'],TIPOS_NOTIFICACAO.AVISO);
     }
     exibirNotificacaoSurveyConcluidoSucesso(msg: string) {
         Notificacao.exibirNotificacao([msg],TIPOS_NOTIFICACAO.SUCESSO);

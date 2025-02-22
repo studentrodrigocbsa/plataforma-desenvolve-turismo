@@ -1,5 +1,5 @@
 <?php
-enum EnumValores: int{
+enum EnumValoresEscolhas: int{
     case DISCORDO_TOTALMENTE = 1;
     case DISCORDO = 2;
     case NEMCONCORDO_NEMDISCORDO = 3;

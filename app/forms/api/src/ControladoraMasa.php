@@ -16,12 +16,17 @@ class ControladoraMasa{
         $survey = $dados[0];
         $respondente = $dados[1];
 
-        $this->gestorDados->calcularNotaAA($respondente,$survey);
+        $this->gestorDados->calcularNotaRespondente($respondente,$survey);
         $this->repoMasa->salvarRespondenteSurvey($respondente);
         return $this->repoMasa->contabilizarVotosSurveyAA($survey);
     }
 
-    public function getResultadosPesquisa($id){
-        return $this->repoMasa->dadosRespondentesPesquisa($id);
+    public function getTotaisGenericosPesquisa(){
+        return $this->repoMasa->totalRespostas();
+    }
+
+    public function getTotaisPorFiltro($filtro): array{
+        $campo_respondente_bd = $this->gestorDados->tradutorDeFiltro($filtro);
+        return $this->repoMasa->totalRespostasPorFiltro($campo_respondente_bd);
     }
 }

@@ -8,30 +8,44 @@ class RepositorioMasa
   ){}
 
 
-  public function dadosRespondentesPesquisa($id){
+  public function totalRespostas(){
     try {
-      $ps = $this->pdo->prepare('SELECT r.tipo,r.faixa_etaria,r.escolaridade,r.cargo,r.nota,s.categoria,p.titulo,o.opcao,o.votos FROM respondente r JOIN survey s ON r.survey=s.id JOIN pergunta p ON s.id = p.survey JOIN opcao o ON p.id = o.pergunta');
+      $ps = $this->pdo->prepare(
+        '
+        SELECT p.titulo,o.opcao,SUM(o.votos) AS total_votos 
+          FROM pergunta p 
+            JOIN opcao o ON p.id = o.pergunta 
+            WHERE p.survey = 1
+            GROUP BY p.titulo,o.opcao;
+      ');
       $ps->execute();
-      $dados = $ps->fetchAll(PDO::FETCH_ASSOC);
+      return $ps->fetchAll(PDO::FETCH_ASSOC);
 
-      $survey = [];
-
-      for($i = 0; $i < count($dados); $i++){
-          $pergunta = new stdClass();
-          $pergunta->titulo = $dados[$i]['titulo'];
-          $pergunta->respondida = false;
-          $pergunta->opcoes = [];
-          for($j = $i; $j < $i + 5; $j++){
-              $pergunta->opcoes []= [ 'opcao' => $dados[$j]['opcao'], 'voto' => 0];
-          }
-          $survey []= $pergunta;
-          $i += 4;
-      }
-
-      return $survey;
-  } catch (Exception $ex) {
-      throw new Exception('Erro ao buscar pesquisa no banco de dados.', (int) $ex->getCode(), $ex);
+    } catch (Exception $ex) {
+      throw new Exception('Erro ao buscar total geral no banco de dados.', (int) $ex->getCode(), $ex);
+    }
   }
+
+  public function totalRespostasPorFiltro($campo_respondente_bd){
+    try {
+      $ps = $this->pdo->prepare(
+        '
+        SELECT r.'.$campo_respondente_bd.',i.titulo,i.opcao,i.total_votos 
+            FROM respondente r 
+          JOIN (SELECT p.survey,p.titulo,o.opcao,SUM(o.votos) AS total_votos 
+            FROM pergunta p 
+              JOIN opcao o ON p.id = o.pergunta 
+              WHERE p.survey = 1
+              GROUP BY p.titulo,o.opcao) as i 
+          ON i.survey = r.survey
+          WHERE i.survey = 1;
+      ');
+      $ps->execute();
+      return $ps->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (Exception $ex) {
+      throw new Exception('Erro ao buscar resultado por filtro no banco de dados.', (int) $ex->getCode(), $ex);
+    }
   }
 
   public function buscarPesquisaAA(): array{
@@ -62,10 +76,10 @@ class RepositorioMasa
 
   public function salvarRespondenteSurvey($respondente): bool{
     try{
-      $sql = 'INSERT INTO respondente(tipo,faixa_etaria,escolaridade,cargo,nota,survey) VALUES (:tipo,:faixa_etaria,:escolaridade,:cargo,:nota,:survey)';
+      $sql = 'INSERT INTO respondente(perfil,faixa_etaria,escolaridade,cargo,nota,survey) VALUES (:perfil,:faixa_etaria,:escolaridade,:cargo,:nota,:survey)';
       $ps = $this->pdo->prepare($sql);
       $ps->execute([
-        'tipo' => $respondente->tipo,
+        'perfil' => $respondente->perfil,
         'faixa_etaria' => $respondente->faixa_etaria,
         'escolaridade' => $respondente->escolaridade,
         'cargo' => $respondente->cargo,
