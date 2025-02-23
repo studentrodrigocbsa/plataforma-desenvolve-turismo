@@ -3,10 +3,10 @@ import { Respondente } from '../modelo/respondente';
 
 export class RepositorioMASA{
 
-    async pegarTotaisPorEscolhaDaPesquisaId(id: number) {
+    async pegarTotaisPorEscolhaDaPesquisaId(id: number): Promise<[{titulo: string, opcao: string, votos: number}]> {
         const response = await fetch( `${API}/masa/generic/resultados?id=${id}`, { method: 'get' } );
         const text = await response.text();
-        console.log('RESPOSTA BACKEND raw',text);
+        //console.log('RESPOSTA BACKEND raw',text);
         if(response.status >= 400){
             console.log(text);
             throw new Error(text);

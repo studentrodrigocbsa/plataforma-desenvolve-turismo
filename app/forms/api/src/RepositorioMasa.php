@@ -12,7 +12,7 @@ class RepositorioMasa
     try {
       $ps = $this->pdo->prepare(
         '
-        SELECT p.titulo,o.opcao,SUM(o.votos) AS total_votos 
+        SELECT p.titulo,o.opcao,SUM(o.votos) AS votos 
           FROM pergunta p 
             JOIN opcao o ON p.id = o.pergunta 
             WHERE p.survey = 1
@@ -30,9 +30,9 @@ class RepositorioMasa
     try {
       $ps = $this->pdo->prepare(
         '
-        SELECT r.'.$campo_respondente_bd.',i.titulo,i.opcao,i.total_votos 
+        SELECT r.'.$campo_respondente_bd.',i.titulo,i.opcao,i.votos 
             FROM respondente r 
-          JOIN (SELECT p.survey,p.titulo,o.opcao,SUM(o.votos) AS total_votos 
+          JOIN (SELECT p.survey,p.titulo,o.opcao,SUM(o.votos) AS votos 
             FROM pergunta p 
               JOIN opcao o ON p.id = o.pergunta 
               WHERE p.survey = 1
