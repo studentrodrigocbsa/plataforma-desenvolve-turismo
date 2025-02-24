@@ -12,7 +12,7 @@ class RepositorioMasa
     try {
       $ps = $this->pdo->prepare(
         '
-        SELECT p.titulo,o.opcao,SUM(o.votos) AS votos 
+        SELECT p.titulo,o.opcao,SUM(o.votos) AS votos, (SELECT AVG(nota) FROM respondente) AS desempenho_geral 
           FROM pergunta p 
             JOIN opcao o ON p.id = o.pergunta 
             WHERE p.survey = 1

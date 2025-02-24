@@ -56,24 +56,52 @@
                     </div>
                     <!-- end row -->
                   </div>
+                
 
 
 
-                  <div class="chart-card-wrapper">
-                    <div class="row">
-                      <div class="col-lg-9"></div>
-                        <div class="col-lg-3">
-                          <div class="card-style mb-30">
-                            <div class="title d-flex justify-content-center">
-                                <div class="right">
-                                  <select class="form-select" name="filtro" id="filtro">
-                                    <option value="" selected>-- Filtro --</option>
-                                  </select>
-                                </div>
-                                <button class="btn btn-primary mx-2" id="filtrar">
-                                  <i data-feather="filter"></i>
-                                </button>
-                            </div>
+                  <div class="row">
+                    <!-- ========== GRÁFICO DADOS "GENÉRICOS" - Total por opção por pergunta ========== -->
+                    <div class="col-lg-12">
+                      <div class="card-style mb-30">
+                        <div class="title d-flex flex-wrap justify-content-start">
+                          <div class="left">
+                            <h3>👀 As escolhas dos respondentes foram...</h3>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-center">
+                          <div class="chart mt-3" id="div-grafico-total-geral">
+                            <canvas id="grafico-total-geral"></canvas>
+                          </div>
+                        </div>
+
+                        <h5 class="mt-5" id="texto-desempenho-geral"></h5>
+
+                        
+                      </div>
+                    </div>
+                    <!-- END GRÁFICO 1 -->
+                  </div>
+
+                  <div class="d-block">
+                    <hr>
+                    <p class="text-muted">Continue rolando para baixo para ler o relatório geral. Escolha um filtro para personalizar seu relatório.</p>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-lg-9"></div>
+                      <div class="col-lg-3">
+                        <div class="card-style mt-30">
+                          <div class="title d-flex justify-content-center">
+                              <div class="right">
+                                <select class="form-select" name="filtro" id="filtro">
+                                  <option value="" selected>-- Filtro --</option>
+                                </select>
+                              </div>
+                              <button class="btn btn-primary mx-2" id="filtrar">
+                                <i data-feather="filter"></i>
+                              </button>
                           </div>
                         </div>
                       </div>
@@ -81,26 +109,16 @@
                   </div>
 
 
-
                   <div class="row">
-
-                    <!-- ========== GRÁFICO DADOS "GENÉRICOS" - Total por opção por pergunta ========== -->
-                    <div class="col-lg-12">
-                      <div class="card-style mb-30">
-                        <div class="title d-flex flex-wrap justify-content-between">
-                            <div class="left">
-                                <h3>👀 As escolhas dos respondentes foram...</h3>
-                            </div>
-                        </div>
-                         <div class="d-flex flex-wrap justify-content-center">
-                          <div class="chart" id="div-grafico-total-geral">
-                            <canvas id="grafico-total-geral"></canvas>
+                      <div class="col-lg-12">
+                        <div class="card-style mt-30">
+                          <div class="title d-flex justify-content-between">
+                              <div class="left" id="relatorio">
+                              </div>
                           </div>
-                         </div>
+                        </div>
                       </div>
                     </div>
-                    <!-- END GRÁFICO 1 -->
-
                   </div>
 
 

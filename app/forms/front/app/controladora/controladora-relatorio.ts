@@ -1,69 +1,44 @@
 import { OPCOES } from "../modelo/enum-opcoes";
 import { RepositorioMASA } from "../repositorio/repositorio-masa";
+import { CalculadorResultados } from "../util/calculador-resultados";
 import { VisaoRelatorio } from "../visao/visao-relatorio";
 
 export class ControladoraRelatorio{
 
     private visao: VisaoRelatorio;
     private repoMASA: RepositorioMASA;
+    private calculador: CalculadorResultados;
 
     constructor(visao: VisaoRelatorio){
         this.visao = visao;
         this.repoMASA = new RepositorioMASA;
+        this.calculador = new CalculadorResultados;
     }
 
 
     async carregarDadosGenericos(){
-
-
         const array = await this.repoMASA.pegarTotaisPorEscolhaDaPesquisaId(1); // só tem 1 pesquisa por enquanto, survey de id 1.
 
-        const totaisEmOrdem__DiscordoTotalmente: number[] = [];
-        const totaisEmOrdem__Discordo: number[] = [];
-        const totaisEmOrdem__NemConcordoNemDiscordo: number[] = [];
-        const totaisEmOrdem__Concordo: number[] = [];
-        const totaisEmOrdem__ConcordoTotalmente: number[] = [];
-        const titulos = new Set<string>();
-        array.map(mp => mp.titulo).filter(titulo => {
-            if(titulos.has(titulo)){
-                return false;
-            }
-            titulos.add(titulo);
-            return true;
-        });
-        const opcoes = new Set<string>();
-        array.map(mp => mp.opcao).filter(opcao => {
-            if(opcoes.has(opcao)){
-                return false;
-            }
-            opcoes.add(opcao);
-            return true;
-        });
-        titulos.forEach(titulo => {
-            array.forEach(pergunta => {
-                opcoes.forEach(opcao => {
-                    if(pergunta.titulo === titulo){
-                        if(pergunta.opcao === opcao && pergunta.opcao === OPCOES.DISCORDO_TOTALMENTE)
-                            totaisEmOrdem__DiscordoTotalmente.push(Number(pergunta.votos));
-                        else if(pergunta.opcao === opcao && pergunta.opcao === OPCOES.DISCORDO)
-                            totaisEmOrdem__Discordo.push(Number(pergunta.votos));
-                        else if(pergunta.opcao === opcao && pergunta.opcao === OPCOES.NEMCONCORDO_NEMDISCORDO)
-                            totaisEmOrdem__NemConcordoNemDiscordo.push(Number(pergunta.votos));
-                        else if(pergunta.opcao === opcao && pergunta.opcao === OPCOES.CONCORDO)
-                            totaisEmOrdem__Concordo.push(Number(pergunta.votos));
-                        else if(pergunta.opcao === opcao && pergunta.opcao === OPCOES.CONCORDO_TOTALMENTE)
-                            totaisEmOrdem__ConcordoTotalmente.push(Number(pergunta.votos));
-                    }
-                });
-            });
-        });
+        const [
+            titulos,
+            totaisEmOrdem__DiscordoTotalmente,
+            totaisEmOrdem__Discordo,
+            totaisEmOrdem__NemConcordoNemDiscordo,
+            totaisEmOrdem__Concordo,
+            totaisEmOrdem__ConcordoTotalmente
+        ] = this.calculador.calcularTotaisGeral(array) as [string[], number[], number[], number[], number[], number[]];
+
+
+        const desempenhoNota = array[0].desempenho_geral;
+        const desempenho = this.calculador.calcularDesempenhoGeral(desempenhoNota);
         
         //console.log(Array.from(titulos),totaisEmOrdem__DiscordoTotalmente,totaisEmOrdem__Discordo,totaisEmOrdem__NemConcordoNemDiscordo,totaisEmOrdem__Concordo,totaisEmOrdem__ConcordoTotalmente);
-        this.visao.desenharGraficoGeral(Array.from(titulos),totaisEmOrdem__DiscordoTotalmente,totaisEmOrdem__Discordo,totaisEmOrdem__NemConcordoNemDiscordo,totaisEmOrdem__Concordo,totaisEmOrdem__ConcordoTotalmente);
+        this.visao.desenharGraficoGeral(titulos,totaisEmOrdem__DiscordoTotalmente,totaisEmOrdem__Discordo,totaisEmOrdem__NemConcordoNemDiscordo,totaisEmOrdem__Concordo,totaisEmOrdem__ConcordoTotalmente);
+        this.visao.desenharDesempenhoGeral(desempenho,desempenhoNota);
     }
 
     async filtrarRelatorio(){
-        //const filtro = this.visao.valorFiltro();
-
+        const filtro = this.visao.valorFiltro();
+        this.repoMASA.pegarTotaisPorFiltro(filtro);
     }
 }

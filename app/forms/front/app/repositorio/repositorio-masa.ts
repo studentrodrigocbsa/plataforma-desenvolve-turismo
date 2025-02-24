@@ -3,7 +3,18 @@ import { Respondente } from '../modelo/respondente';
 
 export class RepositorioMASA{
 
-    async pegarTotaisPorEscolhaDaPesquisaId(id: number): Promise<[{titulo: string, opcao: string, votos: number}]> {
+    async pegarTotaisPorFiltro(filtro: string): Promise<[{titulo: string, opcao: string, votos: number, desempenho_geral: number}]> {
+        const response = await fetch( `${API}/masa/aa/filtro?filtro=${filtro}`, { method: 'get' } );
+        const text = await response.text();
+        //console.log('RESPOSTA BACKEND raw',text);
+        if(response.status >= 400){
+            console.log(text);
+            throw new Error(text);
+        }
+        return JSON.parse(text);
+    }
+
+    async pegarTotaisPorEscolhaDaPesquisaId(id: number): Promise<[{titulo: string, opcao: string, votos: number, desempenho_geral: number}]> {
         const response = await fetch( `${API}/masa/generic/resultados?id=${id}`, { method: 'get' } );
         const text = await response.text();
         //console.log('RESPOSTA BACKEND raw',text);

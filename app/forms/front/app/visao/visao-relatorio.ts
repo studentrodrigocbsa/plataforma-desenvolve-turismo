@@ -7,6 +7,8 @@ export class VisaoRelatorio{
 
     iniciar(){
         const controladora = new ControladoraRelatorio(this);
+
+        // this.loadSpinner();
         
         controladora.carregarDadosGenericos(); // Total de escolhas por opção do survey
 
@@ -20,8 +22,18 @@ export class VisaoRelatorio{
 
         const btnFiltro = document.getElementById('filtrar') as HTMLButtonElement;
         btnFiltro.addEventListener('click', () => {
+            // this.loadSpinner();
             controladora.filtrarRelatorio();
+            // this.loadSpinnerDispense();
         });
+
+
+        // this.loadSpinnerDispense();
+    }
+
+    valorFiltro(){
+        const el = document.getElementById('filtro') as HTMLSelectElement;
+        return el.value ? el.value : '';
     }
 
 
@@ -97,4 +109,9 @@ export class VisaoRelatorio{
         }
     }
     
+
+    desenharDesempenhoGeral(mensagem: string, nota: number){
+        const texto = document.getElementById('texto-desempenho-geral') as HTMLParagraphElement;
+        texto.innerHTML = `${mensagem} (${nota})`;
+    }
 }
