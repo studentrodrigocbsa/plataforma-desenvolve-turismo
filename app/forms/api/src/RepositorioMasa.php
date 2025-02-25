@@ -12,11 +12,10 @@ class RepositorioMasa
     try {
       $ps = $this->pdo->prepare(
         '
-        SELECT p.titulo,o.opcao,SUM(o.votos) AS votos, (SELECT AVG(nota) FROM respondente) AS desempenho_geral 
-          FROM pergunta p 
-            JOIN opcao o ON p.id = o.pergunta 
-            WHERE p.survey = 1
-            GROUP BY p.titulo,o.opcao;
+        SELECT p.titulo,e.opcao,COUNT(e.opcao) AS votos, (SELECT AVG(nota) FROM respondente) AS desempenho_geral FROM escolha e  
+            JOIN pergunta p ON e.pergunta = p.id 
+          WHERE p.survey = 1 
+            GROUP BY p.titulo,e.opcao;
       ');
       $ps->execute();
       return $ps->fetchAll(PDO::FETCH_ASSOC);
@@ -50,7 +49,7 @@ class RepositorioMasa
 
   public function buscarPesquisaAA(): array{
     try {
-        $ps = $this->pdo->prepare('SELECT p.titulo,o.opcao FROM pergunta p JOIN opcao o ON o.pergunta = p.id ORDER BY p.ordem');
+        $ps = $this->pdo->prepare('SELECT p.titulo,o.opcao FROM pergunta p JOIN opcao o ON o.pergunta = p.id WHERE p.survey = 1 ORDER BY p.ordem');
         $ps->execute();
         $dados = $ps->fetchAll(PDO::FETCH_ASSOC);
   
