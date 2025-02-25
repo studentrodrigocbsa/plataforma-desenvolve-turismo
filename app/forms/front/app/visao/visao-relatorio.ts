@@ -96,7 +96,11 @@ export class VisaoRelatorio{
                     responsive: true,
                     scales: {
                         x: {
-                          stacked: true,
+                            stacked: true,
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
                         },
                         y: {
                           stacked: true

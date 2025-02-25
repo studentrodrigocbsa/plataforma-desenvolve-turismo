@@ -17,8 +17,8 @@ class ControladoraMasa{
         $respondente = $dados[1];
 
         $this->gestorDados->calcularNotaRespondente($respondente,$survey);
-        $this->repoMasa->salvarRespondenteSurvey($respondente);
-        return $this->repoMasa->contabilizarVotosSurveyAA($survey);
+        $id = $this->repoMasa->salvarRespondenteSurvey($respondente);
+        return $this->repoMasa->contabilizarVotosSurveyAA($survey, $id);
     }
 
     public function getTotaisGenericosPesquisa(){

@@ -10,7 +10,7 @@ CREATE TABLE survey(
 ) ENGINE=INNODB;
 
 CREATE TABLE pergunta(
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ordem INT NOT NULL,
     titulo VARCHAR(250) NOT NULL,
     survey INT NOT NULL,
@@ -21,11 +21,11 @@ CREATE TABLE pergunta(
 CREATE TABLE opcao(
     pergunta INT NOT NULL,
     opcao VARCHAR(50) NOT NULL,
-    votos INT NOT NULL DEFAULT 0,
     CONSTRAINT fk_opcao__pergunta FOREIGN KEY (pergunta) REFERENCES pergunta(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;
 
 CREATE TABLE respondente(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     perfil ENUM('Gestor','Visitante','Residente Local') NOT NULL,
     faixa_etaria ENUM('18...21','22...25','26...29','30...33','34...37','38...41','42+') NOT NULL,
     escolaridade ENUM('Ensino Fundamental Incompleto','Ensino Fundamental Completo','Ensino Médio Incompleto','Ensino Médio Completo','Ensino Superior Incompleto','Ensino Superior Completo') NOT NULL,
@@ -33,6 +33,15 @@ CREATE TABLE respondente(
     nota INT NOT NULL DEFAULT 0 ,
     survey INT NOT NULL,
     CONSTRAINT fk_respondente__survey FOREIGN KEY (survey) REFERENCES survey(id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=INNODB;
+
+CREATE TABLE escolha(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    respondente INT NOT NULL,
+    pergunta INT NOT NULL,
+    opcao VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_escolha__respondente FOREIGN KEY (respondente) REFERENCES respondente(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_escolha__pergunta FOREIGN KEY (pergunta) REFERENCES pergunta(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;
 
 

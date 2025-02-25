@@ -30,7 +30,7 @@ class RepositorioMasa
     try {
       $ps = $this->pdo->prepare(
         '
-        SELECT r.'.$campo_respondente_bd.',i.titulo,i.opcao,i.votos 
+        SELECT r.'.$campo_respondente_bd.' as filtro,i.titulo,i.opcao,i.votos 
             FROM respondente r 
           JOIN (SELECT p.survey,p.titulo,o.opcao,SUM(o.votos) AS votos 
             FROM pergunta p 
@@ -76,6 +76,9 @@ class RepositorioMasa
 
   public function salvarRespondenteSurvey($respondente): bool{
     try{
+
+      $this->pdo->beginTransaction();
+
       $sql = 'INSERT INTO respondente(perfil,faixa_etaria,escolaridade,cargo,nota,survey) VALUES (:perfil,:faixa_etaria,:escolaridade,:cargo,:nota,:survey)';
       $ps = $this->pdo->prepare($sql);
       $ps->execute([
@@ -87,20 +90,17 @@ class RepositorioMasa
         'survey' => $respondente->survey
       ]);
 
-      return $ps->rowCount() > 0;
+      return $ps->rowCount();
     } catch (Exception $ex) {
-      throw new Exception('Erro ao buscar pesquisa no banco de dados.', (int) $ex->getCode(), $ex);
+      throw new Exception('Erro ao salvar respondente no banco de dados.', (int) $ex->getCode(), $ex);
     }
   }
 
   public function contabilizarVotosSurveyAA($survey): bool{
     try {
-
-      $this->pdo->beginTransaction();
-
       $sqlContabilizarVotos = 
       '
-        UPDATE opcao SET votos = votos + :voto WHERE opcao = :opcao AND pergunta = (SELECT p.id from pergunta p JOIN survey s ON p.survey = s.id WHERE s.categoria = "Acessibilidade Atitudinal - Escala de Capacitismo" AND p.titulo = :titulo);
+        INSERT INTO escolha (respondente,pergunta,opcao) VALUES ((SELECT id FROM respondente ORDER BY id DESC LIMIT 1),(SELECT id FROM pergunta WHERE titulo = :titulo),:opcao) 
       ';
       $psContabilizarVotos = $this->pdo->prepare( $sqlContabilizarVotos );
     
@@ -108,15 +108,16 @@ class RepositorioMasa
       foreach($survey as $resposta){
 
         foreach($resposta->opcoes as $opcao){
-          $sucesso = $psContabilizarVotos->execute( 
-            [ 
-              'opcao' => $opcao->opcao,
-              'voto' => $opcao->voto,
-              'titulo' => $resposta->titulo
-            ] 
-          );
-          if($sucesso === false){
-            throw new Exception('Ocorreu um erro interno na contabilização de votos e por isso sua pesquisa não foi considerada. :(');
+          if($opcao->voto == 1){
+            $sucesso = $psContabilizarVotos->execute( 
+              [ 
+                'opcao' => $opcao->opcao,
+                'titulo' => $resposta->titulo
+              ] 
+            );
+            if($sucesso === false){
+              throw new Exception('Ocorreu um erro interno na contabilização de votos e por isso sua pesquisa não foi considerada. :(');
+            }
           }
         }
 
