@@ -159,6 +159,52 @@ export class VisaoRelatorio{
     }
 
     desenharTabelaMediasGeraisRelatorio(titulos: string[], totaisDiscordoTotalmente: number[], totaisDiscordo: number[], totaisNemConcordoNemDiscordo: number[], totaisConcordo: number[], totaisConcordoTotalmente: number[]){
-        
+        const tbody = document.querySelector('tbody');
+        if(tbody){
+            tbody.innerHTML = '';
+
+            const fragmento = document.createDocumentFragment();
+            for(let i = 0; i < titulos.length; i++){
+                const controladora = new ControladoraRelatorio(this);
+                const media = controladora.calcularMediaPergunta(totaisDiscordoTotalmente[i] ?? 0,totaisDiscordo[i] ?? 0,totaisNemConcordoNemDiscordo[i] ?? 0,totaisConcordo[i] ?? 0,totaisConcordoTotalmente[i] ?? 0);
+                const linha = this.criarLinha(titulos[i],totaisDiscordoTotalmente[i] ?? 0,totaisDiscordo[i] ?? 0,totaisNemConcordoNemDiscordo[i] ?? 0,totaisConcordo[i] ?? 0,totaisConcordoTotalmente[i] ?? 0,media);
+                fragmento.append(linha);
+            }
+            tbody.append(fragmento);
+        }
+    }
+
+    criarLinha(titulo: string, totalDiscordoTotalmente: number, totalDiscordo: number, totalNemConcordoNemDiscordo: number, totalConcordo: number, totalConcordoTotalmente: number, media: number): HTMLTableRowElement {
+        const tr = document.createElement('tr');
+
+        const celulaTituloPergunta = this.criarCelula(titulo);
+        const celulaTotal1 = this.criarCelula(totalDiscordoTotalmente);
+        const celulaTotal2 = this.criarCelula(totalDiscordo);
+        const celulaTotal3 = this.criarCelula(totalNemConcordoNemDiscordo);
+        const celulaTotal4 = this.criarCelula(totalConcordo);
+        const celulaTotal5 = this.criarCelula(totalConcordoTotalmente);
+        const celulaMedia = this.criarCelula(media);
+
+
+        tr.append(
+            celulaTituloPergunta,
+            celulaTotal1,
+            celulaTotal2,
+            celulaTotal3,
+            celulaTotal4,
+            celulaTotal5,
+            celulaMedia
+        );
+
+        return tr;
+      }
+    
+    criarCelula(conteudo: any): HTMLTableCellElement {
+        const td = document.createElement('td');
+        const p = document.createElement('p');
+        p.classList.add('text-sm')
+        p.innerText = conteudo;
+        td.append(p);
+        return td;
     }
 }

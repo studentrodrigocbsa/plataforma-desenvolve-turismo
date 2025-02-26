@@ -89,39 +89,76 @@
 
 
                   <hr>
-                  <p class="fs-6 fw-light text-center">Continue rolando para baixo para ler o relatório geral. Escolha um filtro para personalizar seu relatório.</p>
+                  <p class="fs-6 fw-light text-center mb-4">Continue rolando para baixo para ler o relatório geral.</p>
 
 
                   <div class="row">
-                    <div class="col-lg-8"></div>
-                      <div class="col-lg-4">
-                        <div class="card-style mt-30">
-                          <div class="title d-flex justify-content-center">
-                              <div class="right">
-                                <select class="form-select" name="filtro" id="filtro">
-                                  <option value="" selected>-- Filtro --</option>
-                                </select>
-                              </div>
-                              <button class="btn btn-primary mx-2" id="filtrar">
-                                <i data-feather="filter"></i>
-                              </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="row">
-                      <div class="col-lg-12">
-                        <div class="card-style mt-30">
-                          <div class="title d-flex justify-content-between">
-                              <div class="left" id="relatorio">
+                    <div class="col-lg-12">
+                        <div class="card-style mb-30">
+                          <div class="title d-flex flex-wrap align-items-center justify-content-between">
+                              <div class="left">
+                                <h6 class="text-medium mb-30">Relatório</h6>
                               </div>
                           </div>
+                          <!-- End Title -->
+                          <div class="table-responsive">
+                              <table class="table table-striped align-middle overflow-x-auto">
+                                <thead class="">
+                                  <tr>
+                                    <th class="max-width">
+                                        <h6 class="text-sm text-medium">Pergunta</h6>
+                                    </th>
+                                    <th class="min-width">
+                                        <h6 class="text-sm text-medium">Discordo Totalmente (1)</h6>
+                                    </th>
+                                    <th class="min-width">
+                                        <h6 class="text-sm text-medium">Discordo (2) </h6>
+                                    </th>
+                                    <th class="min-width">
+                                        <h6 class="text-sm text-medium">Nem Concordo/Nem Discordo (3) </h6>
+                                    </th>
+                                    <th class="min-width">
+                                        <h6 class="text-sm text-medium">Concordo (4) </h6>
+                                    </th>
+                                    <th class="min-width">
+                                        <h6 class="text-sm text-medium">Concordo Totalmente (5)</h6>
+                                    </th>
+                                    <th class="min-width">
+                                      <h6 class="text-sm text-medium">Média Aritmética Simples</h6>
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                        <p class="text-sm">-</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm">-</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm">-</p>
+                                    </td>
+                                    <td>
+                                        <span class="text-sm">-</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-sm">-</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-sm">-</span>
+                                    </td>
+                                    <td>
+                                      <span class="text-sm">-</span>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <!-- End Table -->
+                          </div>
                         </div>
-                      </div>
                     </div>
+                    <!-- End Col -->
                   </div>
 
 

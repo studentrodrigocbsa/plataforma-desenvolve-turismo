@@ -2,6 +2,10 @@ import { OPCOES } from "../modelo/enum-opcoes";
 
 export class CalculadorResultados{
 
+    calcularMediaPergunta(totalDiscordoTotalmente: number, totalDiscordo: number, totalNemConcordoNemDiscordo: number, totalConcordo: number, totalConcordoTotalmente: number) {
+        return (totalDiscordoTotalmente * 1 + totalDiscordo * 2 + totalNemConcordoNemDiscordo * 3 + totalConcordo * 4 + totalConcordoTotalmente * 5) / (totalDiscordoTotalmente + totalDiscordo + totalNemConcordoNemDiscordo + totalConcordo + totalConcordoTotalmente);
+    }
+
     calcularDesempenhoGeral(notaGeral: number): string{
         if(notaGeral < 2){
             return "O desempenho geral dos pesquisados foi muito alto! 😊";
