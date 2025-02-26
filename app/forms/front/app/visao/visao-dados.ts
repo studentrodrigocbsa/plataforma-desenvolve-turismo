@@ -38,9 +38,11 @@ export class VisaoDados{
         const s1 = document.getElementById('perfil') as HTMLSelectElement;
         s1.innerHTML = `<option value="" selected>-- Selecione o seu perfil --</option>`;
         const perfis = Object.values(PERFIL);
+        const opt = document.createElement('option');
         perfis.forEach(perfil => {
-            const opt = document.createElement('option');
-            opt.value = perfil;
+            if(perfil == PERFIL.RESIDENTE_LOCAL || perfil == PERFIL.VISITANTE)
+                return; // Trabalharemos apenas com a pesquisa de AA p/ gestores (funcionários de destino turístico)
+            opt.value = perfil; 
             opt.innerHTML = perfil;
             s1.appendChild(opt);
         });
@@ -64,15 +66,16 @@ export class VisaoDados{
             opt.innerHTML = escolaridade;
             s3.appendChild(opt);
         });
-
-        this.desenharSelectCargos();
         
 
         s1.addEventListener('change', () => {
-            if(s1.value == PERFIL.RESIDENTE_LOCAL || s1.value == PERFIL.VISITANTE){
+            if (s1.value == PERFIL.RESIDENTE_LOCAL || s1.value == PERFIL.VISITANTE){
                 const s4 = document.getElementById('cargo') as HTMLSelectElement;
                 s4.innerHTML = `<option value="" selected>-- Selecione o seu cargo --</option>`;
                 s4.innerHTML += `<option value="${CARGO.NENHUM}">${CARGO.NENHUM}</option>`;
+            } else if (s1.value == ''){
+                const s4 = document.getElementById('cargo') as HTMLSelectElement;
+                s4.innerHTML = `<option value="" selected>-- Selecione o seu cargo --</option>`;
             } else{
                 this.desenharSelectCargos();
             }

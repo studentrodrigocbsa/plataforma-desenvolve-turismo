@@ -70,12 +70,16 @@
                           </div>
                         </div>
                         <div class="d-flex flex-wrap justify-content-center">
-                          <div class="chart mt-3" id="div-grafico-total-geral">
-                            <canvas id="grafico-total-geral"></canvas>
+                          <div class="mt-3 overflow-x-scroll" id="div-grafico-total-geral">
+                            <canvas class="chart" id="grafico-total-geral"></canvas>
                           </div>
                         </div>
 
-                        <h5 class="mt-5" id="texto-desempenho-geral"></h5>
+                        <div class="d-inline-flex p-2 align-items-baseline">
+                          <h5 class="mt-5" id="texto-desempenho-geral"></h5>
+                          <i class="p-1 fw-400" data-feather="info" data-bs-toggle="popover" data-bs-trigger="hover" title="Desempenho Geral" data-bs-content="O desempenho geral é dado pela média aritmética simples das respostas, com a nota das opções sendo atribuídas de acordo com Discordo Totalmente valendo 1 até Concordo Totalmente valendo 5. Quanto maior a média, pior o resultado, variando de 1 (melhor) a 5 (pior)."></i>
+                        </div>
+                        
 
                         
                       </div>
@@ -83,15 +87,14 @@
                     <!-- END GRÁFICO 1 -->
                   </div>
 
-                  <div class="d-block">
-                    <hr>
-                    <p class="text-muted">Continue rolando para baixo para ler o relatório geral. Escolha um filtro para personalizar seu relatório.</p>
-                  </div>
+
+                  <hr>
+                  <p class="fs-6 fw-light text-center">Continue rolando para baixo para ler o relatório geral. Escolha um filtro para personalizar seu relatório.</p>
 
 
                   <div class="row">
-                    <div class="col-lg-9"></div>
-                      <div class="col-lg-3">
+                    <div class="col-lg-8"></div>
+                      <div class="col-lg-4">
                         <div class="card-style mt-30">
                           <div class="title d-flex justify-content-center">
                               <div class="right">

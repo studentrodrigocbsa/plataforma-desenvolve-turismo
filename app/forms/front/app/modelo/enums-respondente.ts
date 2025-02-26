@@ -13,12 +13,15 @@ export enum FAIXA_ETARIA {
     faixa7 = '42+'
 }
 export enum ESCOLARIDADE {
-    EFI = 'Ensino Fundamental Incompleto',
-    EFC = 'Ensino Fundamental Completo',
-    EMI = 'Ensino Médio Incompleto',
-    EMC = 'Ensino Médio Completo',
-    ESI = 'Ensino Superior Incompleto',
-    ESC = 'Ensino Superior Completo'
+    EFI = 'Ensino Fundamental incompleto',
+    EFC = 'Ensino Fundamental completo',
+    EMI = 'Ensino Médio incompleto',
+    EMC = 'Ensino Médio completo',
+    ESI = 'Ensino Superior incompleto',
+    ESC = 'Ensino Superior completo',
+    PGI = 'Pós-graduação incompleto',
+    PGC = 'Pós-graduação completo',
+    SF = 'Sem formação'
 }
 export enum CARGO {
     NENHUM = 'Nenhum',
