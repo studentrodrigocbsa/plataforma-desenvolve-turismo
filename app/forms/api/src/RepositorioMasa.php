@@ -29,15 +29,11 @@ class RepositorioMasa
     try {
       $ps = $this->pdo->prepare(
         '
-        SELECT r.'.$campo_respondente_bd.' as filtro,i.titulo,i.opcao,i.votos 
-            FROM respondente r 
-          JOIN (SELECT p.survey,p.titulo,o.opcao,SUM(o.votos) AS votos 
-            FROM pergunta p 
-              JOIN opcao o ON p.id = o.pergunta 
-              WHERE p.survey = 1
-              GROUP BY p.titulo,o.opcao) as i 
-          ON i.survey = r.survey
-          WHERE i.survey = 1;
+        SELECT r.'.$campo_respondente_bd.' as filtro,p.titulo,e.opcao,COUNT(e.opcao) AS votos FROM escolha e  
+          JOIN pergunta p ON e.pergunta = p.id 
+          JOIN respondente r ON e.respondente = r.id 
+        WHERE p.survey = 1 
+          GROUP BY p.titulo,e.opcao,r.faixa_etaria;
       ');
       $ps->execute();
       return $ps->fetchAll(PDO::FETCH_ASSOC);

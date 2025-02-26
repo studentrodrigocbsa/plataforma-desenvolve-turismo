@@ -13,6 +13,7 @@ CREATE TABLE pergunta(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ordem INT NOT NULL,
     titulo VARCHAR(250) NOT NULL,
+    detalhes VARCHAR(500),
     survey INT NOT NULL,
     CONSTRAINT unq_pergunta__titulo UNIQUE (titulo),
     CONSTRAINT fk_pergunta__survey FOREIGN KEY (survey) REFERENCES survey(id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -28,7 +29,7 @@ CREATE TABLE respondente(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     perfil ENUM('Gestor','Visitante','Residente Local') NOT NULL,
     faixa_etaria ENUM('18...21','22...25','26...29','30...33','34...37','38...41','42+') NOT NULL,
-    escolaridade ENUM('Ensino Fundamental Incompleto','Ensino Fundamental Completo','Ensino Médio Incompleto','Ensino Médio Completo','Ensino Superior Incompleto','Ensino Superior Completo') NOT NULL,
+    escolaridade ENUM('Ensino Fundamental incompleto','Ensino Fundamental completo','Ensino Médio incompleto','Ensino Médio completo','Ensino Superior incompleto','Ensino Superior completo','Pós-graduação incompleto','Pós-graduação completo','Sem formação') NOT NULL,
     cargo ENUM('Operacional','Gerencial','Administrativo','Nenhum') DEFAULT 'Nenhum' NOT NULL,
     nota INT NOT NULL DEFAULT 0 ,
     survey INT NOT NULL,
