@@ -60,9 +60,4 @@ export class ControladoraRelatorio{
         }
     }
 
-    async filtrarRelatorio(){
-        const filtro = this.visao.valorFiltro();
-        this.repoMASA.pegarTotaisPorFiltro(filtro);
-        //
-    }
 }

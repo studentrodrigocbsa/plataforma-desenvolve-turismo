@@ -14,27 +14,7 @@ export class VisaoRelatorio{
         controladora.carregarDadosGenericos(); // Total de escolhas por opção do survey
         controladora.carregarRelatorioGeral(); // Pega todas as escolhas por todos os dados do respondente e detalha anterior
 
-        const selectFiltros = document.getElementById('filtro') as HTMLSelectElement;
-        selectFiltros.innerHTML = `<option value="" selected>-- Filtro --</option>`;
-        const filtros = Object.values(DADOS_RESPONDENTE);
-        filtros.forEach(filtro => {
-            selectFiltros.innerHTML += `<option value="${filtro}">${filtro}</option>`;
-        });
-
-
-        const btnFiltro = document.getElementById('filtrar') as HTMLButtonElement;
-        btnFiltro.addEventListener('click', () => {
-            // this.loadSpinner();
-            controladora.filtrarRelatorio(); // Filtra o relatório geral por uma categoria específica
-            // this.loadSpinnerDispense();
-        });
-
         // this.loadSpinnerDispense();
-    }
-
-    valorFiltro(){
-        const el = document.getElementById('filtro') as HTMLSelectElement;
-        return el.value ? el.value : '';
     }
 
     exibirNotificacaoExcecaoErro(msg: string){
@@ -171,6 +151,35 @@ export class VisaoRelatorio{
                 fragmento.append(linha);
             }
             tbody.append(fragmento);
+            this.criarLinhaTotal();
+        }
+    }
+
+    calcularTotais(seletor: string){
+        const a = document.querySelectorAll(seletor) as NodeListOf<HTMLTableCellElement>;
+        let t = 0;
+    
+        a.forEach(celula => {
+            t += parseFloat(celula.textContent ?? '0');
+        });
+
+        return t;
+    }
+
+    criarLinhaTotal(){
+        const tbody = document.querySelector('tbody');
+        if(tbody){
+            const tr = document.createElement('tr');
+            const celulaTotal = this.criarCelula('Total');
+            const celulaTotal1 = this.criarCelula(this.calcularTotais('.qtd1'));
+            const celulaTotal2 = this.criarCelula(this.calcularTotais('.qtd2'));
+            const celulaTotal3 = this.criarCelula(this.calcularTotais('.qtd3'));
+            const celulaTotal4 = this.criarCelula(this.calcularTotais('.qtd4'));
+            const celulaTotal5 = this.criarCelula(this.calcularTotais('.qtd5'));
+            const celulaTotal6 = this.criarCelula(this.calcularTotais('.qtd6'));
+
+            tr.append(celulaTotal,celulaTotal1,celulaTotal2,celulaTotal3,celulaTotal4,celulaTotal5,celulaTotal6);
+            tbody.append(tr);
         }
     }
 
@@ -184,6 +193,13 @@ export class VisaoRelatorio{
         const celulaTotal4 = this.criarCelula(totalConcordo);
         const celulaTotal5 = this.criarCelula(totalConcordoTotalmente);
         const celulaMedia = this.criarCelula(media);
+
+        celulaTotal1.classList.add('qtd1');
+        celulaTotal2.classList.add('qtd2');
+        celulaTotal3.classList.add('qtd3');
+        celulaTotal4.classList.add('qtd4');
+        celulaTotal5.classList.add('qtd5');
+        celulaMedia.classList.add('qtd6');
 
 
         tr.append(
@@ -201,10 +217,7 @@ export class VisaoRelatorio{
     
     criarCelula(conteudo: any): HTMLTableCellElement {
         const td = document.createElement('td');
-        const p = document.createElement('p');
-        p.classList.add('text-sm')
-        p.innerText = conteudo;
-        td.append(p);
+        td.innerText = conteudo;
         return td;
     }
 }
