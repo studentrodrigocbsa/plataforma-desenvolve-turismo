@@ -6,7 +6,7 @@ use function phputil\cors\cors;
 set_exception_handler('TratadoraDeExcecoes::handler');
 
 $app = new Router();
-$app->use(cors([ 'origin' => [ 'http://localhost:5173', 'http://localhost:8080', 'https://c322-177-55-205-120.ngrok-free.app', 'https://93eb-177-55-205-120.ngrok-free.app' ] ] ));
+$app->use(cors([ 'origin' => [ 'http://localhost:5173', 'http://localhost:8080', 'https://e281-2804-14d-2a76-84d8-e4b2-d43d-1b41-1fb0.ngrok-free.app', 'https://fa13-2804-14d-2a76-84d8-e4b2-d43d-1b41-1fb0.ngrok-free.app' ] ] ));
 
 
 header("Access-Control-Allow-Origin: '*");
