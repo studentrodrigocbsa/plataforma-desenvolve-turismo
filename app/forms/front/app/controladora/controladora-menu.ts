@@ -20,6 +20,7 @@ export class ControladoraMenu{
         const opcaoPesquisa = this.visao.valorPesquisaSelecionada();
         switch(opcaoPesquisa){
             case '1' : 
+                this.visao.botaoCarregamento();
                 const perguntas = await this.repoMASA.buscarPerguntasAcessibilidadeAtitudinal();
                 this.repoSurvey.save(perguntas);
                 window.location.href = `${DOMAIN}/front/pages/dados.html`;

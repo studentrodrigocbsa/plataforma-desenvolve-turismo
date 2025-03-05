@@ -77,7 +77,7 @@
 
                         <div class="d-inline-flex p-2 align-items-baseline">
                           <h5 class="mt-5" id="texto-desempenho-geral"></h5>
-                          <i class="p-1 fw-400" data-feather="info" data-bs-toggle="popover" data-bs-trigger="hover" title="Desempenho Geral" data-bs-content="O desempenho geral é dado pela média aritmética simples das respostas, com a nota das opções sendo atribuídas de acordo com Discordo Totalmente valendo 1 até Concordo Totalmente valendo 5. Quanto maior a média, pior o resultado, variando de 1 (melhor) a 5 (pior)."></i>
+                          <i class="p-1 fw-400" data-feather="info" data-bs-toggle="popover" data-bs-trigger="hover" title="Desempenho Geral" data-bs-content="O desempenho geral é dado pela média aritmética simples das respostas, com a nota das opções sendo atribuídas de acordo com a escala Likert de concordância de 5 pontos. Quanto maior a média, nesta pesquisa, pior o resultado, que varia de 1 (melhor) a 5 (pior)."></i>
                         </div>
                         
 
@@ -102,33 +102,34 @@
                           </div>
                           <!-- End Title -->
                           <div class="table-responsive">
-                              <table class="table table-striped align-middle overflow-x-auto">
+                              <table class="table table-hover align-middle overflow-x-auto">
+                                <caption>Interpretação: para interpretar os resultados, entenda que quanto menor o valor do desempenho, melhor. Ele varia de 1 a 5. O desempenho é medido com base na escala Likert de concordância de 5 pontos. Nesta pesquisa, quanto maiores forem os valores, pior o desempenho.</caption>
                                 <thead class="">
                                   <tr>
-                                    <th class="max-width">
+                                    <th class="pe-3">
                                         <h6 class="text-sm text-medium">Pergunta</h6>
                                     </th>
-                                    <th class="min-width">
-                                        <h6 class="text-sm text-medium">Discordo Totalmente (1)</h6>
+                                    <th class="pe-3">
+                                        <h6 class="text-sm text-medium">Discordo Totalmente</h6>
                                     </th>
-                                    <th class="min-width">
-                                        <h6 class="text-sm text-medium">Discordo (2) </h6>
+                                    <th class="pe-3">
+                                        <h6 class="text-sm text-medium">Discordo</h6>
                                     </th>
-                                    <th class="min-width">
-                                        <h6 class="text-sm text-medium">Nem Concordo/Nem Discordo (3) </h6>
+                                    <th class="pe-3">
+                                        <h6 class="text-sm text-medium">Nem Concordo/Nem Discordo</h6>
                                     </th>
-                                    <th class="min-width">
-                                        <h6 class="text-sm text-medium">Concordo (4) </h6>
+                                    <th class="pe-3">
+                                        <h6 class="text-sm text-medium">Concordo</h6>
                                     </th>
-                                    <th class="min-width">
-                                        <h6 class="text-sm text-medium">Concordo Totalmente (5)</h6>
+                                    <th class="pe-3">
+                                        <h6 class="text-sm text-medium">Concordo Totalmente</h6>
                                     </th>
-                                    <th class="min-width">
-                                      <h6 class="text-sm text-medium">Média Aritmética Simples</h6>
+                                    <th class="pe-3">
+                                      <h6 class="text-sm text-medium">Desempenho por pergunta</h6>
                                     </th>
                                   </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="table-group-divider">
                                   <tr>
                                     <td>
                                         <p class="text-sm">-</p>
@@ -153,6 +154,7 @@
                                     </td>
                                   </tr>
                                 </tbody>
+                                <tfoot></tfoot>
                               </table>
                               <!-- End Table -->
                           </div>

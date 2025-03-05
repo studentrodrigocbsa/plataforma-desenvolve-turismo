@@ -19,6 +19,7 @@ export class ControladoraDados{
         if(this.visao.camposEstaoVazios()){
             this.visao.exibirNotificacaoFavorPreencherOsCampos();
         } else{
+            this.visao.botaoCarregamento();
             const perfil = this.visao.valorPerfil();
             const idade = this.visao.valorIdade();
             const escolaridade = this.visao.valorEscolaridade();

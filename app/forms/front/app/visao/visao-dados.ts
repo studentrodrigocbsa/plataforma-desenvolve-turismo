@@ -1,5 +1,4 @@
 import { ControladoraDados } from "../controladora/controladora-dados";
-import { ControladoraMenu } from "../controladora/controladora-menu";
 import { Notificacao, TIPOS_NOTIFICACAO } from "../infra/notificacao";
 import { CARGO, ESCOLARIDADE, FAIXA_ETARIA, PERFIL } from "../modelo/enums-respondente";
 
@@ -15,6 +14,16 @@ export class VisaoDados{
         });
 
         this.desenharDadosSelects();
+    }
+
+    botaoCarregamento(){
+        const botao = document.getElementById('iniciar') as HTMLButtonElement;
+        botao.setAttribute('disabled','true');
+        botao.innerHTML = 
+        `
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status">Carregando...</span>
+        `;
     }
 
     camposEstaoVazios(): boolean{

@@ -99,6 +99,7 @@ export class VisaoRelatorio{
                     ]
                 },
                 options: {
+                    devicePixelRatio: 4,
                     responsive: false,
                     maintainAspectRatio: true,
                     indexAxis: 'y',
@@ -160,15 +161,28 @@ export class VisaoRelatorio{
         let t = 0;
     
         a.forEach(celula => {
-            t += parseFloat(celula.textContent ?? '0');
+            t += parseInt(celula.textContent ?? '0');
+            console.log(t);
         });
 
         return t;
     }
 
+    calcularTotaisMedia(seletor: string){
+        const a = document.querySelectorAll(seletor) as NodeListOf<HTMLTableCellElement>;
+        let t = 0;
+    
+        a.forEach(celula => {
+            t += parseFloat(celula.textContent ?? '0');
+            console.log(t);
+        });
+
+        return t.toFixed(2);
+    }
+
     criarLinhaTotal(){
-        const tbody = document.querySelector('tbody');
-        if(tbody){
+        const tfoot = document.querySelector('tfoot');
+        if(tfoot){
             const tr = document.createElement('tr');
             const celulaTotal = this.criarCelula('Total');
             const celulaTotal1 = this.criarCelula(this.calcularTotais('.qtd1'));
@@ -176,10 +190,10 @@ export class VisaoRelatorio{
             const celulaTotal3 = this.criarCelula(this.calcularTotais('.qtd3'));
             const celulaTotal4 = this.criarCelula(this.calcularTotais('.qtd4'));
             const celulaTotal5 = this.criarCelula(this.calcularTotais('.qtd5'));
-            const celulaTotal6 = this.criarCelula(this.calcularTotais('.qtd6'));
+            const celulaTotal6 = this.criarCelula(this.calcularTotaisMedia('.qtd6'));
 
             tr.append(celulaTotal,celulaTotal1,celulaTotal2,celulaTotal3,celulaTotal4,celulaTotal5,celulaTotal6);
-            tbody.append(tr);
+            tfoot.append(tr);
         }
     }
 
@@ -187,6 +201,7 @@ export class VisaoRelatorio{
         const tr = document.createElement('tr');
 
         const celulaTituloPergunta = this.criarCelula(titulo);
+        celulaTituloPergunta.classList.add("p-3");
         const celulaTotal1 = this.criarCelula(totalDiscordoTotalmente);
         const celulaTotal2 = this.criarCelula(totalDiscordo);
         const celulaTotal3 = this.criarCelula(totalNemConcordoNemDiscordo);
