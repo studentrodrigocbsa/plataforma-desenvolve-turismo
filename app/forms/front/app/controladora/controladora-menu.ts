@@ -32,8 +32,6 @@ export class ControladoraMenu{
     }
 
     async carregarSurveysDisponiveis(){
-        // TODO
-
         //this.visao.desenharPesquisasDisponiveis();
     }
 }
