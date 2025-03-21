@@ -148,7 +148,7 @@ export class VisaoRelatorio{
             for(let i = 0; i < titulos.length; i++){
                 const controladora = new ControladoraRelatorio(this);
                 const media = controladora.calcularMediaPergunta(totaisDiscordoTotalmente[i] ?? 0,totaisDiscordo[i] ?? 0,totaisNemConcordoNemDiscordo[i] ?? 0,totaisConcordo[i] ?? 0,totaisConcordoTotalmente[i] ?? 0);
-                const linha = this.criarLinha(titulos[i],totaisDiscordoTotalmente[i] ?? 0,totaisDiscordo[i] ?? 0,totaisNemConcordoNemDiscordo[i] ?? 0,totaisConcordo[i] ?? 0,totaisConcordoTotalmente[i] ?? 0,media);
+                const linha = this.criarLinha(titulos[i],totaisDiscordoTotalmente[i] ?? 0,totaisDiscordo[i] ?? 0,totaisNemConcordoNemDiscordo[i] ?? 0,totaisConcordo[i] ?? 0,totaisConcordoTotalmente[i] ?? 0,Number(media));
                 fragmento.append(linha);
             }
             tbody.append(fragmento);
