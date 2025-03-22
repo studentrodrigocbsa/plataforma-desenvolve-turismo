@@ -4,25 +4,26 @@ import { Notificacao, TIPOS_NOTIFICACAO } from "../infra/notificacao";
 
 export class VisaoSurvey{
 
-    private static INDEX_ATUAL = -1;
+    static INDEX_ATUAL = -1;
 
     iniciar() {
         const controladora = new ControladoraSurvey(this);
-
-        window.onbeforeunload = () => {
-            controladora.limpar();
-        }
 
 
         const nxt = document.getElementById('next-btn') as HTMLButtonElement;
         nxt.addEventListener('click', () => {
             controladora.next();
         });
+
     }
 
-    
+
+
+    /****************
+     * Notificações *
+     ***************/
     exibirNotificacaoVocePossuiPerguntasNaoRespondidas() {
-        Notificacao.exibirNotificacao(['Você possui ainda perguntas não respondidas...'],TIPOS_NOTIFICACAO.AVISO);
+        Notificacao.exibirNotificacao(['Você possui perguntas não respondidas.'],TIPOS_NOTIFICACAO.AVISO);
     }
     exibirNotificacaoSurveyConcluidoSucesso(msg: string) {
         Notificacao.exibirNotificacao([msg],TIPOS_NOTIFICACAO.SUCESSO);
@@ -30,7 +31,13 @@ export class VisaoSurvey{
     exibirNotificacaoOcorreuUmErro(msg: string) {
         Notificacao.exibirNotificacao([msg],TIPOS_NOTIFICACAO.ERRO);
     }
+    //$end
 
+
+
+    /**
+     * Telas
+     */
     telaAgradecimento(){
         const divConteudo = document.getElementById('conteudo') as HTMLDivElement;
         divConteudo.innerHTML = '';
@@ -45,18 +52,12 @@ export class VisaoSurvey{
         const divBotoes = document.createElement('div');
         divBotoes.classList.add('d-inline-block');
 
-        const botaoHome = document.createElement('button');
-        botaoHome.classList.add('btn','btn-secondary');
-        botaoHome.innerText = 'Voltar p/ Home';
-        botaoHome.addEventListener('click', () => {
-            window.location.href = `${DOMAIN}`
-        });
-
         const botaoPagInicial = document.createElement('button');
         botaoPagInicial.classList.add('btn','btn-primary');
         botaoPagInicial.innerText = "Responder Novamente";
         botaoPagInicial.addEventListener('click', () => {
-            window.location.href = `${DOMAIN}/front/pages/menu.html`
+            const controladora = new ControladoraSurvey(this);
+            controladora.resetarPesquisa();
         });
 
         const botaoRelatorio = document.createElement('button');
@@ -66,18 +67,8 @@ export class VisaoSurvey{
             window.location.href = `${DOMAIN}/front/pages/relatorio.html`
         });
 
-        divBotoes.append(botaoHome,botaoPagInicial,botaoRelatorio);
+        divBotoes.append(botaoPagInicial,botaoRelatorio);
         divConteudo.append(obrigado,hr,p,divBotoes);
-    }
-
-    
-    prevIndex() {
-        VisaoSurvey.INDEX_ATUAL--;
-        return VisaoSurvey.INDEX_ATUAL;
-    }
-    nextIndex() {
-        VisaoSurvey.INDEX_ATUAL++;
-        return VisaoSurvey.INDEX_ATUAL;
     }
 
     desenharPergunta(pergunta: {titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}) {
@@ -179,6 +170,7 @@ export class VisaoSurvey{
     }
 
     inicio(){
+        VisaoSurvey.INDEX_ATUAL = -1;
         const divConteudo = document.getElementById('conteudo') as HTMLDivElement;
         divConteudo.innerHTML = 
         `
@@ -202,5 +194,19 @@ export class VisaoSurvey{
             controladora.next();
         });
     }
+    //$end
+    
+
+    
+    /**************************
+     * Controles de navegação *
+     *************************/
+    prevIndex() {
+        VisaoSurvey.INDEX_ATUAL--;
+    }
+    nextIndex() {
+        VisaoSurvey.INDEX_ATUAL++;
+    }
+    //$end
 
 }

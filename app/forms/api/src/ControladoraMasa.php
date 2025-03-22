@@ -7,14 +7,11 @@ class ControladoraMasa{
         return $this->repoMasa->buscarPesquisaAA();
     }
 
-    public function postAA($dados = []): bool{
+    public function postAA($survey,$respondente): bool{
 
-        if(count($dados) == 0){
+        if(!$survey || !$respondente){
             return false;
         }
-
-        $survey = $dados[0];
-        $respondente = $dados[1];
 
         $this->gestorDados->calcularNotaRespondente($respondente,$survey);
         $this->repoMasa->salvarRespondenteSurvey($respondente);

@@ -1,4 +1,4 @@
-import { VisaoSurvey } from "./visao/visao-survery";
+import { VisaoSurvey } from "./visao/visao-survey";
 
 console.log('oi visao survey');
 const visao = new VisaoSurvey();

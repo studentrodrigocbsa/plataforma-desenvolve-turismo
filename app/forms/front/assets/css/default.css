@@ -150,12 +150,12 @@ sup {
 
 a {
   color: #1de9b6;
-  text-decoration: none;
-  background-color: transparent;
-  -webkit-text-decoration-skip: objects; }
+  font-size: 80%; }
   a:hover {
-    color: #0e9271;
-    text-decoration: none; }
+    color: #0e9271; }
+    a svg {
+      font-size: 75%;
+    }
 
 a:not([href]):not([tabindex]) {
   color: inherit;

@@ -5,6 +5,7 @@ export class VisaoMenu{
 
     iniciar() {
         const controladora = new ControladoraMenu(this);
+
         controladora.carregarSurveysDisponiveis();
 
         const botao = document.getElementById('iniciar') as HTMLButtonElement;

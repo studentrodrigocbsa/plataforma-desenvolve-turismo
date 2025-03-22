@@ -26,6 +26,9 @@
     <!-- Own -->
     <script src="../assets/js/popover.js" type="module" defer></script>
 
+    <!-- Others -->
+     <script src="../../node_modules/clipboard/dist/clipboard.min.js"></script>
+
 </head>
 
 <body>
@@ -45,33 +48,53 @@
                 <div class="col-md-10 col-sm-10 col-12 mx-auto my-auto text-center">
 
                     <h1 class="heading-black text-capitalize">Quase lá!</h1>
-                    <p class="lead py-3">Preencha as informações anônimas abaixo para conseguirmos gerar o relatório geral.</p>
-
+                    <p class="lead py-3">Insira o seu token de pesquisa.</p>
                     <hr>
+                    <div class="input-group mb-3">
+                        <input type="text" id="token" name="token" class="form-control" placeholder="Token de pesquisa" maxlength="30" minlength="30" aria-label="Token de pesquisa" aria-describedby="iniciar" tabindex="1">
+                        <button class="btn btn-outline-secondary" type="button" id="confirmar" tabindex="2">Iniciar com este token <i data-feather="log-in"></i> </button>
+                      </div>
+                      <p><a id="gerar-token" href="#" class="link-underline-primary link-offset-3" tabindex="3">Não tenho um token / Gerar um novo  <i width="18" height="18" data-feather="refresh-cw"></i></a></p>
 
-                    <select class="form-select" aria-label="Selecione o seu perfil" id="perfil" name="perfil" tabindex="1">
-                    </select>
-
-                    <select class="form-select mt-2" aria-label="Selecione a sua faixa etária" id="idade" name="idade" tabindex="2">
-                    </select>
-
-                    <select class="form-select mt-2" aria-label="Selecione a sua escolaridade" id="escolaridade" name="escolaridade" tabindex="3">
-                    </select>
-
-                    <select class="form-select mt-2 mb-4" aria-label="Selecione o seu cargo" id="cargo" name="cargo" tabindex="4">
-                        <option value="" selected>-- Selecione o seu cargo --</option>
-                    </select>
-
-                    
-
-                    <button id="iniciar" class="btn btn-primary" tabindex="5">Responder à pesquisa</button>
                 </div>
             </div>
         </div>
     </section>
 
 
-    <script> feather.replace(); </script>
+    <!-- Modal -->
+    <div class="modal fade" id="modalConfirmacao" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">Guarde o seu token.</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="text-primary-emphasis fw-semibold">Guarde o seu token. Ele será necessário para acessar o seu relatório final. Você poderá realizar várias pesquisas com o mesmo token e gerar outro a qualquer momento. Em caso de perda, os dados associados a ele são irrecuperáveis.</p>
+                    <p class="text-primary-emphasis fw-bolder">
+                        <span id="token-gerado"></span> 
+                        <i class="clipboard" style="cursor: pointer;" data-feather="clipboard" data-clipboard-target="#token-gerado"></i> 
+                    </p>
+                    <hr>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="confirmacao">
+                        <label class="form-check-label text-body-emphasis" for="flexCheckDefault">
+                            Declaro que li, entendi e guardei o token em local apropriado.
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                    <button type="button" id="iniciar" class="btn btn-primary" disabled>Iniciar!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script> feather.replace(); new ClipboardJS('.clipboard'); </script>
 
     
 </body>

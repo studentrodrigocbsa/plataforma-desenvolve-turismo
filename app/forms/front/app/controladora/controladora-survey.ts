@@ -1,6 +1,6 @@
 import { RepositorioMASA } from "../repositorio/repositorio-masa";
 import { RepositorioSurvey } from "../repositorio/repositorio-survey";
-import { VisaoSurvey } from "../visao/visao-survery";
+import { VisaoSurvey } from "../visao/visao-survey";
 
 export class ControladoraSurvey{
 
@@ -36,25 +36,38 @@ export class ControladoraSurvey{
             }
         }
         catch(e:any){
+            console.log(e);
             this.visao.exibirNotificacaoOcorreuUmErro(e.message);
         }
     }
 
-    limpar(){
+    /**
+     * Limpeza
+     */
+    limparArmazenamentoLocal(){
         this.repoSurvey.clear();
     }
+    resetarPesquisa(){
+        this.repoSurvey.resetar();
+        this.visao.inicio();
+    }
+    //$end
 
+    /**
+     * Controles de navegação
+     */
     prev(){
-        const index = this.visao.prevIndex();
+        this.visao.prevIndex();
         const perguntas = this.repoSurvey.get();
-        perguntas[index] ? this.visao.desenharPergunta(perguntas[index]) : this.visao.inicio();
+        perguntas[VisaoSurvey.INDEX_ATUAL] ? this.visao.desenharPergunta(perguntas[VisaoSurvey.INDEX_ATUAL]) : this.visao.inicio();
     }
-
     next() {
-        const index = this.visao.nextIndex();
+        this.visao.nextIndex();
         const perguntas = this.repoSurvey.get();
-        perguntas[index] ? this.visao.desenharPergunta(perguntas[index]) : this.visao.conclusao();
+        perguntas[VisaoSurvey.INDEX_ATUAL] ? this.visao.desenharPergunta(perguntas[VisaoSurvey.INDEX_ATUAL]) : this.visao.conclusao();
     }
+    //$end
+
 
     atualizarVoto(e: Event) {
         // Só pode um voto por pergunta, então, a cada 'change' resetar onde tiver voto 1 --> 0 e alterar o voto na pergunta de 0 --> 1

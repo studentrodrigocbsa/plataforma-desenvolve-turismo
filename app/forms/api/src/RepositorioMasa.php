@@ -74,18 +74,15 @@ class RepositorioMasa
 
       $this->pdo->beginTransaction();
 
-      $sql = 'INSERT INTO respondente(perfil,faixa_etaria,escolaridade,cargo,nota,survey) VALUES (:perfil,:faixa_etaria,:escolaridade,:cargo,:nota,:survey)';
+      $sql = 'INSERT INTO respondente(token,nota,survey) VALUES (:token,:nota,:survey)';
       $ps = $this->pdo->prepare($sql);
       $ps->execute([
-        'perfil' => $respondente->perfil,
-        'faixa_etaria' => $respondente->faixa_etaria,
-        'escolaridade' => $respondente->escolaridade,
-        'cargo' => $respondente->cargo,
+        'token' => $respondente->token,
         'nota' => $respondente->nota,
         'survey' => $respondente->survey
       ]);
 
-      return $ps->rowCount();
+      return $this->pdo->lastInsertId();
     } catch (Exception $ex) {
       throw new Exception('Erro ao salvar respondente no banco de dados.', (int) $ex->getCode(), $ex);
     }

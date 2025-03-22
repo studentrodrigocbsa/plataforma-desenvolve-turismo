@@ -3,7 +3,6 @@ CREATE DATABASE tcc_base;
 USE tcc_base;
 
 
-
 CREATE TABLE survey(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     categoria VARCHAR(100) NOT NULL
@@ -27,12 +26,9 @@ CREATE TABLE opcao(
 
 CREATE TABLE respondente(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    perfil ENUM('Gestor','Visitante','Residente Local') NOT NULL,
-    faixa_etaria ENUM('18...21','22...25','26...29','30...33','34...37','38...41','42+') NOT NULL,
-    escolaridade ENUM('Ensino Fundamental incompleto','Ensino Fundamental completo','Ensino Médio incompleto','Ensino Médio completo','Ensino Superior incompleto','Ensino Superior completo','Pós-graduação incompleto','Pós-graduação completo','Sem formação') NOT NULL,
-    cargo ENUM('Operacional','Gerencial','Administrativo','Nenhum') DEFAULT 'Nenhum' NOT NULL,
-    nota INT NOT NULL DEFAULT 0 ,
+    nota INT NOT NULL DEFAULT 0,
     survey INT NOT NULL,
+    token VARCHAR(30) NOT NULL,
     CONSTRAINT fk_respondente__survey FOREIGN KEY (survey) REFERENCES survey(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;
 

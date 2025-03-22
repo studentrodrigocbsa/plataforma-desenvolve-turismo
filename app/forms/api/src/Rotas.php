@@ -39,7 +39,9 @@ $app->post( '/masa/aa', function( $req, $res ) use ( $pdo )
 {
     $dados = (array) $req->body();
     $controladora = criarControladoraMASA($pdo);
-    $success = $controladora->postAA($dados);
+    $survey = $dados[0];
+    $respondente = $dados[1];
+    $success = $controladora->postAA($survey, $respondente);
     if ( $success ) {
         $res->json(['success' => true, 'message' => 'Survey concluído com sucesso!']);
     } else {

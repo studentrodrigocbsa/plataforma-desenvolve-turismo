@@ -7,122 +7,111 @@ export class VisaoDados{
     iniciar() {
         const controladora = new ControladoraDados(this);
 
-        const botao = document.getElementById('iniciar') as HTMLButtonElement;
-        botao.addEventListener('click', (event) => {
+        const botaoConfirmar = document.getElementById('confirmar') as HTMLButtonElement;
+        botaoConfirmar.addEventListener('click', (event) => {
+            event.preventDefault();
+            controladora.confirmar();
+        })
+
+        const botaoIniciar = document.getElementById('iniciar') as HTMLButtonElement;
+        botaoIniciar.addEventListener('click', (event) => {
             event.preventDefault();
             controladora.iniciarSurvey();
         });
 
-        this.desenharDadosSelects();
+        const gerador = document.getElementById('gerar-token') as HTMLLinkElement;
+        gerador.addEventListener('click', (event) => {
+            event.preventDefault();
+            controladora.gerarToken();
+        });
+
+        // Permitir apenas caracteres alfanuméricos no campo
+        const inputToken = document.getElementById('token') as HTMLSelectElement;
+        inputToken.addEventListener('input', () => {
+            inputToken.value = inputToken.value.replace(/[^a-zA-Z0-9]/g, '');
+        });
+
     }
 
+
+    /*********
+     * Modal *
+     *********/
+    abrirModal(){
+        const botaoConfirmacao = document.getElementById('confirmar') as HTMLButtonElement;
+        botaoConfirmacao.setAttribute('data-bs-toggle','modal');
+        botaoConfirmacao.setAttribute('data-bs-target','#modalConfirmacao');
+        botaoConfirmacao.click();
+        this.confirmacaoCheckBox();
+    }
+    confirmacaoCheckBox(){
+        const botaoIniciar = document.getElementById('iniciar') as HTMLButtonElement;
+        const check = document.getElementById('confirmacao') as HTMLInputElement;
+        check.addEventListener('click',() => {
+        if(check.checked == true){
+            botaoIniciar.removeAttribute('disabled');
+        }
+        else{
+            botaoIniciar.setAttribute('disabled','true');
+        }
+        
+        });
+    }
+    //$end
+
+
+
+    /*******************
+     * Efeitos visuais *
+     ******************/
     botaoCarregamento(){
-        const botao = document.getElementById('iniciar') as HTMLButtonElement;
-        botao.setAttribute('disabled','true');
-        botao.innerHTML = 
+        const botaoIniciar = document.getElementById('iniciar') as HTMLButtonElement;
+        botaoIniciar.setAttribute('disabled','true');
+        botaoIniciar.innerHTML = 
         `
         <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
         <span role="status">Carregando...</span>
         `;
     }
+    //$end
 
-    camposEstaoVazios(): boolean{
-        const s1 = document.getElementById('perfil') as HTMLSelectElement;
-        const s2 = document.getElementById('idade') as HTMLSelectElement;
-        const s3 = document.getElementById('escolaridade') as HTMLSelectElement;
-        const s4 = document.getElementById('cargo') as HTMLSelectElement;
 
-        return  (s1.value   == '' ||
-                s2.value    == '' ||
-                s3.value    == '' ||
-                s4.value    == '' ) ? true : false;
+
+    /****************
+     * Notificações *
+     ***************/
+    exibirNotificacaoTokenCopiado() {
+        Notificacao.exibirNotificacao(['Token copiado!'],TIPOS_NOTIFICACAO.SUCESSO);
     }
-
-    exibirNotificacaoFavorPreencherOsCampos() {
-        Notificacao.exibirNotificacao(['Favor preencher todos os campos para iniciar o survey.'],TIPOS_NOTIFICACAO.INFO);
+    exibirNotificacaoFavorInserirToken() {
+        Notificacao.exibirNotificacao(['Favor inserir token no campo.'],TIPOS_NOTIFICACAO.INFO);
     }
-
-
-    desenharDadosSelects(){
-        const s1 = document.getElementById('perfil') as HTMLSelectElement;
-        s1.innerHTML = `<option value="" selected>-- Selecione o seu perfil --</option>`;
-        const perfis = Object.values(PERFIL);
-        const opt = document.createElement('option');
-        perfis.forEach(perfil => {
-            if(perfil == PERFIL.RESIDENTE_LOCAL || perfil == PERFIL.VISITANTE)
-                return; // Trabalharemos apenas com a pesquisa de AA p/ gestores (funcionários de destino turístico)
-            opt.value = perfil; 
-            opt.innerHTML = perfil;
-            s1.appendChild(opt);
-        });
-
-        const s2 = document.getElementById('idade') as HTMLSelectElement;
-        s2.innerHTML = `<option value="" selected>-- Selecione a sua faixa etária --</option>`;
-        const faixas = Object.values(FAIXA_ETARIA);
-        faixas.forEach(faixa => {
-            const opt = document.createElement('option');
-            opt.value = faixa;
-            opt.innerHTML = faixa;
-            s2.appendChild(opt);
-        });
-
-        const s3 = document.getElementById('escolaridade') as HTMLSelectElement;
-        s3.innerHTML = `<option value="" selected>-- Selecione a sua escolaridade --</option>`;
-        const escolaridades = Object.values(ESCOLARIDADE);
-        escolaridades.forEach(escolaridade => {
-            const opt = document.createElement('option');
-            opt.value = escolaridade;
-            opt.innerHTML = escolaridade;
-            s3.appendChild(opt);
-        });
-        
-
-        s1.addEventListener('change', () => {
-            if (s1.value == PERFIL.RESIDENTE_LOCAL || s1.value == PERFIL.VISITANTE){
-                const s4 = document.getElementById('cargo') as HTMLSelectElement;
-                s4.innerHTML = `<option value="" selected>-- Selecione o seu cargo --</option>`;
-                s4.innerHTML += `<option value="${CARGO.NENHUM}">${CARGO.NENHUM}</option>`;
-            } else if (s1.value == ''){
-                const s4 = document.getElementById('cargo') as HTMLSelectElement;
-                s4.innerHTML = `<option value="" selected>-- Selecione o seu cargo --</option>`;
-            } else{
-                this.desenharSelectCargos();
-            }
-        });
+    exibirNotificacaoErroGerarToken(msg: string) {
+        Notificacao.exibirNotificacao([msg],TIPOS_NOTIFICACAO.ERRO);
     }
-
-    desenharSelectCargos(){
-        const s4 = document.getElementById('cargo') as HTMLSelectElement;
-        s4.innerHTML = `<option value="" selected>-- Selecione o seu cargo --</option>`;
-        const cargos = Object.values(CARGO);
-        cargos.forEach(cargo => {
-            if(cargo == CARGO.NENHUM){
-                return;
-            }
-            const opt = document.createElement('option');
-            opt.value = cargo;
-            opt.innerHTML = cargo;
-            s4.appendChild(opt);
-        });
+    exibirNotificacaoErroTokenInvalido() {
+        Notificacao.exibirNotificacao(['Token inválido. Favor inserir token válido.'],TIPOS_NOTIFICACAO.AVISO);
     }
+    //$end
 
 
-    
-    valorCargo() {
-        const s = document.getElementById('cargo') as HTMLSelectElement;
-        return s.value ? s.value : '';
+    /***************
+     * Input Token *
+     **************/
+    preencherCampoToken(token: string){
+        const input = document.getElementById('token') as HTMLSelectElement;
+        input.value = token;
+        const span = document.getElementById('token-gerado') as HTMLSpanElement;
+        span.innerHTML = token;
     }
-    valorEscolaridade() {
-        const s = document.getElementById('escolaridade') as HTMLSelectElement;
-        return s.value ? s.value : '';
+    valorToken(){
+        const el = document.getElementById('token') as HTMLSelectElement;
+        return el.value;
     }
-    valorIdade() {
-        const s = document.getElementById('idade') as HTMLSelectElement;
-        return s.value ? s.value : '';
+    campoTokenPreenchido(): boolean{
+        const s1 = document.getElementById('token') as HTMLSelectElement;
+        return  (s1.value   === '' ) ? false : true;
     }
-    valorPerfil() {
-        const s = document.getElementById('perfil') as HTMLSelectElement;
-        return s.value ? s.value : '';
-    }
+    //$end
 
 }

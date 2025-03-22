@@ -6,12 +6,21 @@ export class RepositorioSurvey{
         localStorage.clear();
     }
 
-    save(perguntas: [{titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}]) {
-        localStorage.setItem('survey',JSON.stringify(perguntas));
+    save(survey: [{titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}]) {
+        localStorage.setItem('survey',JSON.stringify(survey));
     }
 
     get(): [{titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}]{
         return JSON.parse(localStorage.getItem('survey') || '[]');
+    }
+
+    resetar(){
+        const survey = this.get();
+        survey.forEach(p => {
+            p.respondida = false;
+            p.opcoes.forEach(o => o.voto = 0);
+        });
+        this.save(survey);
     }
 
     
@@ -21,5 +30,9 @@ export class RepositorioSurvey{
 
     getDadosRespondente(): Respondente{
         return JSON.parse(localStorage.getItem('respondente') || '{}');
+    }
+
+    getToken(){
+        return JSON.parse(localStorage.getItem('respondente') || '{token:"?"}').token;
     }
 }
