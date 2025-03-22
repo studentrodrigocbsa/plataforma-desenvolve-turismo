@@ -45,17 +45,34 @@
             <div class="container-fluid">
 
 
+              <!-- ========== TÍTULO E BREADCRUMB ========== -->
                 <div class="title-wrapper pt-30">
-                    <div class="row align-items-center">
+                  <div class="row align-items-center">
                       <div class="col-md-6">
                         <div class="title">
                           <h2>MASA | Resultados</h2>
                           <p>Relatório - Acessibilidade Atitudinal (Escala de Capacitismo)</p>
                         </div>
                       </div>
-                    </div>
-                    <!-- end row -->
+                      <!-- breadcrumb -->
+                      <div class="col-md-6">
+                        <div class="breadcrumb-wrapper">
+                          <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                  <a href="../../index.html">
+                                    <i data-feather="arrow-left"></i>
+                                    Sair
+                                  </a>
+                                </li>
+                            </ol>
+                          </nav>
+                        </div>
+                      </div>
+                      <!-- breadcrumb -->
                   </div>
+                  <!-- end row -->
+              </div>
                 
 
 
@@ -64,12 +81,8 @@
                     <!-- ========== GRÁFICO DADOS "GENÉRICOS" - Total por opção por pergunta ========== -->
                     <div class="col-lg-12">
                       <div class="card-style mb-30">
-                        <div class="title d-flex flex-wrap justify-content-start">
-                          <div class="left">
-                            <h3>👀 As escolhas dos respondentes foram...</h3>
-                          </div>
-                        </div>
                         <div class="d-flex flex-wrap justify-content-center">
+                          
                           <div class="mt-3 overflow-x-scroll" id="div-grafico-total-geral">
                             <canvas class="chart" id="grafico-total-geral"></canvas>
                           </div>
@@ -79,8 +92,6 @@
                           <h5 class="mt-5" id="texto-desempenho-geral"></h5>
                           <i class="p-1 fw-400" data-feather="info" data-bs-toggle="popover" data-bs-trigger="hover" title="Desempenho Geral" data-bs-content="O desempenho geral é dado pela média aritmética simples das respostas, com a nota das opções sendo atribuídas de acordo com a escala Likert de concordância de 5 pontos. Quanto maior a média, nesta pesquisa, pior o resultado, que varia de 1 (melhor) a 5 (pior)."></i>
                         </div>
-                        
-
                         
                       </div>
                     </div>
@@ -103,8 +114,7 @@
                           <!-- End Title -->
                           <div class="table-responsive">
                               <table class="table table-hover align-middle overflow-x-auto">
-                                <caption>Interpretação: para interpretar os resultados, entenda que quanto menor o valor do desempenho, melhor. Ele varia de 1 a 5. O desempenho é medido com base na escala Likert de concordância de 5 pontos. Nesta pesquisa, quanto maiores forem os valores, pior o desempenho.</caption>
-                                <thead class="">
+                                <thead>
                                   <tr>
                                     <th class="pe-3">
                                         <h6 class="text-sm text-medium">Pergunta</h6>
@@ -162,6 +172,22 @@
                     </div>
                     <!-- End Col -->
                   </div>
+
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Como interpreto os resultados?
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          Quanto <strong>maior</strong> o valor do desempenho, nesta pesquisa, <strong>pior</strong> o resultado. A escala de concordância de 5 pontos foi utilizada, com as notas das opções sendo atribuídas de acordo com a escala Likert. A média aritmética simples das respostas foi calculada para cada pergunta, com a média geral sendo calculada a partir das médias das perguntas.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
 
 
             </div>

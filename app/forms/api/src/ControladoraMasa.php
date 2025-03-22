@@ -7,26 +7,14 @@ class ControladoraMasa{
         return $this->repoMasa->buscarPesquisaAA();
     }
 
-    public function postAA($dados = []): bool{
+    public function postAA($survey): bool{
 
-        if(count($dados) == 0){
-            return false;
-        }
-
-        $survey = $dados[0];
-        $respondente = $dados[1];
-
-        $this->gestorDados->calcularNotaRespondente($respondente,$survey);
-        $this->repoMasa->salvarRespondenteSurvey($respondente);
+        $nota = $this->gestorDados->calcularNotaRespondente($survey);
+        $this->repoMasa->salvarNotaRespondenteSurvey($nota);
         return $this->repoMasa->contabilizarVotosSurveyAA($survey);
     }
 
     public function getTotaisGenericosPesquisa(){
         return $this->repoMasa->totalRespostas();
-    }
-
-    public function getTotaisPorFiltro($filtro): array{
-        $campo_respondente_bd = $this->gestorDados->tradutorDeFiltro($filtro);
-        return $this->repoMasa->totalRespostasPorFiltro($campo_respondente_bd);
     }
 }

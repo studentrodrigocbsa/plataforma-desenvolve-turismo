@@ -1,6 +1,6 @@
 import { RepositorioMASA } from "../repositorio/repositorio-masa";
 import { RepositorioSurvey } from "../repositorio/repositorio-survey";
-import { VisaoSurvey } from "../visao/visao-survery";
+import { VisaoSurvey } from "../visao/visao-survey";
 
 export class ControladoraSurvey{
 
@@ -14,6 +14,11 @@ export class ControladoraSurvey{
         this.repoSurvey = new RepositorioSurvey;
     }
 
+    resetarPesquisa(){
+        this.repoSurvey.resetar();
+        this.visao.inicio();
+    }
+
 
     async enviar(){
         let prontoParaEnviar = true;
@@ -25,8 +30,7 @@ export class ControladoraSurvey{
         });
         try{
             if(prontoParaEnviar){
-                const respondente = this.repoSurvey.getDadosRespondente();
-                const resposta = await this.repoMASA.enviar(survey,respondente);
+                const resposta = await this.repoMASA.enviar(survey);
                 if(resposta.success){
                     this.visao.exibirNotificacaoSurveyConcluidoSucesso(resposta.message);
                     this.visao.telaAgradecimento();

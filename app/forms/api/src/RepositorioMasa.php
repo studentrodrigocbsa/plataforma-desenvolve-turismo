@@ -25,24 +25,6 @@ class RepositorioMasa
     }
   }
 
-  public function totalRespostasPorFiltro($campo_respondente_bd){
-    try {
-      $ps = $this->pdo->prepare(
-        '
-        SELECT r.'.$campo_respondente_bd.' as filtro,p.titulo,e.opcao,COUNT(e.opcao) AS votos FROM escolha e  
-          JOIN pergunta p ON e.pergunta = p.id 
-          JOIN respondente r ON e.respondente = r.id 
-        WHERE p.survey = 1 
-          GROUP BY p.titulo,e.opcao,r.faixa_etaria;
-      ');
-      $ps->execute();
-      return $ps->fetchAll(PDO::FETCH_ASSOC);
-
-    } catch (Exception $ex) {
-      throw new Exception('Erro ao buscar resultado por filtro no banco de dados.', (int) $ex->getCode(), $ex);
-    }
-  }
-
   public function buscarPesquisaAA(): array{
     try {
         $ps = $this->pdo->prepare('SELECT p.titulo,o.opcao FROM pergunta p JOIN opcao o ON o.pergunta = p.id WHERE p.survey = 1 ORDER BY p.ordem');
@@ -69,20 +51,15 @@ class RepositorioMasa
     }
   }
 
-  public function salvarRespondenteSurvey($respondente): bool{
+  public function salvarNotaRespondenteSurvey($nota): bool{
     try{
 
       $this->pdo->beginTransaction();
 
-      $sql = 'INSERT INTO respondente(perfil,faixa_etaria,escolaridade,cargo,nota,survey) VALUES (:perfil,:faixa_etaria,:escolaridade,:cargo,:nota,:survey)';
+      $sql = 'INSERT INTO respondente(nota,survey) VALUES (:nota,1)';
       $ps = $this->pdo->prepare($sql);
       $ps->execute([
-        'perfil' => $respondente->perfil,
-        'faixa_etaria' => $respondente->faixa_etaria,
-        'escolaridade' => $respondente->escolaridade,
-        'cargo' => $respondente->cargo,
-        'nota' => $respondente->nota,
-        'survey' => $respondente->survey
+        'nota' => $nota
       ]);
 
       return $ps->rowCount();

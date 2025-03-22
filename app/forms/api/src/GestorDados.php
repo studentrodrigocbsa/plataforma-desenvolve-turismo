@@ -2,7 +2,7 @@
 class GestorDados{
 
     
-    public function calcularNotaRespondente(&$respondente,$survey){
+    public function calcularNotaRespondente($survey): int{
         $mediaAritmeticaSimples = 0;
         $totalPerguntas = 0;
 
@@ -27,17 +27,7 @@ class GestorDados{
             }
         }
 
-        $respondente->nota = $mediaAritmeticaSimples/$totalPerguntas;
+        return $mediaAritmeticaSimples/$totalPerguntas;
     }
 
-
-    public function tradutorDeFiltro($filtro){
-        return match($filtro){
-            EnumFiltro::ESCOLARIDADE->value => EnumTradutorFiltro::ESCOLARIDADE->value,
-            EnumFiltro::CARGO->value => EnumTradutorFiltro::CARGO->value,
-            EnumFiltro::FAIXA_ETARIA->value => EnumTradutorFiltro::FAIXA_ETARIA->value,
-            EnumFiltro::PERFIL->value => EnumTradutorFiltro::PERFIL->value,
-            default => ''
-        };
-    }
 }

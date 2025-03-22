@@ -18,14 +18,6 @@ $app->get( '/masa/generic/resultados', function( $req, $res ) use ( $pdo )
     $res->json( $content );
 });
 
-$app->get( '/masa/aa/filtro', function( $req, $res ) use ( $pdo ) 
-{
-    $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : '';
-    $controller = criarControladoraMASA($pdo);
-    $content = $controller->getTotaisPorFiltro($filtro);
-    $res->json( $content );
-});
-
 
 $app->get( '/masa/aa', function( $req, $res ) use ( $pdo ) 
 {
@@ -39,7 +31,8 @@ $app->post( '/masa/aa', function( $req, $res ) use ( $pdo )
 {
     $dados = (array) $req->body();
     $controladora = criarControladoraMASA($pdo);
-    $success = $controladora->postAA($dados);
+    $survey = $dados[0];
+    $success = $controladora->postAA($survey);
     if ( $success ) {
         $res->json(['success' => true, 'message' => 'Survey concluído com sucesso!']);
     } else {

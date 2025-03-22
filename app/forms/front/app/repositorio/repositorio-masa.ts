@@ -1,5 +1,4 @@
 import { API } from '../infra/API';
-import { Respondente } from '../modelo/respondente';
 
 export class RepositorioMASA{
 
@@ -36,8 +35,8 @@ export class RepositorioMASA{
         return JSON.parse(text);
     }
 
-    async enviar(survey: [{titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}], respondente: Respondente){
-        const dados = [survey,respondente];
+    async enviar(survey: [{titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}]){
+        const dados = [survey];
         const response = await fetch(`${API}/masa/aa`, { method: 'post', body: JSON.stringify(dados), headers: {'Content-Type': 'application/json', 'ngrok-skip-browser-warning':'yoloo'} } );
         const text = await response.text();
         if(response.status >= 400){

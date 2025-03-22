@@ -1,6 +1,5 @@
 import { Chart } from "chart.js/auto";
 import { ControladoraRelatorio } from "../controladora/controladora-relatorio";
-import { DADOS_RESPONDENTE } from '../modelo/enums-respondente';
 import { OPCOES } from "../modelo/enum-opcoes";
 import { Notificacao, TIPOS_NOTIFICACAO } from "../infra/notificacao";
 
@@ -106,7 +105,7 @@ export class VisaoRelatorio{
                     plugins: {
                         title: {
                           display: true,
-                          text: 'Gráfico Geral - Total por escolha dos respondentes'
+                          text: 'Gráfico Geral - Escolhas por pergunta'
                         },
                     },
                     scales: {
