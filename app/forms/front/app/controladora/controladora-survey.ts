@@ -48,18 +48,30 @@ export class ControladoraSurvey{
         this.repoSurvey.clear();
     }
 
+
+
+
+    /**
+     * Controles do usuário
+     */
     prev(){
         const index = this.visao.prevIndex();
+        if(index < -1){
+            this.visao.nextIndex();
+            return;
+        }
         const perguntas = this.repoSurvey.get();
         perguntas[index] ? this.visao.desenharPergunta(perguntas[index]) : this.visao.inicio();
     }
-
     next() {
         const index = this.visao.nextIndex();
         const perguntas = this.repoSurvey.get();
+        if(index >= (perguntas.length + 1)){
+            this.visao.prevIndex();
+            return;
+        }
         perguntas[index] ? this.visao.desenharPergunta(perguntas[index]) : this.visao.conclusao();
     }
-
     atualizarVoto(e: Event) {
         // Só pode um voto por pergunta, então, a cada 'change' resetar onde tiver voto 1 --> 0 e alterar o voto na pergunta de 0 --> 1
         const input = e.target as HTMLInputElement;
@@ -79,4 +91,5 @@ export class ControladoraSurvey{
         });
         this.repoSurvey.save(perguntas);
     }
+    //$end
 }
