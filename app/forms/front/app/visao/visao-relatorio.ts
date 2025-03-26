@@ -161,7 +161,6 @@ export class VisaoRelatorio{
     
         a.forEach(celula => {
             t += parseInt(celula.textContent ?? '0');
-            console.log(t);
         });
 
         return t;
@@ -173,7 +172,6 @@ export class VisaoRelatorio{
     
         a.forEach(celula => {
             t += parseFloat(celula.textContent ?? '0');
-            console.log(t);
         });
 
         return t.toFixed(2);

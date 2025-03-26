@@ -11,13 +11,20 @@ export class VisaoSurvey{
         const controladora = new ControladoraSurvey(this);
 
 
-        const nxt = document.getElementById('next-btn') as HTMLButtonElement;
-        nxt.addEventListener('click', () => {
+        const nxtbtn = document.getElementById('next-btn') as HTMLButtonElement;
+        nxtbtn.addEventListener('click', () => {
             controladora.next();
+        });
+        const prevbtn = document.getElementById('prev-btn') as HTMLButtonElement;
+        prevbtn.addEventListener('click', () => {
+            controladora.prev();
         });
     }
 
-    
+
+    /**
+     * Notificações
+     */
     exibirNotificacaoVocePossuiPerguntasNaoRespondidas() {
         Notificacao.exibirNotificacao(['Você possui perguntas não respondidas.'],TIPOS_NOTIFICACAO.AVISO);
     }
@@ -27,7 +34,26 @@ export class VisaoSurvey{
     exibirNotificacaoOcorreuUmErro(msg: string) {
         Notificacao.exibirNotificacao([msg],TIPOS_NOTIFICACAO.ERRO);
     }
+    //$end
 
+    
+    /**
+     * Controles de navegação
+     */
+    prevIndex() {
+        VisaoSurvey.INDEX_ATUAL--;
+        return VisaoSurvey.INDEX_ATUAL;
+    }
+    nextIndex() {
+        VisaoSurvey.INDEX_ATUAL++;
+        return VisaoSurvey.INDEX_ATUAL;
+    }
+    //$end
+
+
+    /**
+     * Telas
+     */
     telaAgradecimento(){
         const divConteudo = document.getElementById('conteudo') as HTMLDivElement;
         divConteudo.innerHTML = '';
@@ -60,16 +86,6 @@ export class VisaoSurvey{
 
         divBotoes.append(botaoPagInicial,botaoRelatorio);
         divConteudo.append(obrigado,hr,p,divBotoes);
-    }
-
-    
-    prevIndex() {
-        VisaoSurvey.INDEX_ATUAL--;
-        return VisaoSurvey.INDEX_ATUAL;
-    }
-    nextIndex() {
-        VisaoSurvey.INDEX_ATUAL++;
-        return VisaoSurvey.INDEX_ATUAL;
     }
 
     desenharPergunta(pergunta: {titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}) {
@@ -106,32 +122,13 @@ export class VisaoSurvey{
             }
             
         });
-
-
-        // setas
-        divConteudo.innerHTML += 
-        `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" id="prev-btn"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" id="next-btn"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        `;
         
-
         
         const controladora = new ControladoraSurvey(this);
         var checkboxElems = document.querySelectorAll("input[type='radio']") as NodeListOf<HTMLInputElement>;
         for (var i = 0; i < checkboxElems.length; i++) {
             checkboxElems[i].addEventListener('change', (e) => controladora.atualizarVoto(e));
         }
-
-        const nxt = document.getElementById('next-btn') as HTMLButtonElement;
-        nxt.addEventListener('click', () => {
-            controladora.next();
-        });
-
-        const prev = document.getElementById('prev-btn') as HTMLButtonElement;
-        prev.addEventListener('click', () => {
-            controladora.prev();
-        });
     }
 
     conclusao(){
@@ -140,34 +137,26 @@ export class VisaoSurvey{
 
         const title = document.createElement('h6');
         title.innerText = 'Fim';
+
         const msg = document.createElement('h5');
         msg.innerText = "Você chegou ao fim! Agora, clique no botão abaixo para enviar suas respostas.";
+
         const hr = document.createElement('hr');
+
         const p = document.createElement('p');
         p.classList.add('text-muted');
         p.innerText = "Você pode voltar para revisar suas respostas antes de enviar.";
+
         const btn = document.createElement('button');
         btn.classList.add('btn','btn-primary');
         btn.id = 'enviar';
         btn.innerText = 'Enviar!';
+        btn.addEventListener('click', () => {
+            const controladora = new ControladoraSurvey(this);
+            controladora.enviar();
+        });
 
         divConteudo.append(title,msg,hr,p,btn);
-
-        divConteudo.innerHTML += 
-        `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" id="prev-btn"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right close" id="next-btn"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        `;
-
-        const controladora = new ControladoraSurvey(this);
-        const prev = document.getElementById('prev-btn') as HTMLButtonElement;
-        prev.addEventListener('click', () => {
-            controladora.prev();
-        });
-        const botaoEnviar = document.getElementById('enviar') as HTMLButtonElement;
-        botaoEnviar.addEventListener('click', () => {
-            controladora.enviar();
-        })
     }
 
     inicio(){
@@ -177,23 +166,15 @@ export class VisaoSurvey{
         `
         <div class="title">
             <h5>Responda às próximas 15 assertivas com atenção.</h5>
-            <h6>Dica: Clique na seta da esquerda para voltar na pergunta e alterar sua escolha.</h6>
+            <h6>Dica: Use a seta da esquerda para voltar na pergunta e alterar a sua escolha.</h6>
             </div>
             <hr>
         <div class="title">
-            <h6>Clique na seta da direita para avançar.</h6>
+            <h6>Use a seta da direita para avançar.</h6>
         </div>
         <p class="text-muted">Tempo estimado: 6min</p>
-
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left close" id="prev-btn"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" id="next-btn"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         `;
-
-        const controladora = new ControladoraSurvey(this);
-        const nxt = document.getElementById('next-btn') as HTMLButtonElement;
-        nxt.addEventListener('click', () => {
-            controladora.next();
-        });
     }
+    //$end
 
 }
