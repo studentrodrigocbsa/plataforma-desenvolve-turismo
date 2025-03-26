@@ -6,7 +6,7 @@ use function phputil\cors\cors;
 set_exception_handler('TratadoraDeExcecoes::handler');
 
 $app = new Router();
-$app->use(cors([ 'origin' => [ 'http://localhost:5173', 'http://localhost:8080', 'https://e786-179-191-193-57.ngrok-free.app', 'https://b877-179-191-193-57.ngrok-free.app' ] ] ));
+$app->use(cors([ 'origin' => [ 'http://localhost:5173', 'http://localhost:8080', API, DOMINIO ] ] ));
 
 
 header("Access-Control-Allow-Origin: '*");
@@ -20,6 +20,7 @@ $pdo = Conexao::pdo();
 
 
 require_once 'src/Rotas.php';
+//require_once 'src/RotasRedirect.php';
 
 
 $app->listen();

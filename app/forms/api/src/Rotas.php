@@ -10,6 +10,7 @@ function criarControladoraMASA(PDO $pdo): ControladoraMasa {
 }
 
 
+
 $app->get( '/masa/generic/resultados', function( $req, $res ) use ( $pdo ) 
 {
     $id = isset($_GET['id']) ? $_GET['id'] : ''; // não faço nada... (ler controladora-relatorio.ts)

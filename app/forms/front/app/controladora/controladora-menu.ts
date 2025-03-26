@@ -1,4 +1,4 @@
-import { DOMAIN } from "../infra/DOMAIN";
+import { DOMINIO } from "../infra/Dominio";
 import { RepositorioMASA } from "../repositorio/repositorio-masa";
 import { RepositorioSurvey } from "../repositorio/repositorio-survey";
 import { VisaoMenu } from "../visao/visao-menu";
@@ -23,7 +23,7 @@ export class ControladoraMenu{
                 this.visao.botaoCarregamento();
                 const perguntas = await this.repoMASA.buscarPerguntasAcessibilidadeAtitudinal();
                 this.repoSurvey.save(perguntas);
-                window.location.href = `${DOMAIN}/front/pages/survey.html`;
+                window.location.href = `${DOMINIO}/front/pages/survey.html`;
             break;
             default :
                 this.visao.exibirNotificacaoSelecioneUmaPesquisa();

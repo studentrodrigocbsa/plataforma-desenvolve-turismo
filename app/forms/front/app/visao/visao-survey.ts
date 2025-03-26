@@ -1,6 +1,7 @@
 import { ControladoraSurvey } from "../controladora/controladora-survey";
-import { DOMAIN } from "../infra/DOMAIN";
+import { DOMINIO } from "../infra/Dominio";
 import { Notificacao, TIPOS_NOTIFICACAO } from "../infra/notificacao";
+import { Redirect } from "../infra/redirect";
 
 export class VisaoSurvey{
 
@@ -53,7 +54,8 @@ export class VisaoSurvey{
         botaoRelatorio.classList.add('btn','btn-secondary');
         botaoRelatorio.innerText = "Pág. Relatório";
         botaoRelatorio.addEventListener('click', () => {
-            window.location.href = `${DOMAIN}/front/pages/relatorio.html`
+            //Redirect.redirectToRelatorio();
+            window.location.href = `${DOMINIO}/front/pages/relatorio.html`;
         });
 
         divBotoes.append(botaoPagInicial,botaoRelatorio);
