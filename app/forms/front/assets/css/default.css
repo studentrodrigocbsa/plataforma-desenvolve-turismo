@@ -61,6 +61,7 @@ html {
   width: device-width; }
 
 article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+  background-color: transparent;
   display: block; }
 
 body {
@@ -3514,7 +3515,6 @@ input[type="button"].btn-block {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #ECEFF1;
   border-radius: 0.3rem; }
 
 .breadcrumb-item + .breadcrumb-item {
@@ -7594,8 +7594,8 @@ body {
 
 .bg-hero {
   background-color: #000000;
-  background-image: url("../content/Video\ by\ Ruvim\ Miksanskiy\ drone-view-of-autumn-colors.mp4");
-  /* background by SVGBackgrounds.com */
+  /*background-image: url("../content/Video\ by\ Ruvim\ Miksanskiy\ drone-view-of-autumn-colors.mp4");*/
+  /* background by Ruvim Miksanskiy from Pexels.com */
   background-attachment: fixed;
   background-size: cover;
   position: relative; }
@@ -7634,7 +7634,7 @@ body {
       position: relative;
       font-family: FontAwesome;
       font-size: 14px;
-      content: "\f10c";
+      content: "✅";
       color: #1de9b6;
       margin: 0 .75rem 0 0; }
 
@@ -7688,11 +7688,6 @@ body {
     margin-bottom: 1rem;
     font-size: 1.05rem;
     font-weight: 500; }
-    .pricing-table .pricing-list li:hover{
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 50px;
-      transition: all 0.8s;
-    }
 
 .pricing-table .card {
   transition: all .25s ease-out;
