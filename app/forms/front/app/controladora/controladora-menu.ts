@@ -1,4 +1,4 @@
-import { DOMAIN } from "../infra/DOMAIN";
+import { DOMINIO } from "../infra/Dominio";
 import { RepositorioMASA } from "../repositorio/repositorio-masa";
 import { RepositorioSurvey } from "../repositorio/repositorio-survey";
 import { VisaoMenu } from "../visao/visao-menu";

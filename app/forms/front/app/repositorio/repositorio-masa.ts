@@ -1,10 +1,9 @@
 import { API } from '../infra/API';
-import { Respondente } from '../modelo/respondente';
 
 export class RepositorioMASA{
 
     async pegarTotaisPorFiltro(filtro: string): Promise<[{titulo: string, opcao: string, votos: number, desempenho_geral: number}]> {
-        const response = await fetch( `${API}/masa/aa/filtro?filtro=${filtro}`, { method: 'get', headers: {'ngrok-skip-browser-warning':'yoloo'} } );
+        const response = await fetch( `${API}/masa/aa/filtro?filtro=${filtro}`, { method: 'get', headers: {'ngrok-skip-browser-warning':'skip it'} } );
         const text = await response.text();
         //console.log('RESPOSTA BACKEND raw',text);
         if(response.status >= 400){
@@ -15,7 +14,7 @@ export class RepositorioMASA{
     }
 
     async pegarTotaisPorEscolhaDaPesquisaId(id: number): Promise<[{titulo: string, opcao: string, votos: number, desempenho_geral: number}]> {
-        const response = await fetch( `${API}/masa/generic/resultados?id=${id}`, { method: 'get', headers: {'ngrok-skip-browser-warning':'yoloo'} } );
+        const response = await fetch( `${API}/masa/generic/resultados?id=${id}`, { method: 'get', headers: {'ngrok-skip-browser-warning':'skip it'} } );
         const text = await response.text();
         //console.log('RESPOSTA BACKEND raw',text);
         if(response.status >= 400){
@@ -26,7 +25,7 @@ export class RepositorioMASA{
     }
 
     async buscarPerguntasAcessibilidadeAtitudinal() {
-        const response = await fetch( `${API}/masa/aa`, { method: 'get', headers: {'ngrok-skip-browser-warning':'yoloo'} } );
+        const response = await fetch( `${API}/masa/aa`, { method: 'get', headers: {'ngrok-skip-browser-warning':'skip it'} } );
         console.log(response);
         const text = await response.text();
         if(response.status >= 400){

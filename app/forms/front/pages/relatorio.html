@@ -22,6 +22,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="../assets/css/main.css" id="theme-color">
+    <link rel="stylesheet" href="../assets/css/chart.css">
 
     <!-- Own -->
     <script src="../assets/js/popover.js" type="module" defer></script>
@@ -42,133 +43,195 @@
         <!-- ========== header end ========== -->
 
         <section class="section">
-            <div class="container-fluid">
+          <div class="container-fluid">
 
 
-                <div class="title-wrapper pt-30">
-                    <div class="row align-items-center">
-                      <div class="col-md-6">
-                        <div class="title">
-                          <h2>MASA | Resultados</h2>
-                          <p>Relatório - Acessibilidade Atitudinal (Escala de Capacitismo)</p>
-                        </div>
+            <!-- ========== TÍTULO E BREADCRUMB ========== -->
+            <div class="title-wrapper pt-30">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <div class="title">
+                        <h2>MASA | Resultados</h2>
+                        <p>Relatório - Acessibilidade Atitudinal (Escala de Capacitismo)</p>
                       </div>
                     </div>
-                    <!-- end row -->
-                  </div>
-                
-
-
-
-                  <div class="row">
-                    <!-- ========== GRÁFICO DADOS "GENÉRICOS" - Total por opção por pergunta ========== -->
-                    <div class="col-lg-12">
-                      <div class="card-style mb-30">
-                        <div class="title d-flex flex-wrap justify-content-start">
-                          <div class="left">
-                            <h3>👀 As escolhas dos respondentes foram...</h3>
-                          </div>
-                        </div>
-                        <div class="d-flex flex-wrap justify-content-center">
-                          <div class="mt-3 overflow-x-scroll" id="div-grafico-total-geral">
-                            <canvas class="chart" id="grafico-total-geral"></canvas>
-                          </div>
-                        </div>
-
-                        <div class="d-inline-flex p-2 align-items-baseline">
-                          <h5 class="mt-5" id="texto-desempenho-geral"></h5>
-                          <i class="p-1 fw-400" data-feather="info" data-bs-toggle="popover" data-bs-trigger="hover" title="Desempenho Geral" data-bs-content="O desempenho geral é dado pela média aritmética simples das respostas, com a nota das opções sendo atribuídas de acordo com a escala Likert de concordância de 5 pontos. Quanto maior a média, nesta pesquisa, pior o resultado, que varia de 1 (melhor) a 5 (pior)."></i>
-                        </div>
-                        
-
-                        
+                    <!-- breadcrumb -->
+                    <div class="col-md-6">
+                      <div class="breadcrumb-wrapper">
+                        <nav aria-label="breadcrumb">
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item">
+                                <a href="../../index.html">
+                                  <i data-feather="arrow-left"></i>
+                                  Sair
+                                </a>
+                              </li>
+                          </ol>
+                        </nav>
                       </div>
                     </div>
-                    <!-- END GRÁFICO 1 -->
-                  </div>
-
-
-                  <hr>
-                  <p class="fs-6 fw-light text-center mb-4">Continue rolando para baixo para ler o relatório geral.</p>
-
-
-                  <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card-style mb-30">
-                          <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                              <div class="left">
-                                <h6 class="text-medium mb-30">Relatório</h6>
-                              </div>
-                          </div>
-                          <!-- End Title -->
-                          <div class="table-responsive">
-                              <table class="table table-hover align-middle overflow-x-auto">
-                                <caption>Interpretação: para interpretar os resultados, entenda que quanto menor o valor do desempenho, melhor. Ele varia de 1 a 5. O desempenho é medido com base na escala Likert de concordância de 5 pontos. Nesta pesquisa, quanto maiores forem os valores, pior o desempenho.</caption>
-                                <thead class="">
-                                  <tr>
-                                    <th class="pe-3">
-                                        <h6 class="text-sm text-medium">Pergunta</h6>
-                                    </th>
-                                    <th class="pe-3">
-                                        <h6 class="text-sm text-medium">Discordo Totalmente</h6>
-                                    </th>
-                                    <th class="pe-3">
-                                        <h6 class="text-sm text-medium">Discordo</h6>
-                                    </th>
-                                    <th class="pe-3">
-                                        <h6 class="text-sm text-medium">Nem Concordo/Nem Discordo</h6>
-                                    </th>
-                                    <th class="pe-3">
-                                        <h6 class="text-sm text-medium">Concordo</h6>
-                                    </th>
-                                    <th class="pe-3">
-                                        <h6 class="text-sm text-medium">Concordo Totalmente</h6>
-                                    </th>
-                                    <th class="pe-3">
-                                      <h6 class="text-sm text-medium">Desempenho por pergunta</h6>
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                  <tr>
-                                    <td>
-                                        <p class="text-sm">-</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-sm">-</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-sm">-</p>
-                                    </td>
-                                    <td>
-                                        <span class="text-sm">-</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-sm">-</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-sm">-</span>
-                                    </td>
-                                    <td>
-                                      <span class="text-sm">-</span>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                                <tfoot></tfoot>
-                              </table>
-                              <!-- End Table -->
-                          </div>
-                        </div>
-                    </div>
-                    <!-- End Col -->
-                  </div>
-
-
+                    <!-- breadcrumb -->
+                </div>
+                <!-- end row -->
             </div>
+              
+
+
+            <!-- Gráfico -->
+            <div class="row">
+              <!-- ========== GRÁFICO DADOS "GENÉRICOS" - Total por opção por pergunta ========== -->
+              <div class="col-lg-12">
+                <div class="card-style mb-30">
+                  <div class="d-flex flex-wrap justify-content-center">
+                    
+                    <div class="mt-3 overflow-x-scroll" class="position-relative vw-90 vh-60">
+                      <canvas class="chart" id="grafico-total-geral"></canvas>
+                    </div>
+                  </div>
+
+                  <h5 class="mt-5" id="texto-desempenho-geral"></h5>
+                  
+                </div>
+              </div>
+              <!-- END GRÁFICO 1 -->
+            </div>
+
+
+            <hr>
+            <p class="fs-6 fw-light text-center mb-4">Continue rolando para baixo para ler o relatório geral.</p>
+
+
+            <!-- Tabela -->
+            <div class="row">
+              <div class="col-lg-12">
+                  <div class="card-style mb-30">
+                    <div class="title d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="left">
+                          <h6 class="text-medium mb-30">Relatório</h6>
+                        </div>
+                    </div>
+                    <!-- End Title -->
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle overflow-x-auto">
+                          <thead>
+                            <tr>
+                              <th class="pe-3">
+                                  <span class="text-sm text-medium">Pergunta</span>
+                              </th>
+                              <th class="pe-3">
+                                  <span class="text-sm text-medium">Discordo Totalmente</span>
+                              </th>
+                              <th class="pe-3">
+                                  <span class="text-sm text-medium">Discordo</span>
+                              </th>
+                              <th class="pe-3">
+                                  <span class="text-sm text-medium">Nem Concordo/Nem Discordo</span>
+                              </th>
+                              <th class="pe-3">
+                                  <span class="text-sm text-medium">Concordo</span>
+                              </th>
+                              <th class="pe-3">
+                                  <span class="text-sm text-medium">Concordo Totalmente</span>
+                              </th>
+                              <th class="pe-3">
+                                <span class="text-sm text-medium">Desempenho por pergunta</span>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-group-divider">
+                            <tr>
+                              <td>
+                                  <p class="text-sm">-</p>
+                              </td>
+                              <td>
+                                  <p class="text-sm">-</p>
+                              </td>
+                              <td>
+                                  <p class="text-sm">-</p>
+                              </td>
+                              <td>
+                                  <span class="text-sm">-</span>
+                              </td>
+                              <td>
+                                  <span class="text-sm">-</span>
+                              </td>
+                              <td>
+                                  <span class="text-sm">-</span>
+                              </td>
+                              <td>
+                                <span class="text-sm">-</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tfoot></tfoot>
+                        </table>
+                        <!-- End Table -->
+                    </div>
+                  </div>
+              </div>
+              <!-- End Col -->
+            </div>
+
+
+            <!-- Accordion -->
+            <div class="accordion" id="sobre">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">
+                    Como interpreto os resultados?
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#sobre">
+                  <div class="accordion-body text-center">
+                    <p class="my-2">
+                      Os participantes da pesquisa deverão atribuir uma nota de 1
+                      a 5 ao indicador de acordo com o seu grau de concordância, marcando, na escala, a
+                      resposta que mais traduz sua opinião, conforme as duas colunas do rótulo a seguir:
+                    </p>
+                    <div class="">
+                      <ul class="p-4 list-unstyled text-start">
+                        <li>Discordo Totalmente: 1 ponto</li>
+                        <li>Discordo: 2 pontos</li>
+                        <li>Nem Concordo/Nem Discordo: 3 pontos</li>
+                        <li>Concordo: 4 pontos</li>
+                        <li>Concordo Totalmente: 5 pontos</li>
+                      </ul>
+                    </div>
+                    <p class="my-2">
+                      A valoração final do indicador será atribuída a partir da lista anterior por meio dos resultados da média aritmética
+                      simples das notas dadas pelos respondentes, conforme rótulo a seguir:
+                    </p>
+                    <div class="">
+                      <ul class="p-4 list-unstyled text-start">
+                        <li>Muito alta: 1 ponto</li>
+                        <li>Alta: 2 pontos</li>
+                        <li>Moderada: 3 pontos</li>
+                        <li>Baixa: 4 pontos</li>
+                        <li>Muito baixa: 5 pontos</li>
+                      </ul>
+                    </div>
+                    <p class="my-2">
+                      Assim, tem-se que quanto <strong>menor</strong> a média das notas dos profissionais do
+                      turismo, <strong>maior</strong> a sustentabilidade de acessibilidade atitudinal do destino.
+                    </p>
+                    <p class="my-2">
+                      O desempenho irá variar entre <strong>1.00 &le; x &le; 5.00</strong>.
+                    </p>
+                    <p class="my-2 fw-light">
+                      Cálculo baseado no estudo de Lamas (2021).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
         </section>
     </main>
   
-    <script defer>feather.replace()</script>
+    <script defer>feather.replace();</script>
   
 </body>
 </html>
