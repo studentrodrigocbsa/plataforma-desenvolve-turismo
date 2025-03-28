@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS tcc_base;
-CREATE DATABASE tcc_base;
-USE tcc_base;
+DROP DATABASE IF EXISTS tcc_base_dados_respondente;
+CREATE DATABASE tcc_base_dados_respondente;
+USE tcc_base_dados_respondente;
 
 
 

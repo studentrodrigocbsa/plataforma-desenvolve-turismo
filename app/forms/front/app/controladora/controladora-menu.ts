@@ -23,7 +23,7 @@ export class ControladoraMenu{
                 this.visao.botaoCarregamento();
                 const perguntas = await this.repoMASA.buscarPerguntasAcessibilidadeAtitudinal();
                 this.repoSurvey.save(perguntas);
-                window.location.href = `${DOMAIN}/front/pages/dados.html`;
+                window.location.href = `${DOMINIO}/front/pages/dados.html`;
             break;
             default :
                 this.visao.exibirNotificacaoSelecioneUmaPesquisa();

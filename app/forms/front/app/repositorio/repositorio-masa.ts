@@ -1,4 +1,5 @@
 import { API } from '../infra/API';
+import { Respondente } from '../modelo/respondente';
 
 export class RepositorioMASA{
 
