@@ -8,16 +8,43 @@ class RepositorioMasa
   ){}
 
 
-  public function totalRespostas(){
+  public function salvarToken($token): array{
+    try {
+      $ps = $this->pdo->prepare('INSERT INTO link(token) VALUES (:token)');
+      $ps->execute(['token' => $token]);
+      return ['success' => true, 'token' => $token];
+    } catch (Exception $ex) {
+      throw new Exception('Erro ao salvar o token no banco de dados.', (int) $ex->getCode(), $ex);
+    }
+  }
+
+  public function todosTokens(): array{
+    try {
+      $ps = $this->pdo->prepare('SELECT * FROM link');
+      $ps->execute();
+      $dados = $ps->fetchAll(PDO::FETCH_ASSOC);
+      $links = [];
+      foreach ($dados as $linha){
+        $link = new Link($linha['id'], $linha['token']);
+        $links []= $link;
+      }
+      return $links;
+    } catch (Exception $ex) {
+      throw new Exception('Erro ao buscar tokens dos links no banco de dados.', (int) $ex->getCode(), $ex);
+    }
+  }
+
+
+  public function totalRespostas($token){
     try {
       $ps = $this->pdo->prepare(
         '
         SELECT p.titulo,e.opcao,COUNT(e.opcao) AS votos, (SELECT AVG(nota) FROM respondente) AS desempenho_geral FROM escolha e  
             JOIN pergunta p ON e.pergunta = p.id 
-          WHERE p.survey = 1 
+          WHERE p.survey = 1 AND e.link = (SELECT id FROM link WHERE token = :token)
             GROUP BY p.titulo,e.opcao;
       ');
-      $ps->execute();
+      $ps->execute(['token' => $token]);
       return $ps->fetchAll(PDO::FETCH_ASSOC);
 
     } catch (Exception $ex) {
@@ -43,7 +70,7 @@ class RepositorioMasa
     }
   }
 
-  public function buscarPesquisaAA(): array{
+  public function buscarPerguntasPesquisaAcessibilidadeAtitudinal(): array{
     try {
         $ps = $this->pdo->prepare('SELECT p.titulo,o.opcao FROM pergunta p JOIN opcao o ON o.pergunta = p.id WHERE p.survey = 1 ORDER BY p.ordem');
         $ps->execute();
@@ -85,17 +112,17 @@ class RepositorioMasa
         'survey' => $respondente->survey
       ]);
 
-      return $ps->rowCount();
+      return $this->pdo->lastInsertId();
     } catch (Exception $ex) {
       throw new Exception('Erro ao salvar respondente no banco de dados.', (int) $ex->getCode(), $ex);
     }
   }
 
-  public function contabilizarVotosSurveyAA($survey): bool{
+  public function contabilizarVotosSurveyAA($survey,$idRespondente,$token): bool{
     try {
       $sqlContabilizarVotos = 
       '
-        INSERT INTO escolha (respondente,pergunta,opcao) VALUES ((SELECT id FROM respondente ORDER BY id DESC LIMIT 1),(SELECT id FROM pergunta WHERE titulo = :titulo),:opcao) 
+        INSERT INTO escolha (respondente,pergunta,opcao,link) VALUES (:id,(SELECT id FROM pergunta WHERE titulo = :titulo),:opcao,(SELECT id FROM link WHERE token = :token)) 
       ';
       $psContabilizarVotos = $this->pdo->prepare( $sqlContabilizarVotos );
     
@@ -106,8 +133,10 @@ class RepositorioMasa
           if($opcao->voto == 1){
             $sucesso = $psContabilizarVotos->execute( 
               [ 
+                'id' => $idRespondente,
                 'opcao' => $opcao->opcao,
-                'titulo' => $resposta->titulo
+                'titulo' => $resposta->titulo,
+                'token' => $token
               ] 
             );
             if($sucesso === false){

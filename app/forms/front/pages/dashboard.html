@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Olá! | Desenvolve Turismo</title>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon" />
+  
+    <script type="module" src="../app/index-dashboard.ts" defer></script>
+    <script src="../assets/js/sidebar.js" defer></script>
+    <script type="module" src="../assets/js/header.js" defer></script>
+    <script src="../assets/js/comportamento-sidebar.js" defer></script>
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  
+    <!-- Feather icons -->
+    <script src="../../node_modules/feather-icons/dist/feather.min.js"></script>
+
+    <!-- ========== CSS ========= -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+
+<body>
+
+    <!-- ======== SIDEBAR =========== -->
+    <div id="sidebar-div"></div>
+    <div class="overlay"></div>
+    <!-- ======== sidebar-nav end =========== -->
+
+  <!-- ======== main-wrapper start =========== -->
+    <main class="main-wrapper active">
+
+        <!-- ========== header start ========== -->
+        <div id="header-div"></div>
+        <!-- ========== header end ========== -->
+
+        <section class="section">
+            <div class="container-fluid">
+
+                <!-- ========== TÍTULO E BREADCRUMB ========== -->
+                <div class="title-wrapper pt-30">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="title">
+                                <h2>Dashboard | (Nome do Destino Turístico) | (Nome do Gestor)</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+
+                <!-- ========== SEÇÃO DE DADOS GERAIS ========== -->
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-card mb-30">
+                            <div class="icon purple">
+                                <i data-feather="thermometer"></i>
+                            </div>
+                            <div class="content">
+                                <h6 class="mb-10">Pontuação</h6>
+                                <h3 id="reservas-feitas" class="text-bold mb-10">-</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-card mb-30">
+                        <div class="icon primary">
+                            <i data-feather="award"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="mb-10">Ranking</h6>
+                            <h3 id="pedidos-realizados" class="text-bold mb-10">-</h3>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-card mb-30">
+                        <div class="icon success">
+                            <i data-feather="percent"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="mb-10">Completos</h6>
+                            <h3 id="receita-total" class="text-bold mb-10">0%</h3>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Seção Dados Gerais -->
+
+
+                <!-- ========== LISTA DE RESERVAS ========== -->
+                <div class="row">
+                <div class="col-lg-12">
+                    <div class="card-style mb-30">
+                    <div class="title d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="left">
+                        <h6 class="text-medium mb-30">Dimensão: Acessibilidade | Subdimensão: Atitudinal</h6>
+                        </div>
+                        <div class="right">
+                        <a id="gerar-link" type="submit" class="btn btn-primary">Gerar novo link de pesquisa</a>
+                        <!-- end select -->
+                        </div>
+                    </div>
+                    <!-- End Title -->
+                    <div class="table-responsive">
+                        <table class="table top-selling-table overflow-x-auto">
+                        <thead>
+                            <tr>
+                                <th class="min-width">
+                                    <h6 class="text-sm text-medium">Link de pesquisa</h6>
+                                </th>
+                                <th>
+                                    <h6 class="text-sm text-medium text-end">
+                                    Ações
+                                    </h6>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p class="text-sm">-</p>
+                                </td>
+                                <td>
+                                    <div class="action justify-content-end">
+                                        <i data-feather="copy" class="copiar-link"></i>
+                                        <div class="mx-4 vr"></div>
+                                        <i data-feather="bar-chart-2" class="visualizar-dados-link"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <!-- End Table -->
+                    </div>
+                    </div>
+                </div>
+                <!-- End Col -->
+                </div>
+                <!-- END_LISTAGEM_RESERVAS -->
+
+
+                <!-- Offcanvas p/ fechamento de conta -->
+                <div class="offcanvas offcanvas-bottom" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" style="height: 60vh;">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title">Fechamento de conta</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="fechar-offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="container">
+                            <div class="row m-6">
+                                <div class="col-md-6 col-12 text-center">
+                                    <h6 class="mb-25">Resumo dos Pedidos</h6>
+                                    <div class="input-style-1">
+                                        <textarea id="resumo-pedido" style="height: 35vh; width: 30vw; overflow: auto;" readonly></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="text-center">
+                                        <h6 class="mb-25">Total</h6>
+                                        <h2 class="mb-10" style="color: limegreen;" id="total">R$ --</h2>
+                                    </div>
+                                    <div class="m-4">
+                                        <select title="Forma de pagamento" id="modo-pagamento">
+                                            <option value="PIX" selected>PIX</option>
+                                            <option value="Débito">Débito</option>
+                                            <option value="Crédito">Crédito</option>
+                                            <option value="Dinheiro">Dinheiro</option>
+                                        </select>
+                                        <div class="form-check form-switch toggle-switch mb-30" id="">
+                                            <input class="form-check-input" type="checkbox" id="desconto">
+                                            <label class="form-check-label text-gray" for="desconto">Desconto de 10%</label>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h6 class="mb-25">Total final</h6>
+                                        <h2 class="mb-10" style="color: limegreen;" id="total-final">R$ --</h2>
+                                        <button class="btn btn-primary" id="fechar-conta" type="button">Fechar a conta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+
+
+            </div>
+            
+        </section>
+    </main>
+  
+    <script defer>feather.replace()</script>
+  
+</body>
+</html>

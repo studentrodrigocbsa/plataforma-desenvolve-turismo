@@ -6,7 +6,14 @@ export class RepositorioSurvey{
         localStorage.clear();
     }
 
-    save(perguntas: [{titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}]) {
+    pegarTokenUrl(){
+        const url = window.location.href;
+        const params = new URLSearchParams(new URL(url).search);
+        const token = params.get('token');
+        return token ? token : '';
+    }
+
+    salvarSurveyLocalmente(perguntas: [{titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}]) {
         localStorage.setItem('survey',JSON.stringify(perguntas));
     }
 
@@ -29,6 +36,6 @@ export class RepositorioSurvey{
             p.respondida = false;
             p.opcoes.forEach(o => o.voto = 0);
         });
-        this.save(survey);
+        this.salvarSurveyLocalmente(survey);
     }
 }

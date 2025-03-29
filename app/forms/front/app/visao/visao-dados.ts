@@ -1,5 +1,5 @@
 import { ControladoraDados } from "../controladora/controladora-dados";
-import { Notificacao, TIPOS_NOTIFICACAO } from "../infra/notificacao";
+import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
 import { CARGO, ESCOLARIDADE, FAIXA_ETARIA, PERFIL } from "../modelo/enums-respondente";
 
 export class VisaoDados{

@@ -23,6 +23,7 @@
     "vite-plugin-ngrok": "^1.1.2"
   },
   "dependencies": {
-    "chart.js": "^4.4.8"
+    "chart.js": "^4.4.8",
+    "copy-to-clipboard": "^3.3.3"
   }
 }

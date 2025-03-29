@@ -1,6 +1,6 @@
 import { ControladoraSurvey } from "../controladora/controladora-survey";
 import { DOMINIO } from "../infra/Dominio";
-import { Notificacao, TIPOS_NOTIFICACAO } from "../infra/notificacao";
+import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
 import { Redirect } from "../infra/redirect";
 
 export class VisaoSurvey{
@@ -9,6 +9,8 @@ export class VisaoSurvey{
 
     iniciar() {
         const controladora = new ControladoraSurvey(this);
+
+        
 
 
         const nxtbtn = document.getElementById('next-btn') as HTMLButtonElement;
@@ -63,28 +65,21 @@ export class VisaoSurvey{
         const hr = document.createElement('hr');
         const p = document.createElement('p');
         p.classList.add('text-muted');
-        p.innerText = "Quando todos terminarem de responder, acesse a página de relatório.";
+        p.innerText = "Você respondeu a esta pesquisa.";
 
         const divBotoes = document.createElement('div');
         divBotoes.classList.add('d-inline-block');
 
         const botaoPagInicial = document.createElement('button');
         botaoPagInicial.classList.add('btn','btn-primary');
-        botaoPagInicial.innerText = "Responder Novamente";
+        botaoPagInicial.innerText = "Sair para Home";
         botaoPagInicial.addEventListener('click', () => {
             const controladora = new ControladoraSurvey(this);
-            controladora.resetarPesquisa();
+            controladora.limpar();
+            window.location.href = `${DOMINIO}`;
         });
 
-        const botaoRelatorio = document.createElement('button');
-        botaoRelatorio.classList.add('btn','btn-secondary');
-        botaoRelatorio.innerText = "Pág. Relatório";
-        botaoRelatorio.addEventListener('click', () => {
-            //Redirect.redirectToRelatorio();
-            window.location.href = `${DOMINIO}/front/pages/relatorio.html`;
-        });
-
-        divBotoes.append(botaoPagInicial,botaoRelatorio);
+        divBotoes.append(botaoPagInicial);
         divConteudo.append(obrigado,hr,p,divBotoes);
     }
 

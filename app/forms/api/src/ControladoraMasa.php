@@ -4,25 +4,43 @@ class ControladoraMasa{
     public function __construct(private RepositorioMasa $repoMasa, private GestorDados $gestorDados){}
 
     public function getAA(): array{
-        return $this->repoMasa->buscarPesquisaAA();
+        return $this->repoMasa->buscarPerguntasPesquisaAcessibilidadeAtitudinal();
+    }
+
+    public function novoToken(): string{
+        // Verificar se link existe antes de salvar
+        $linksExistentes = $this->getTokensLinks();
+        do{
+            $token = $this->gestorDados->gerarToken();
+            // TODO: previnir loop
+        }while(in_array($token, array_column($linksExistentes, 'link')));
+        $this->repoMasa->salvarToken($token);
+        return $token;
+    }
+
+    public function getTokensLinks(): array{
+        return $this->repoMasa->todosTokens();
     }
 
     public function postAA($dados = []): bool{
 
-        if(count($dados) == 0){
+        if(count($dados) != 3){
             return false;
         }
 
+
         $survey = $dados[0];
         $respondente = $dados[1];
+        $token = $dados[2];
 
         $this->gestorDados->calcularNotaRespondente($respondente,$survey);
-        $this->repoMasa->salvarRespondenteSurvey($respondente);
-        return $this->repoMasa->contabilizarVotosSurveyAA($survey);
+        $id = $this->repoMasa->salvarRespondenteSurvey($respondente);
+        return $this->repoMasa->contabilizarVotosSurveyAA($survey,$id,$token);
     }
 
-    public function getTotaisGenericosPesquisa(){
-        return $this->repoMasa->totalRespostas();
+    public function getTotaisGenericosPesquisa($token){
+        $token = htmlspecialchars($token, ENT_QUOTES, 'UTF-8');
+        return $this->repoMasa->totalRespostas($token);
     }
 
     public function getTotaisPorFiltro($filtro): array{

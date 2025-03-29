@@ -10,11 +10,13 @@ function criarControladoraMASA(PDO $pdo): ControladoraMasa {
 }
 
 
+
+
 $app->get( '/masa/generic/resultados', function( $req, $res ) use ( $pdo ) 
 {
-    $id = isset($_GET['id']) ? $_GET['id'] : ''; // não faço nada... (ler controladora-relatorio.ts)
+    $token = isset($_GET['token']) ? $_GET['token'] : ''; 
     $controller = criarControladoraMASA($pdo);
-    $content = $controller->getTotaisGenericosPesquisa();
+    $content = $controller->getTotaisGenericosPesquisa($token);
     $res->json( $content );
 });
 
@@ -26,14 +28,12 @@ $app->get( '/masa/aa/filtro', function( $req, $res ) use ( $pdo )
     $res->json( $content );
 });
 
-
 $app->get( '/masa/aa', function( $req, $res ) use ( $pdo ) 
 {
     $controller = criarControladoraMASA($pdo);
     $content = $controller->getAA();
     $res->json( $content );
 });
-
 
 $app->post( '/masa/aa', function( $req, $res ) use ( $pdo ) 
 {
@@ -45,4 +45,18 @@ $app->post( '/masa/aa', function( $req, $res ) use ( $pdo )
     } else {
         $res->json(['success' => false, 'message' => 'Ocorreu um erro.']);
     }
+});
+
+
+$app->get( '/dashboard/novo/token', function( $req, $res ) use ( $pdo ) 
+{
+    $controller = criarControladoraMASA($pdo);
+    $content = $controller->novoToken();
+    $res->json( [ 'token' => $content] );
+});
+$app->get( '/dashboard/tokens', function( $req, $res ) use ( $pdo ) 
+{
+    $controller = criarControladoraMASA($pdo);
+    $content = $controller->getTokensLinks();
+    $res->json( $content );
 });

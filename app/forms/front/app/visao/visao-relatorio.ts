@@ -1,7 +1,7 @@
 import { Chart } from "chart.js/auto";
 import { ControladoraRelatorio } from "../controladora/controladora-relatorio";
 import { OPCOES } from "../modelo/enum-opcoes";
-import { Notificacao, TIPOS_NOTIFICACAO } from "../infra/notificacao";
+import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
 
 export class VisaoRelatorio{
 
@@ -10,10 +10,16 @@ export class VisaoRelatorio{
 
         // this.loadSpinner();
         
-        controladora.carregarDadosGenericos(); // Total de escolhas por opção do survey
-        controladora.carregarRelatorioGeral(); // Pega todas as escolhas por todos os dados do respondente e detalha anterior
+        controladora.carregarTotaisGrafico();
+        controladora.carregarTabelaDesempenhoPorPergunta();
 
         // this.loadSpinnerDispense();
+    }
+
+    dadosIndisponiveis(){
+        const body = document.querySelector('body');
+        if(body)
+            body.innerHTML = `Não há dados associados a este link.`;
     }
 
     exibirNotificacaoExcecaoErro(msg: string){

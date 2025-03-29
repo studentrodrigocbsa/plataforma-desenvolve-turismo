@@ -1,8 +1,12 @@
-DROP DATABASE IF EXISTS tcc_base_dados_respondente;
-CREATE DATABASE tcc_base_dados_respondente;
-USE tcc_base_dados_respondente;
+DROP DATABASE IF EXISTS tcc_base_dados_respondente_token;
+CREATE DATABASE tcc_base_dados_respondente_token;
+USE tcc_base_dados_respondente_token;
 
 
+CREATE TABLE link(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    token VARCHAR(100) NOT NULL
+) ENGINE=INNODB;
 
 CREATE TABLE survey(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -41,6 +45,8 @@ CREATE TABLE escolha(
     respondente INT NOT NULL,
     pergunta INT NOT NULL,
     opcao VARCHAR(50) NOT NULL,
+    link INT NOT NULL,
+    CONSTRAINT fk_respondente__token FOREIGN KEY (link) REFERENCES link(id) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT fk_escolha__respondente FOREIGN KEY (respondente) REFERENCES respondente(id) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT fk_escolha__pergunta FOREIGN KEY (pergunta) REFERENCES pergunta(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;

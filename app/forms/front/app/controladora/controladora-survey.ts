@@ -31,7 +31,8 @@ export class ControladoraSurvey{
         try{
             if(prontoParaEnviar){
                 const respondente = this.repoSurvey.getDadosRespondente();
-                const resposta = await this.repoMASA.enviar(survey,respondente);
+                const token = this.repoSurvey.pegarTokenUrl();
+                const resposta = await this.repoMASA.enviar(survey,respondente,token);
                 if(resposta.success){
                     this.visao.exibirNotificacaoSurveyConcluidoSucesso(resposta.message);
                     this.visao.telaAgradecimento();
@@ -90,7 +91,7 @@ export class ControladoraSurvey{
                 return;
             }
         });
-        this.repoSurvey.save(perguntas);
+        this.repoSurvey.salvarSurveyLocalmente(perguntas);
     }
     //$end
 }
