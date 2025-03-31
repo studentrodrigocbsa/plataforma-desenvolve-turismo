@@ -9,12 +9,20 @@ function criarControladoraMASA(PDO $pdo): ControladoraMasa {
     );
 }
 
+function criarControladoraLogin( PDO $pdo ) {
+    return new ControladoraLogin(
+        new RepositorioLogin( $pdo )
+    );
+}
 
 
+$app->get('/logado', $middlewareIsLogado, function($req,$res) use ($pdo) {
+    $res->status( 200 )->send( 'Acesso autenticado.' );
+});
 
 $app->get( '/masa/generic/resultados', function( $req, $res ) use ( $pdo ) 
 {
-    $token = isset($_GET['token']) ? $_GET['token'] : ''; 
+    $token = isset($_GET['token']) ? htmlspecialchars($_GET['token'], ENT_QUOTES, 'UTF-8') : ''; 
     $controller = criarControladoraMASA($pdo);
     $content = $controller->getTotaisGenericosPesquisa($token);
     $res->json( $content );
@@ -50,13 +58,43 @@ $app->post( '/masa/aa', function( $req, $res ) use ( $pdo )
 
 $app->get( '/dashboard/novo/token', function( $req, $res ) use ( $pdo ) 
 {
+    session_name('sid');
+    session_start();
+    $usuario = $_SESSION['usuario'];
+
     $controller = criarControladoraMASA($pdo);
-    $content = $controller->novoToken();
+    $content = $controller->novoToken($usuario);
     $res->json( [ 'token' => $content] );
 });
 $app->get( '/dashboard/tokens', function( $req, $res ) use ( $pdo ) 
 {
+    session_name('sid');
+    session_start();
+    $usuario = $_SESSION['usuario'];
+
     $controller = criarControladoraMASA($pdo);
-    $content = $controller->getTokensLinks();
+    $content = $controller->getTokensLinksUsuario($usuario);
     $res->json( $content );
+});
+
+
+$app->post('/login', function( $req, $res ) use ($pdo) {
+    
+    $dados = (array) $req->body();
+
+    $usuario = htmlspecialchars( $dados[ 'usuario' ] ?? '' );
+    $senha = htmlspecialchars( $dados[ 'senha' ] ?? '' );
+
+
+    $controladora = criarControladoraLogin($pdo);
+    
+
+    $resposta = $controladora->postLogin($usuario,$senha);
+
+    if($resposta === false){
+        $res->json(['success' => false, 'message' => 'Login inexistente.']);
+    } else{
+        $res->json($resposta);
+    }
+
 });

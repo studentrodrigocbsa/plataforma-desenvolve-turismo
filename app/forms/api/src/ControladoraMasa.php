@@ -7,19 +7,19 @@ class ControladoraMasa{
         return $this->repoMasa->buscarPerguntasPesquisaAcessibilidadeAtitudinal();
     }
 
-    public function novoToken(): string{
+    public function novoToken($usuario): string{
         // Verificar se link existe antes de salvar
-        $linksExistentes = $this->getTokensLinks();
+        $linksExistentes = $this->repoMasa->todosTokens();
         do{
             $token = $this->gestorDados->gerarToken();
             // TODO: previnir loop
         }while(in_array($token, array_column($linksExistentes, 'link')));
-        $this->repoMasa->salvarToken($token);
+        $this->repoMasa->salvarToken($token,$usuario);
         return $token;
     }
 
-    public function getTokensLinks(): array{
-        return $this->repoMasa->todosTokens();
+    public function getTokensLinksUsuario($usuario): array{
+        return $this->repoMasa->todosTokensUsuario($usuario);
     }
 
     public function postAA($dados = []): bool{
@@ -39,7 +39,6 @@ class ControladoraMasa{
     }
 
     public function getTotaisGenericosPesquisa($token){
-        $token = htmlspecialchars($token, ENT_QUOTES, 'UTF-8');
         return $this->repoMasa->totalRespostas($token);
     }
 

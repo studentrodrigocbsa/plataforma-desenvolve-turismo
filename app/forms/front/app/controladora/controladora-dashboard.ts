@@ -30,6 +30,10 @@ export class ControladoraDashboard {
   async listarLinks(){
     try{
       const links = await this.repo.todosTokensLinks();
+      if(links.length === 0){
+        this.visao.exibirNotificacaoNaoHaLinks();
+        return;
+      }
       links.reverse();
       this.visao.listarLinks(links);
     } catch(error: any){

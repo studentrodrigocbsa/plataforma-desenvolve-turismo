@@ -3,9 +3,18 @@ CREATE DATABASE tcc_base_dados_respondente_token;
 USE tcc_base_dados_respondente_token;
 
 
+CREATE TABLE login(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(40) NOT NULL,
+    senha VARCHAR(200) NOT NULL,
+    CONSTRAINT unq_usuario__usuario UNIQUE (usuario)
+) ENGINE=INNODB;
+
 CREATE TABLE link(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    token VARCHAR(100) NOT NULL
+    token VARCHAR(100) NOT NULL,
+    usuario INT NOT NULL,
+    CONSTRAINT fk_link__usuario FOREIGN KEY (usuario) REFERENCES login(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;
 
 CREATE TABLE survey(
@@ -53,7 +62,9 @@ CREATE TABLE escolha(
 
 
 
-/* Dados do app admin Dashboard (TODO) */
+/* Dados para configuração inicial do app experimental */
+INSERT INTO login(usuario,senha) VALUES ("demonstracao","demonstracao");
+
 INSERT INTO survey(categoria) VALUES ('Acessibilidade Atitudinal - Escala de Capacitismo');
 
 INSERT INTO pergunta (ordem,titulo,survey) 

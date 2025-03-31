@@ -25,6 +25,9 @@ export class VisaoDashboard {
   /****************************/
   /* VisaoDashboard FUNCTIONS */
   /****************************/
+  exibirNotificacaoNaoHaLinks(){
+    Notificacao.exibirNotificacao(['Gere o seu primeiro link de pesquisa!'],TIPOS_NOTIFICACAO.INFO);
+  }
   exibirNotificacaoExcecaoErro(): void{
     Notificacao.exibirNotificacao(['Ocorreu um erro grave e não foi possível concluir a ação.'], TIPOS_NOTIFICACAO.ERRO);
   }

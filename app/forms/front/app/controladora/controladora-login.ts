@@ -21,11 +21,15 @@ export class ControladoraLogin{
             
             const login = new Login(0,usuario,senha);
             const resposta = await this.repo.login(login);
-            if(resposta === true){
+            if(resposta.success){
+                sessionStorage.setItem('usuario',resposta.usuario);
                 window.location.href = `${DOMINIO}/front/pages/dashboard.html`;
+            } else{
+                this.visao.exibirNotificacaoErroDeLogin();
             }
         } catch(error: any){
             console.log(error);
+            this.visao.exibirNotificacaoErroDeLogin();
         }
         
     }

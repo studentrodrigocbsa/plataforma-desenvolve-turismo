@@ -13,13 +13,24 @@ export class VisaoLogin{
             e.preventDefault();
             if(!this.camposEstaoVazios())
                 controladora.acaoDeLogin();
-            else
-                this.exibirNotificacao(["Aplicativo de demonstração. Preencha os campos com qualquer dado."],TIPOS_NOTIFICACAO.AVISO);
         });
 
         const cadastrar = document.getElementById('cadastrar') as HTMLButtonElement;
         cadastrar.addEventListener('click', (e) => {
-            this.exibirNotificacao(["Aplicativo de demonstração. Cadastro indisponível no momento."],TIPOS_NOTIFICACAO.AVISO);
+            Notificacao.exibirNotificacao(["Aplicativo de demonstração. Cadastro indisponível no momento."],TIPOS_NOTIFICACAO.AVISO);
+        });
+
+
+        // impedir caracteres não alfanuméricos
+        const inputUsuario = document.getElementById('usuario') as HTMLInputElement;
+        inputUsuario.addEventListener('input', (event) => {
+            const input = event.target as HTMLInputElement;
+            input.value = input.value.replace(/[^a-zA-Z0-9]/g, '');
+        });
+        const inputSenha = document.getElementById('senha') as HTMLInputElement;
+        inputSenha.addEventListener('input', (event) => {
+            const input = event.target as HTMLInputElement;
+            input.value = input.value.replace(/[^a-zA-Z0-9]/g, '');
         });
     }
 
@@ -31,8 +42,9 @@ export class VisaoLogin{
     pegarSenha(): string{
         return (document.getElementById('senha') as HTMLInputElement).value;
     }
-    exibirNotificacao(mensagens: Array<string>, tipo: TIPOS_NOTIFICACAO): void{
-        Notificacao.exibirNotificacao(mensagens, tipo);
+    
+    exibirNotificacaoErroDeLogin(): void{
+        Notificacao.exibirNotificacao(["Insira o login de demonstração fornecido."], TIPOS_NOTIFICACAO.ERRO);
     }
     camposEstaoVazios(){
         return ( (document.getElementById('senha') as HTMLInputElement).value == '' || (document.getElementById('usuario') as HTMLInputElement).value == '' );
