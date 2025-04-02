@@ -8,49 +8,6 @@ class RepositorioMasa
   ){}
 
 
-  public function salvarToken($token,$usuario): array{
-    try {
-      $ps = $this->pdo->prepare('INSERT INTO link(token,usuario) VALUES (:token, (SELECT id FROM login WHERE usuario = :usuario))');
-      $ps->execute(['token' => $token, 'usuario' => $usuario]);
-      return ['success' => true, 'token' => $token];
-    } catch (Exception $ex) {
-      throw new Exception('Erro ao salvar o token no banco de dados.', (int) $ex->getCode(), $ex);
-    }
-  }
-
-  public function todosTokensUsuario($usuario): array{
-    try {
-      $ps = $this->pdo->prepare('SELECT * FROM link WHERE usuario = (SELECT id FROM login WHERE usuario = :usuario)');
-      $ps->execute(['usuario' => $usuario]);
-      $dados = $ps->fetchAll(PDO::FETCH_ASSOC);
-      $links = [];
-      foreach ($dados as $linha){
-        $link = new Link($linha['id'], $linha['token']);
-        $links []= $link;
-      }
-      return $links;
-    } catch (Exception $ex) {
-      throw new Exception('Erro ao buscar tokens dos links no banco de dados.', (int) $ex->getCode(), $ex);
-    }
-  }
-
-  public function todosTokens(): array{
-    try {
-      $ps = $this->pdo->prepare('SELECT * FROM link');
-      $ps->execute();
-      $dados = $ps->fetchAll(PDO::FETCH_ASSOC);
-      $links = [];
-      foreach ($dados as $linha){
-        $link = new Link($linha['id'], $linha['token']);
-        $links []= $link;
-      }
-      return $links;
-    } catch (Exception $ex) {
-      throw new Exception('Erro ao buscar tokens dos links no banco de dados.', (int) $ex->getCode(), $ex);
-    }
-  }
-
-
   public function totalRespostas($token){
     try {
       $ps = $this->pdo->prepare(
@@ -65,24 +22,6 @@ class RepositorioMasa
 
     } catch (Exception $ex) {
       throw new Exception('Erro ao buscar total geral no banco de dados.', (int) $ex->getCode(), $ex);
-    }
-  }
-
-  public function totalRespostasPorFiltro($campo_respondente_bd){
-    try {
-      $ps = $this->pdo->prepare(
-        '
-        SELECT r.'.$campo_respondente_bd.' as filtro,p.titulo,e.opcao,COUNT(e.opcao) AS votos FROM escolha e  
-          JOIN pergunta p ON e.pergunta = p.id 
-          JOIN respondente r ON e.respondente = r.id 
-        WHERE p.survey = 1 
-          GROUP BY p.titulo,e.opcao,r.faixa_etaria;
-      ');
-      $ps->execute();
-      return $ps->fetchAll(PDO::FETCH_ASSOC);
-
-    } catch (Exception $ex) {
-      throw new Exception('Erro ao buscar resultado por filtro no banco de dados.', (int) $ex->getCode(), $ex);
     }
   }
 

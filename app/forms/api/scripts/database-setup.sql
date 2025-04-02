@@ -2,6 +2,12 @@ DROP DATABASE IF EXISTS tcc_base_dados_respondente_token;
 CREATE DATABASE tcc_base_dados_respondente_token;
 USE tcc_base_dados_respondente_token;
 
+DROP USER IF EXISTS 'tcc'@'localhost';
+CREATE USER 'tcc'@'localhost' IDENTIFIED BY 'tcc';
+GRANT ALL PRIVILEGES ON `tcc_base_dados_respondente_token`.* TO 'tcc'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'tcc'@'localhost';
+
 
 CREATE TABLE login(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -14,6 +20,8 @@ CREATE TABLE link(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     token VARCHAR(100) NOT NULL,
     usuario INT NOT NULL,
+    status ENUM('Ativa','Concluída') NOT NULL DEFAULT 'Concluída',
+    apelido VARCHAR(50),
     CONSTRAINT fk_link__usuario FOREIGN KEY (usuario) REFERENCES login(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;
 

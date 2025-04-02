@@ -1,10 +1,18 @@
 {
-    "name": "rcbsa/surveycapacitismo",
-    "description": "TCC Rodrigo Bittencourt",
+    "name": "rcbsa/desenvolveturismo",
+    "description": "Desenvolve Turismo é uma plataforma de aprimoramento de destinos turísticos sustentáveis com base na MASA",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": ["src/"]
+            "": [
+                "src/Controller",
+                "src/Infra",
+                "src/Middleware",
+                "src/Model",
+                "src/Model/Enum",
+                "src/Repository",
+                "src/Util"
+            ]
         }
     },
     "require-dev": {

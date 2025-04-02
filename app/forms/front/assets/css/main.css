@@ -1813,7 +1813,7 @@ h6,
 
 .top-selling-table tr th,
 .top-selling-table tr td {
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 .top-selling-table tr .min-width {
   min-width: 40px;
