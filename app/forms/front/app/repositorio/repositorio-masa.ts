@@ -1,4 +1,4 @@
-import { API } from '../infra/API';
+import { API } from '../infra/api';
 import { Respondente } from '../modelo/respondente';
 
 export class RepositorioMASA{
@@ -15,7 +15,7 @@ export class RepositorioMASA{
     }
 
     async pegarTotaisPorEscolhaDaPesquisaIdComToken(id: number,token: string): Promise<[{titulo: string, opcao: string, votos: number, desempenho_geral: number}]> {
-        console.log(id);
+        //console.log(id);
         const response = await fetch( `${API}/masa/generic/resultados?token=${token}`, { method: 'get', headers: {'ngrok-skip-browser-warning':'skip it'} } );
         const text = await response.text();
         //console.log('RESPOSTA BACKEND raw',text);
@@ -28,7 +28,7 @@ export class RepositorioMASA{
 
     async buscarPerguntasAcessibilidadeAtitudinal() {
         const response = await fetch( `${API}/masa/aa`, { method: 'get', headers: {'ngrok-skip-browser-warning':'skip it'} } );
-        console.log(response);
+        //console.log(response);
         const text = await response.text();
         if(response.status >= 400){
             console.log(text);

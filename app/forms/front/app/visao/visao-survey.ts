@@ -1,5 +1,5 @@
 import { ControladoraSurvey } from "../controladora/controladora-survey";
-import { DOMINIO } from "../infra/Dominio";
+import { DOMINIO } from "../infra/domain";
 import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
 import { Redirect } from "../infra/redirect";
 

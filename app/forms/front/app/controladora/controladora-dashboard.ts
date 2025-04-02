@@ -13,7 +13,6 @@ export class ControladoraDashboard {
     this.repo         = new RepositorioDashboard();
   }
 
-
   async gerarLink(){
     try{
       await this.repo.gerarToken();

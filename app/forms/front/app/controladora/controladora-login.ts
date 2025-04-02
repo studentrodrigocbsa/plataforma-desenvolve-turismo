@@ -2,7 +2,7 @@ import { RepositorioUsuario } from "../repositorio/repositorio-usuario";
 import { Login } from "../modelo/login";
 import { VisaoLogin } from "../visao/visao-login";
 import { TIPOS_NOTIFICACAO } from "../util/notificacao";
-import { DOMINIO } from "../infra/Dominio";
+import { DOMINIO } from "../infra/domain";
 
 export class ControladoraLogin{
 

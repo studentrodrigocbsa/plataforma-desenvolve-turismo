@@ -1,4 +1,4 @@
-import { API } from "./API";
+import { API } from "./api";
 
 export async function isLogado()
 {

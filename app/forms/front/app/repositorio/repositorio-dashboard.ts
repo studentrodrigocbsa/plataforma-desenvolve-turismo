@@ -1,4 +1,4 @@
-import { API } from "../infra/API";
+import { API } from "../infra/api";
 import { Link } from "../modelo/link";
 
 

@@ -17,7 +17,7 @@ export class VisaoLogin{
 
         const cadastrar = document.getElementById('cadastrar') as HTMLButtonElement;
         cadastrar.addEventListener('click', (e) => {
-            Notificacao.exibirNotificacao(["Aplicativo de demonstração. Cadastro indisponível no momento."],TIPOS_NOTIFICACAO.AVISO);
+            Notificacao.exibirNotificacao(["Aplicativo de demonstração. Insira o login fornecido."],TIPOS_NOTIFICACAO.AVISO);
         });
 
 

@@ -1,4 +1,4 @@
-import { API } from './API';
+import { API } from './api';
 
 export class Redirect{
     static async redirectToRelatorio(){

@@ -33,19 +33,23 @@
 <body>
 
     <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent">
-            <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Login</li>
-        </ol>
-    </nav>
+    <div class="fixed-top m-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent">
+                <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Login</li>
+            </ol>
+        </nav>
+    </div>
+    
 
 
-    <section class="py-7 my-6 bg-dark section-angle top-left bottom-left">
+    <section class="position-absolute top-50 start-50 w-100 h-75 translate-middle">
         <div class="container">
 
 
             <div class="row mt-6">
+
                 <div class="col-md-6 mr-auto">
                     <h2>É muito bom ver você aqui!</h2>
                     <p class="mb-5">
@@ -53,22 +57,28 @@
                         <br>
                         Um destino.
                     </p>
-                    <a href="#" class="btn btn-light" id="cadastrar">
+                    <button type="button" href="#" class="btn btn-light mb-4 btn-block" id="cadastrar">
                         Quero cadastrar meu destino turístico ❤️
-                    </a>
+                    </button>
                 </div>
+
                 <div class="col-md-5">
-                    <div class="input-style-1">
-                        <input id="usuario" name="usuario" type="text" placeholder="Insira aqui o seu identificador..." required/>
-                    </div>
-                    <div class="input-style-1">
-                        <input id="senha" name="senha" type="password" placeholder="Insira aqui a sua senha..." required/>
-                    </div>
-                    <div class="button-group d-flex justify-content-center flex-wrap">
-                        <button name="Entrar" class="main-btn primary-btn btn-hover w-100 text-center" id="logar">
-                        Entrar 🚀
-                        </button>
-                    </div>
+                    <hr class="divider">
+                    <h6 class="title">Fazer login</h6>
+                    <form action="">
+                        <div class="input-style-1">
+                            <input autocomplete="username" id="usuario" name="usuario" type="text" placeholder="Insira aqui o seu identificador..." required/>
+                        </div>
+                        <div class="input-style-1">
+                            <input autocomplete="current-password" id="senha" name="senha" type="password" placeholder="Insira aqui a sua senha..." required/>
+                        </div>
+                        <div class="button-group d-flex justify-content-center flex-wrap">
+                            <button name="Entrar" class="btn btn-info btn-hover w-100 text-center" id="logar">
+                            Entrar 🚀
+                            </button>
+                        </div>
+                    </form>
+                    <hr class="divider">
                 </div>
             </div>
 

@@ -23,7 +23,7 @@ export class CalculadorResultados{
     }
 
     calcularTotaisGeral(array: { titulo: string, opcao: string, votos: number, desempenho_geral: number }[]) {
-        console.log(array);
+        //console.log(array);
     
         const totaisEmOrdem__DiscordoTotalmente: number[] = [];
         const totaisEmOrdem__Discordo: number[] = [];

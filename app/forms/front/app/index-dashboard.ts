@@ -1,6 +1,6 @@
 import { VisaoDashboard } from "./visao/visao-dashboard";
 import { isLogado } from "./infra/auth";
-import { DOMINIO } from "./infra/Dominio";
+import { DOMINIO } from "./infra/domain";
 
 
 const res = await isLogado();

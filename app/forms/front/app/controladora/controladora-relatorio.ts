@@ -76,7 +76,7 @@ export class ControladoraRelatorio{
     
             const desempenhoNota = array[0].desempenho_geral;
             const desempenho = this.calculador.calcularDesempenhoGeral(desempenhoNota);
-            console.log(titulos,totaisEmOrdem__DiscordoTotalmente,totaisEmOrdem__Discordo,totaisEmOrdem__NemConcordoNemDiscordo,totaisEmOrdem__Concordo,totaisEmOrdem__ConcordoTotalmente);
+            //console.log(titulos,totaisEmOrdem__DiscordoTotalmente,totaisEmOrdem__Discordo,totaisEmOrdem__NemConcordoNemDiscordo,totaisEmOrdem__Concordo,totaisEmOrdem__ConcordoTotalmente);
             this.visao.desenharGraficoGeral(titulos,totaisEmOrdem__DiscordoTotalmente,totaisEmOrdem__Discordo,totaisEmOrdem__NemConcordoNemDiscordo,totaisEmOrdem__Concordo,totaisEmOrdem__ConcordoTotalmente);
             this.visao.desenharDesempenhoGeral(desempenho,desempenhoNota);
         } catch(error: any){

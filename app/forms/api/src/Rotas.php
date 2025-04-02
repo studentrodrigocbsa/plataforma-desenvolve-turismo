@@ -20,6 +20,23 @@ $app->get('/logado', $middlewareIsLogado, function($req,$res) use ($pdo) {
     $res->status( 200 )->send( 'Acesso autenticado.' );
 });
 
+$app->post('/logout', function( $req, $res ) use ($pdo) {
+    
+    session_name('sid');
+    session_start();
+
+    $cookie = $req->cookie( 'sid' );
+
+    if (isset($_SESSION['logado']) && $_SESSION['logado'] === TRUE && $cookie) {
+        session_unset();
+        setcookie("sid", "", time() - 3600); // deletando o cookie
+        session_destroy();
+        header('Location: http://localhost:5173/index.html');
+        exit;
+    }
+
+});
+
 $app->get( '/masa/generic/resultados', function( $req, $res ) use ( $pdo ) 
 {
     $token = isset($_GET['token']) ? htmlspecialchars($_GET['token'], ENT_QUOTES, 'UTF-8') : ''; 
