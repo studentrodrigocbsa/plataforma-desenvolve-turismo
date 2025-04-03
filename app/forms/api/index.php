@@ -1,36 +1,56 @@
 <?php
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Factory\AppFactory;
+
 require_once 'vendor/autoload.php';
-use phputil\router\Router;
-use function phputil\cors\cors;
 
-set_exception_handler('TratadoraDeExcecoes::handler');
+$app = AppFactory::create();
 
-$origins = [ 'http://localhost:5173', 'http://localhost:8080', 'https://5c3d-2804-56c-d5ef-6700-562-fec3-d018-3300.ngrok-free.app', 'https://2d38-2804-56c-d5ef-6700-562-fec3-d018-3300.ngrok-free.app' ];
+$app->addBodyParsingMiddleware();
 
-$app = new Router();
-$app->use(cors([ 'origin' =>  $origins] ));
+// Add the RoutingMiddleware before the CORS middleware
+// to ensure routing is performed later
+$app->addRoutingMiddleware();
 
+// Add the ErrorMiddleware before the CORS middleware
+// to ensure error responses contain all CORS headers.
+$app->addErrorMiddleware(true, true, true);
 
-header("Access-Control-Allow-Origin: http://localhost:5173");
-header("Access-Control-Allow-Credentials: true");
-header("Access-Control-Allow-Headers: Host, Origin, Accept, Content-Type, Cookie, Authorization, ngrok-skip-browser-warning");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Expose-Headers: Content-Type, Content-Length, Set-Cookie");
+// This CORS middleware will append the response header
+// Access-Control-Allow-Methods with all allowed methods
+$app->add(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($app): ResponseInterface {
+    if ($request->getMethod() === 'OPTIONS') {
+        $response = $app->getResponseFactory()->createResponse();
+    } else {
+        $response = $handler->handle($request);
+    }
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(204);
-    exit;
-}
+    $response = $response
+        ->withHeader('Access-Control-Allow-Credentials', 'true')
+        ->withHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
+        ->withHeader('Access-Control-Allow-Headers', ['Host', 'Origin', 'Accept', 'Content-Type', 'Cookie', 'Authorization', 'ngrok-skip-browser-warning'])
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+        ->withHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+        ->withHeader('Pragma', 'no-cache');
 
+    if (ob_get_contents()) {
+        ob_clean();
+    }
+
+    return $response;
+});
 
 $pdo = Conexao::pdo();
 
-
+// Define app routes
 require_once 'src/Middleware/middlewareIsLogado.php';
 
 require_once 'src/Infra/RotasLogin.php';
 require_once 'src/Infra/RotasMasa.php';
 require_once 'src/Infra/RotasToken.php';
+// ...
 
-
-$app->listen();
+$app->run();

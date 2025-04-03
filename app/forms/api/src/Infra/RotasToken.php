@@ -18,7 +18,9 @@ $app->get( '/dashboard/novo/token', function( $req, $res ) use ( $pdo )
 
     $controller = criarControladoraToken($pdo);
     $content = $controller->novoToken($usuario);
-    $res->json( [ 'token' => $content] );
+    $payload = json_encode([ 'token' => $content]);
+    $res->getBody()->write($payload);
+    return $res->withHeader('Content-Type', 'application/json');
 });
 
 
@@ -30,5 +32,7 @@ $app->get( '/dashboard/tokens', function( $req, $res ) use ( $pdo )
 
     $controller = criarControladoraToken($pdo);
     $content = $controller->getTokensLinksUsuario($usuario);
-    $res->json( $content );
+    $payload = json_encode($content);
+    $res->getBody()->write($payload);
+    return $res->withHeader('Content-Type', 'application/json');
 });

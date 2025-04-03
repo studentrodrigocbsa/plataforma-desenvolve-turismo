@@ -79,7 +79,6 @@ class RepositorioMasa
         INSERT INTO escolha (respondente,pergunta,opcao,link) VALUES (:id,(SELECT id FROM pergunta WHERE titulo = :titulo),:opcao,(SELECT id FROM link WHERE token = :token)) 
       ';
       $psContabilizarVotos = $this->pdo->prepare( $sqlContabilizarVotos );
-    
 
       foreach($survey as $resposta){
 

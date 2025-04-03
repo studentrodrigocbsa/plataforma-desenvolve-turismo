@@ -9,18 +9,34 @@ class ControladoraMasa{
 
     public function postAA($dados = []): bool{
 
-        if(count($dados) != 3){
-            return false;
+        Sanitizador::sanitize_recursive($dados);
+
+
+        $dadosSurvey = $dados[0];
+        $arraySurvey = [];
+        $opcaoArray = [];
+        foreach($dadosSurvey as $pergunta){
+            $titulo = $pergunta['titulo'];
+            $respondida = $pergunta['respondida'];
+            foreach($pergunta['opcoes'] as $opcao){
+                $obj = new Opcao($opcao['opcao'],$opcao['voto']);
+                $opcaoArray []= $obj;
+            }
+            $survey = new Survey($titulo,$respondida,$opcaoArray);
+            $arraySurvey []= $survey;
+            $opcaoArray = [];
         }
 
-
-        $survey = $dados[0];
-        $respondente = $dados[1];
+        $dadosRespondente = $dados[1];
+        $respondente = new Respondente($dadosRespondente['perfil'],$dadosRespondente['faixa_etaria'],$dadosRespondente['escolaridade'],$dadosRespondente['cargo'],$dadosRespondente['nota']);
+        
         $token = $dados[2];
 
-        $this->calculadorNota->calcularNotaRespondente($respondente,$survey);
+        //file_put_contents('php://stderr', print_r($dados, TRUE)); // debug
+
+        $this->calculadorNota->calcularNotaRespondente($respondente,$arraySurvey);
         $id = $this->repo->salvarRespondenteSurvey($respondente);
-        return $this->repo->contabilizarVotosSurveyAA($survey,$id,$token);
+        return $this->repo->contabilizarVotosSurveyAA($arraySurvey,$id,$token);
     }
 
     public function getTotaisGenericosPesquisa($token){

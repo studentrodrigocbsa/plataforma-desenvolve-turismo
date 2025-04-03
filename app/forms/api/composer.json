@@ -19,11 +19,11 @@
         "phpstan/phpstan": "^2.1"
     },
     "require": {
-        "phputil/router": "^0.3.3",
-        "phputil/cors": "^0.5.2"
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.7"
     },
     "scripts": {
-        "check": "phpstan analyse src",
+        "check": "phpstan analyse src --level=6",
         "server": [
             "Composer\\Config::disableProcessTimeout",
             "php -S localhost:8080"

@@ -36,6 +36,7 @@ export class ControladoraSurvey{
                 if(resposta.success){
                     this.visao.exibirNotificacaoSurveyConcluidoSucesso(resposta.message);
                     this.visao.telaAgradecimento();
+                    this.repoSurvey.clear();
                 }
             } else{
                 this.visao.exibirNotificacaoVocePossuiPerguntasNaoRespondidas();
