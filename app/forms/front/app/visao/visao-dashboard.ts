@@ -63,7 +63,7 @@ export class VisaoDashboard {
     }
   
     // Visualizar relatório do link
-    const btnChart = document.getElementsByClassName('visualizar-dados-link');
+    const btnChart = document.getElementsByClassName('visualizar-relatorio-link');
     if(btnChart) {
       Array.from(btnChart).forEach(botao => {
         botao.addEventListener('click', (event => {
@@ -78,6 +78,8 @@ export class VisaoDashboard {
         }));
       });
     }
+
+
 
   }
 
@@ -109,12 +111,21 @@ export class VisaoDashboard {
     const celulaActions = this.criarCelula('');
     celulaActions.innerHTML = 
     `
-    <div class="d-inline">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy copiar-link"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+    <div class="d-flex">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+        class="feather feather-copy copiar-link">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </svg>
       <div class="mx-3 vr"></div>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2 visualizar-dados-link"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+        class="feather feather-bar-chart-2 visualizar-relatorio-link">
+        <line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
     </div>
     `
+
 
 
     tr.append(

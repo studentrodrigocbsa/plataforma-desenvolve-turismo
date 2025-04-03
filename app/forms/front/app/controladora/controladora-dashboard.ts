@@ -1,4 +1,3 @@
-import { Link } from "../modelo/link";
 import { RepositorioDashboard } from "../repositorio/repositorio-dashboard";
 import { VisaoDashboard } from "../visao/visao-dashboard";
 
