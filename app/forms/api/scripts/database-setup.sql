@@ -20,7 +20,7 @@ CREATE TABLE link(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     token VARCHAR(100) NOT NULL,
     usuario INT NOT NULL,
-    status ENUM('Ativa','Concluída') NOT NULL DEFAULT 'Concluída',
+    situacao ENUM('Ativa','Concluída') NOT NULL DEFAULT 'Ativa',
     apelido VARCHAR(50),
     CONSTRAINT fk_link__usuario FOREIGN KEY (usuario) REFERENCES login(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;
