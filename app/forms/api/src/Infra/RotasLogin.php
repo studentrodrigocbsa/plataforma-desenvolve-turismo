@@ -27,10 +27,12 @@ $app->post('/logout', function( Request $req, Response $res ) {
 
     if (isset($_SESSION['logado']) && $_SESSION['logado'] === TRUE && $cookie) {
         session_unset();
-        setcookie("sid", "", time() - 3600); // deletando o cookie
+        setcookie("sid", "", time() - 86400); // deletando o cookie
         session_destroy();
-        return $res->withHeader('Location', DOMINIO)->withStatus(302);
+        return $res->withHeader('Location', 'https://11ce-2804-56c-d5ef-6700-a5f1-25b2-748b-58f8.ngrok-free.app')->withStatus(302);
     }
+
+    return $res->withHeader('Location', 'https://11ce-2804-56c-d5ef-6700-a5f1-25b2-748b-58f8.ngrok-free.app')->withStatus(302);
 
 });
 

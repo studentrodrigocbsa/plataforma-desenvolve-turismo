@@ -11,6 +11,7 @@ export class VisaoSurvey{
         const controladora = new ControladoraSurvey(this);
 
         
+        localStorage.length == 0 ? window.location.href = `${DOMINIO}` : console.log() ;
 
 
         const nxtbtn = document.getElementById('next-btn') as HTMLButtonElement;

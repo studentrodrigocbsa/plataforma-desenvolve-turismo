@@ -5,7 +5,7 @@ export default defineConfig({
     host: true, // Permite que o Vite seja acessível por outros dispositivos
     port: 5173, // Porta padrão do Vite, altere se necessário
     strictPort: true, // Garante que a porta escolhida será usada
-    allowedHosts: ["69db-2804-56c-d5ef-6700-5f95-d802-53a7-c2d0.ngrok-free.app"], // Domínio
+    allowedHosts: ["11ce-2804-56c-d5ef-6700-a5f1-25b2-748b-58f8.ngrok-free.app"], // Domínio
     cors: true, // Habilita CORS
     /*
     hmr: {
