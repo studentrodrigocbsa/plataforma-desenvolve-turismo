@@ -1,7 +1,7 @@
 export class Link{
     id: number;
     token: string;
-    situacao: ;
+    //situacao: string;
     
     
     constructor( id = 0, link = ''){

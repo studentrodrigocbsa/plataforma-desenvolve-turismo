@@ -1,3 +1,3 @@
 <?php
-const DOMINIO = 'http://localhost:5173';
-//const DOMINIO = 'https://11ce-2804-56c-d5ef-6700-a5f1-25b2-748b-58f8.ngrok-free.app';
+//const DOMINIO = 'http://localhost:5174';
+const DOMINIO = 'https://13b0-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app';

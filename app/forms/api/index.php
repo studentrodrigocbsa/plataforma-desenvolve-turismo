@@ -11,7 +11,7 @@ require_once 'vendor/autoload.php';
 session_set_cookie_params([
     'lifetime' => 86400,  // 1 dia
     'path' => '/',
-    'domain' => 'https://11ce-2804-56c-d5ef-6700-a5f1-25b2-748b-58f8.ngrok-free.app',
+    'domain' => 'https://13b0-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app/',
     'secure' => true,  // IMPORTANTE: precisa ser `true` se estiver rodando em HTTPS
     'httponly' => true,
     'samesite' => 'None', // Permite cookies em requests cross-origin
@@ -33,8 +33,10 @@ require_once 'src/Middleware/middlewareIsLogado.php';
 // Access-Control-Allow-Methods with all allowed methods
 $app->add(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($app): ResponseInterface {
     $allowedOrigins = [
-        'http://localhost:5174',
-        'http://localhost:8888'
+        'https://13b0-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app/', //frontend
+        'http://localhost:5173',
+        'https://9c3f-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app', //backend
+        'http://localhost:8080'
     ];
 
     $origin = $request->getHeaderLine('Origin'); // Obtém o Origin da requisição
@@ -47,14 +49,8 @@ $app->add(function (ServerRequestInterface $request, RequestHandlerInterface $ha
         $response = $handler->handle($request);
     }
 
-    // 🛠️ Se a origem da requisição for válida, permitir o CORS
-    if (in_array($origin, $allowedOrigins)) {
-        $response = $response->withHeader('Access-Control-Allow-Origin', $origin);
-    } else {
-        file_put_contents('php://stderr', "⚠️ Origem NÃO permitida: " . $origin . PHP_EOL, FILE_APPEND);
-    }
-
     return $response
+        ->withHeader('Access-Control-Allow-Origin', $origin)
         ->withHeader('Access-Control-Allow-Credentials', 'true')
         ->withHeader('Access-Control-Allow-Headers', 'Host, Origin, Accept, Content-Type, Cookie, Authorization, ngrok-skip-browser-warning')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')

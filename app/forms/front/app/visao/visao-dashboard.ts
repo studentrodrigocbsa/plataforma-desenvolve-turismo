@@ -125,7 +125,7 @@ export class VisaoDashboard {
     </div>
     `;
 
-    const celulaStatus = this.criarCelulaDeStatus(el.situacao);
+    const celulaStatus = this.criarCelulaDeStatus('Ativa'); // TODO
 
     const celulaDropdown = this.criarCelula('');
     celulaDropdown.innerHTML = 

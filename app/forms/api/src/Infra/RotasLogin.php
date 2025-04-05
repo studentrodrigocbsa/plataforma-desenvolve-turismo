@@ -29,10 +29,10 @@ $app->post('/logout', function( Request $req, Response $res ) {
         session_unset();
         setcookie("sid", "", time() - 86400); // deletando o cookie
         session_destroy();
-        return $res->withHeader('Location', 'http://localhost:5174')->withStatus(302);
+        return $res->withHeader('Location', 'https://13b0-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app')->withStatus(302);
     }
 
-    return $res->withHeader('Location', 'http://localhost:5174')->withStatus(302);
+    return $res->withHeader('Location', 'https://13b0-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app')->withStatus(302);
 
 });
 
