@@ -54,7 +54,7 @@ CREATE TABLE respondente(
     perfil ENUM('Gestor','Visitante','Residente Local') NOT NULL,
     faixa_etaria ENUM('18...24','25...34','35...44','45...54','55...64','65+') NOT NULL,
     escolaridade ENUM('Ensino Fundamental incompleto','Ensino Fundamental completo','Ensino Médio incompleto','Ensino Médio completo','Ensino Superior incompleto','Ensino Superior completo','Pós-graduação incompleto','Pós-graduação completo','Sem formação') NOT NULL,
-    cargo ENUM('Operacional','Gerencial','Administrativo','Nenhum') DEFAULT 'Nenhum' NOT NULL,
+    cargo ENUM('Operacional (Analistas, Assistentes, Auxiliares, Estagiários e Trainees)','Tático (Coordenadores, Gerentes e Supervisores) ','Estratégico (CEOs, Presidentes e Diretores)','Nenhum') DEFAULT 'Nenhum' NOT NULL,
     nota INT NOT NULL DEFAULT 0
 ) ENGINE=INNODB;
 
