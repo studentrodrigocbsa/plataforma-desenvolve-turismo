@@ -18,21 +18,6 @@ export class CalculadorResultados{
         return ((totalDiscordoTotalmente * 1 + totalDiscordo * 2 + totalNemConcordoNemDiscordo * 3 + totalConcordo * 4 + totalConcordoTotalmente * 5) / (totalDiscordoTotalmente + totalDiscordo + totalNemConcordoNemDiscordo + totalConcordo + totalConcordoTotalmente));
     }
 
-    calcularFeedback(notaGeral: number): string{
-        if(notaGeral < 2){
-            return "O resultado da média das notas atribuídas a cada respondente foi muito alto! 😀";
-        }
-        if(notaGeral >= 2 && notaGeral < 3){
-            return "O resultado da média das notas atribuídas a cada respondente foi alto! 😊";
-        }
-        if(notaGeral >= 3 && notaGeral < 4){
-            return "O resultado da média das notas atribuídas a cada respondente foi moderado. 😯";
-        }
-        if(notaGeral >= 4 && notaGeral < 5){
-            return "O resultado da média das notas atribuídas a cada respondente foi baixo. 🙁";
-        }
-        return "O resultado da média das notas atribuídas a cada respondente foi muito baixo. 😢"; // >=5
-    }
 
     calcularTotaisGeral(array: { titulo: string, opcao: string, votos: number, desempenho_geral: number }[]) {
         //console.log(array);
