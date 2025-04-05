@@ -157,10 +157,6 @@ export class VisaoRelatorio{
         
         `;
     }
-    escreverFeedbackNaTela(mensagem: string, nota: number){
-        const texto = document.getElementById('texto-desempenho-geral') as HTMLElement;
-        texto.innerHTML = `${mensagem} (${nota})`;
-    }
 
 
 
