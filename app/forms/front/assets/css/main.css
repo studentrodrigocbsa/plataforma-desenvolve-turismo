@@ -68,7 +68,7 @@ iframe,
 img,
 svg,
 video {
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 
 canvas{
@@ -1043,16 +1043,17 @@ h6,
 }
 
 /* Alert Danger */
-.danger-alert .left {
+.alert-danger .left {
   background: #d50100;
 }
-.danger-alert .alert {
+.alert-danger {
   color: #d50100;
-  border: 1px solid #d50100;
-  background: rgba(213, 1, 0, 0.2);
+  border: 4px solid #d50000c9;
+  background: rgba(213, 0, 0, 0.116);
   width: 100%;
+  height: 10rem;
 }
-.danger-alert .alert .alert-heading {
+.alert-danger .alert .alert-heading {
   color: #d50100;
   margin-bottom: 15px;
 }

@@ -23,12 +23,14 @@
     <!-- css -->
     <link rel="stylesheet" href="../assets/css/main.css" id="theme-color">
     <link rel="stylesheet" href="../assets/css/chart.css">
+    <link rel="stylesheet" href="../assets/css/table-colors.css">
 
     <!-- Own -->
     <script src="../assets/js/popover.js" type="module" defer></script>
 </head>
 
 <body>
+
 
     <!-- ======== SIDEBAR =========== -->
     <div id="sidebar-div"></div>
@@ -83,14 +85,10 @@
               <div class="col-lg-12">
                 <div class="card-style mb-30">
                   <div class="d-flex flex-wrap justify-content-center">
-                    
                     <div class="mt-3 overflow-x-scroll" class="position-relative vw-90 vh-60">
-                      <canvas class="chart" id="grafico-total-geral"></canvas>
+                      <canvas width="1220px" height="530px" class="chart" id="grafico-total-geral"></canvas>
                     </div>
-                  </div>
-
-                  <h5 class="mt-5" id="texto-desempenho-geral"></h5>
-                  
+                  </div>                  
                 </div>
               </div>
               <!-- END GRÁFICO 1 -->
@@ -98,7 +96,12 @@
 
 
             <hr>
-            <p class="fs-6 fw-light text-center mb-4">Continue rolando para baixo para ler o relatório geral.</p>
+            <p class="fs-6 fw-light text-center mb-4">
+              <i data-feather="info"></i>
+              Para melhor visualização, acesse a página via computador ou vire a tela do dispositivo na horizontal.
+              <br>
+              <i class="my-4" data-feather="arrow-down-circle"></i>
+            </p>
 
 
             <!-- Tabela -->
@@ -107,7 +110,7 @@
                   <div class="card-style mb-30">
                     <div class="title d-flex flex-wrap align-items-center justify-content-between">
                         <div class="left">
-                          <h6 class="text-medium mb-30">Relatório</h6>
+                          <h6 class="text-medium mb-30">Total de respondentes: <i data-feather="user"></i> <div class="d-inline-block" id="total-respondentes">0</div></h6>
                         </div>
                     </div>
                     <!-- End Title -->
@@ -118,22 +121,22 @@
                               <th class="pe-3">
                                   <span class="text-sm text-medium">Pergunta</span>
                               </th>
-                              <th class="pe-3">
-                                  <span class="text-sm text-medium">Discordo Totalmente</span>
+                              <th class="pe-3 table-muito-bom-titulo">
+                                  <span class="fw-bold text-sm text-medium">Discordo Totalmente</span>
                               </th>
-                              <th class="pe-3">
-                                  <span class="text-sm text-medium">Discordo</span>
+                              <th class="pe-3 table-bom-titulo">
+                                  <span class="fw-bold text-sm text-medium">Discordo</span>
                               </th>
-                              <th class="pe-3">
-                                  <span class="text-sm text-medium">Nem Concordo/Nem Discordo</span>
+                              <th class="pe-3 table-neutro-titulo">
+                                  <span class="fw-bold text-sm text-medium">Nem Concordo/Nem Discordo</span>
                               </th>
-                              <th class="pe-3">
-                                  <span class="text-sm text-medium">Concordo</span>
+                              <th class="pe-3 table-ruim-titulo">
+                                  <span class="fw-bold text-sm text-medium">Concordo</span>
                               </th>
-                              <th class="pe-3">
-                                  <span class="text-sm text-medium">Concordo Totalmente</span>
+                              <th class="pe-3 table-muito-ruim-titulo">
+                                  <span class="fw-bold text-sm text-medium">Concordo Totalmente</span>
                               </th>
-                              <th class="pe-3">
+                              <th class="pe-3 table-destaque-cinza-titulo">
                                 <span class="text-sm text-medium">Desempenho por pergunta</span>
                               </th>
                             </tr>
@@ -165,8 +168,13 @@
                           </tbody>
                           <tfoot></tfoot>
                         </table>
-                        <!-- End Table -->
                     </div>
+                    <!-- End Table -->
+                    
+                    <div class="m-4" id="semaforo"></div>
+
+                    <h5 class="mt-5" id="texto-desempenho-geral"></h5>
+                    
                   </div>
               </div>
               <!-- End Col -->
@@ -216,9 +224,6 @@
                     </p>
                     <p class="my-2">
                       O desempenho irá variar entre <strong>1.00 &le; x &le; 5.00</strong>.
-                    </p>
-                    <p class="my-2 fw-light">
-                      Cálculo baseado no estudo de Lamas (2021).
                     </p>
                   </div>
                 </div>

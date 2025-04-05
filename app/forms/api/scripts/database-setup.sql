@@ -22,6 +22,9 @@ CREATE TABLE link(
     usuario INT NOT NULL,
     situacao ENUM('Ativa','Concluída') NOT NULL DEFAULT 'Ativa',
     apelido VARCHAR(50),
+    data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_fechamento DATETIME,
+    total_respondentes INT NOT NULL DEFAULT 0,
     CONSTRAINT fk_link__usuario FOREIGN KEY (usuario) REFERENCES login(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;
 
@@ -49,7 +52,7 @@ CREATE TABLE opcao(
 CREATE TABLE respondente(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     perfil ENUM('Gestor','Visitante','Residente Local') NOT NULL,
-    faixa_etaria ENUM('18...21','22...25','26...29','30...33','34...37','38...41','42+') NOT NULL,
+    faixa_etaria ENUM('18...24','25...34','35...44','45...54','55...64','65+') NOT NULL,
     escolaridade ENUM('Ensino Fundamental incompleto','Ensino Fundamental completo','Ensino Médio incompleto','Ensino Médio completo','Ensino Superior incompleto','Ensino Superior completo','Pós-graduação incompleto','Pós-graduação completo','Sem formação') NOT NULL,
     cargo ENUM('Operacional','Gerencial','Administrativo','Nenhum') DEFAULT 'Nenhum' NOT NULL,
     nota INT NOT NULL DEFAULT 0
@@ -61,7 +64,7 @@ CREATE TABLE escolha(
     pergunta INT NOT NULL,
     opcao VARCHAR(50) NOT NULL,
     link INT NOT NULL,
-    CONSTRAINT fk_respondente__token FOREIGN KEY (link) REFERENCES link(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_escolha__link FOREIGN KEY (link) REFERENCES link(id) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT fk_escolha__respondente FOREIGN KEY (respondente) REFERENCES respondente(id) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT fk_escolha__pergunta FOREIGN KEY (pergunta) REFERENCES pergunta(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;

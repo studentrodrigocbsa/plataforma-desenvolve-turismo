@@ -1,0 +1,38 @@
+.table-muito-bom-titulo{
+    background-color: rgba(3, 255, 116, 0.747) !important;  
+}
+.table-bom-titulo{
+    background-color: rgba(0, 173, 66, 0.664) !important; 
+}
+.table-neutro-titulo{
+    background-color: rgba(255, 255, 0, 0.788) !important; 
+}
+.table-ruim-titulo{
+    background-color: rgba(255, 187, 0, 0.877) !important; 
+}
+.table-muito-ruim-titulo{
+    background-color: rgba(219, 6, 6, 0.788) !important;
+}
+
+.table-muito-bom{
+    background-color: rgba(3, 255, 116, 0.479) !important;  
+}
+.table-bom{
+    background-color: rgba(0, 173, 66, 0.479) !important; 
+}
+.table-neutro{
+    background-color: rgba(255, 255, 0, 0.479) !important; 
+}
+.table-ruim{
+    background-color: rgba(255, 187, 0, 0.479) !important; 
+}
+.table-muito-ruim{
+    background-color: rgba(219, 6, 6, 0.479) !important;
+}
+
+.table-destaque-cinza{
+    background-color: rgba(206, 206, 206, 0.479) !important; 
+}
+.table-destaque-cinza-titulo{
+    background-color: rgba(170, 170, 170, 0.479) !important; 
+}

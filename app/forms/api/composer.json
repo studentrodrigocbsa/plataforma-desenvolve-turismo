@@ -26,7 +26,7 @@
         "check": "phpstan analyse src --level=6",
         "server": [
             "Composer\\Config::disableProcessTimeout",
-            "php -S localhost:8080"
+            "php -S localhost:8888"
         ]
     }
 }
