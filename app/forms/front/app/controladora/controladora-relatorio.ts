@@ -75,13 +75,19 @@ export class ControladoraRelatorio{
     
     
             const desempenhoNota = array[0].desempenho_geral;
-            const desempenho = this.calculador.calcularDesempenhoGeral(desempenhoNota);
+            const desempenho = this.calculador.calcularFeedback(desempenhoNota);
             //console.log(titulos,totaisEmOrdem__DiscordoTotalmente,totaisEmOrdem__Discordo,totaisEmOrdem__NemConcordoNemDiscordo,totaisEmOrdem__Concordo,totaisEmOrdem__ConcordoTotalmente);
             this.visao.desenharGraficoGeral(titulos,totaisEmOrdem__DiscordoTotalmente,totaisEmOrdem__Discordo,totaisEmOrdem__NemConcordoNemDiscordo,totaisEmOrdem__Concordo,totaisEmOrdem__ConcordoTotalmente);
-            this.visao.desenharDesempenhoGeral(desempenho,desempenhoNota);
+            this.visao.escreverFeedbackNaTela(desempenho,desempenhoNota);
         } catch(error: any){
             this.visao.dadosIndisponiveis();
         }
+    }
+
+
+    feedbackSemaforo(maior: number, totais: number[], totalMuitoBom: number, totalBom: number, totalNeutro: number, totalRuim: number, totalMuitoRuim: number) {
+        const feedback = this.calculador.calcularFeedbackSemaforo(maior,totais,totalMuitoBom,totalBom,totalNeutro,totalRuim,totalMuitoRuim);
+        this.visao.escreverFeedbackNaTelaSemaforo(feedback.key, feedback.value);
     }
 
 }

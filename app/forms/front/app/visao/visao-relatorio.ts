@@ -139,11 +139,38 @@ export class VisaoRelatorio{
         }
     }
 
-    desenharDesempenhoGeral(mensagem: string, nota: number){
-        const texto = document.getElementById('texto-desempenho-geral') as HTMLParagraphElement;
+
+
+    /*********************
+     *                  *
+     *      feedbacks   *
+     *                  -
+     ********************/
+    escreverFeedbackNaTelaSemaforo(key: string, value: string) {
+        const div = document.getElementById('semaforo') as HTMLElement;
+        div.innerHTML =
+        `
+        <div class="alert alert-${key} d-flex align-items-center" role="alert" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle m-4"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>             
+            <p>${value}</p>
+        </div>
+        
+        `;
+    }
+    escreverFeedbackNaTela(mensagem: string, nota: number){
+        const texto = document.getElementById('texto-desempenho-geral') as HTMLElement;
         texto.innerHTML = `${mensagem} (${nota})`;
     }
 
+
+
+    /****************************************************
+     *                                                  *
+     * 
+     *          TABELA DE DESEMPENHO POR PERGUNTA       *
+     * 
+     *                                                  *
+     ***************************************************/
     desenharTabelaMediasGeraisRelatorio(titulos: string[], totaisDiscordoTotalmente: number[], totaisDiscordo: number[], totaisNemConcordoNemDiscordo: number[], totaisConcordo: number[], totaisConcordoTotalmente: number[]){
         const tbody = document.querySelector('tbody');
         if(tbody){
@@ -152,27 +179,33 @@ export class VisaoRelatorio{
             const fragmento = document.createDocumentFragment();
             for(let i = 0; i < titulos.length; i++){
                 const controladora = new ControladoraRelatorio(this);
-                const media = controladora.calcularMediaPergunta(totaisDiscordoTotalmente[i] ?? 0,totaisDiscordo[i] ?? 0,totaisNemConcordoNemDiscordo[i] ?? 0,totaisConcordo[i] ?? 0,totaisConcordoTotalmente[i] ?? 0);
-                const linha = this.criarLinha(titulos[i],totaisDiscordoTotalmente[i] ?? 0,totaisDiscordo[i] ?? 0,totaisNemConcordoNemDiscordo[i] ?? 0,totaisConcordo[i] ?? 0,totaisConcordoTotalmente[i] ?? 0,Number(media));
+                const media = controladora.calcularMediaPergunta(
+                    totaisDiscordoTotalmente[i] ?? 0,
+                    totaisDiscordo[i] ?? 0,
+                    totaisNemConcordoNemDiscordo[i] ?? 0,
+                    totaisConcordo[i] ?? 0,
+                    totaisConcordoTotalmente[i] ?? 0);
+                const linha = this.criarLinha(
+                    titulos[i],
+                    totaisDiscordoTotalmente[i] ?? 0,
+                    totaisDiscordo[i] ?? 0,
+                    totaisNemConcordoNemDiscordo[i] ?? 0,
+                    totaisConcordo[i] ?? 0,
+                    totaisConcordoTotalmente[i] ?? 0,
+                    media.toFixed(2));
                 fragmento.append(linha);
             }
             tbody.append(fragmento);
-            this.criarLinhaTotal();
+            this.criarLinhaTotaltfoot();
         }
     }
 
-    calcularTotais(seletor: string){
-        const a = document.querySelectorAll(seletor) as NodeListOf<HTMLTableCellElement>;
-        let t = 0;
-    
-        a.forEach(celula => {
-            t += parseInt(celula.textContent ?? '0');
-        });
 
-        return t;
-    }
-
-    calcularTotaisMedia(seletor: string){
+    /**
+     * 
+     * Retorna um ponto flutuante representando o total numa coluna dado o seletor
+     */
+    calcularTotalColuna(seletor: string){
         const a = document.querySelectorAll(seletor) as NodeListOf<HTMLTableCellElement>;
         let t = 0;
     
@@ -180,37 +213,96 @@ export class VisaoRelatorio{
             t += parseFloat(celula.textContent ?? '0');
         });
 
-        return t.toFixed(2);
+        return t;
     }
 
-    criarLinhaTotal(){
+
+    /**
+     * 
+     * Cria uma linha no tfoot com a soma dos totais por classe e retorna.
+     * 
+     * Chama criarCelula, calcularTotaisMedia e calcularTotais.
+     * 
+     */
+    criarLinhaTotaltfoot(){
         const tfoot = document.querySelector('tfoot');
         if(tfoot){
             const tr = document.createElement('tr');
-            const celulaTotal = this.criarCelula('Total');
-            const celulaTotal1 = this.criarCelula(this.calcularTotais('.qtd1'));
-            const celulaTotal2 = this.criarCelula(this.calcularTotais('.qtd2'));
-            const celulaTotal3 = this.criarCelula(this.calcularTotais('.qtd3'));
-            const celulaTotal4 = this.criarCelula(this.calcularTotais('.qtd4'));
-            const celulaTotal5 = this.criarCelula(this.calcularTotais('.qtd5'));
-            const celulaTotal6 = this.criarCelula(this.calcularTotaisMedia('.qtd6'));
+            const celulaTotal = this.criarCelula('Total', 'table-destaque-cinza');
+            const totais = [];
+            const totalMuitoBom = this.calcularTotalColuna('.qtd1');
+            const totalBom = this.calcularTotalColuna('.qtd2');
+            const totalNeutro = this.calcularTotalColuna('.qtd3');
+            const totalRuim = this.calcularTotalColuna('.qtd4');
+            const totalMuitoRuim = this.calcularTotalColuna('.qtd5');
+            totais.push(totalMuitoBom,totalBom,totalNeutro,totalRuim,totalMuitoRuim);
+            
+
+            const celulaTotal1 = this.criarCelula(totalMuitoBom);
+            const celulaTotal2 = this.criarCelula(totalBom);
+            celulaTotal1.style.borderBottom = '8px solid green';
+            celulaTotal2.style.borderBottom = '8px solid green';
+            const celulaTotal3 = this.criarCelula(totalNeutro);
+            celulaTotal3.style.borderBottom = '8px solid yellow';
+            const celulaTotal4 = this.criarCelula(totalRuim);
+            const celulaTotal5 = this.criarCelula(totalMuitoRuim);
+            celulaTotal4.style.borderBottom = '8px solid red';
+            celulaTotal5.style.borderBottom = '8px solid red';
+
+            // Verificar qual é maior para definir a cor da célula
+            const maior = Math.max(...totais);
+            if(maior === totalMuitoBom){
+                celulaTotal1.classList.add('table-muito-bom-titulo');
+            } else{
+                celulaTotal1.classList.add('table-destaque-cinza');
+            } if(maior === totalBom){
+                celulaTotal2.classList.add('table-bom-titulo');
+            } else{
+                celulaTotal2.classList.add('table-destaque-cinza');
+            } if(maior === totalNeutro){
+                celulaTotal3.classList.add('table-neutro-titulo');
+            } else{
+                celulaTotal3.classList.add('table-destaque-cinza');
+            } if(maior === totalRuim){
+                celulaTotal4.classList.add('table-ruim-titulo');
+            } else{
+                celulaTotal4.classList.add('table-destaque-cinza');
+            } if(maior === totalMuitoRuim){
+                celulaTotal5.classList.add('table-muito-ruim-titulo');
+            } else{
+                celulaTotal5.classList.add('table-destaque-cinza');
+            }
+
+            const controladora = new ControladoraRelatorio(this);
+            controladora.feedbackSemaforo(maior, totais, totalMuitoBom, totalBom, totalNeutro, totalRuim, totalMuitoRuim);
+
+            
+            const celulaTotal6 = this.criarCelula(this.calcularTotalColuna('.qtd6').toFixed(2), 'table-destaque-cinza-titulo');
 
             tr.append(celulaTotal,celulaTotal1,celulaTotal2,celulaTotal3,celulaTotal4,celulaTotal5,celulaTotal6);
             tfoot.append(tr);
         }
     }
 
-    criarLinha(titulo: string, totalDiscordoTotalmente: number, totalDiscordo: number, totalNemConcordoNemDiscordo: number, totalConcordo: number, totalConcordoTotalmente: number, media: number): HTMLTableRowElement {
+
+    /**
+     * 
+     * Cria uma linha com os totais por opção e retorna. 
+     * 
+     * Chama criarCelula.
+     * 
+     */
+    criarLinha(titulo: string, totalDiscordoTotalmente: number, totalDiscordo: number, totalNemConcordoNemDiscordo: number, totalConcordo: number, totalConcordoTotalmente: number, media: string): HTMLTableRowElement {
         const tr = document.createElement('tr');
 
         const celulaTituloPergunta = this.criarCelula(titulo);
         celulaTituloPergunta.classList.add("p-3");
-        const celulaTotal1 = this.criarCelula(totalDiscordoTotalmente);
-        const celulaTotal2 = this.criarCelula(totalDiscordo);
-        const celulaTotal3 = this.criarCelula(totalNemConcordoNemDiscordo);
-        const celulaTotal4 = this.criarCelula(totalConcordo);
-        const celulaTotal5 = this.criarCelula(totalConcordoTotalmente);
-        const celulaMedia = this.criarCelula(media);
+        const celulaTotal1 = this.criarCelula(totalDiscordoTotalmente,'table-muito-bom');
+        const celulaTotal2 = this.criarCelula(totalDiscordo, 'table-bom');
+        const celulaTotal3 = this.criarCelula(totalNemConcordoNemDiscordo, 'table-neutro');
+        const celulaTotal4 = this.criarCelula(totalConcordo, 'table-ruim');
+        const celulaTotal5 = this.criarCelula(totalConcordoTotalmente, 'table-muito-ruim');
+        const celulaMedia = this.criarCelula(media, 'table-destaque-cinza');
 
         celulaTotal1.classList.add('qtd1');
         celulaTotal2.classList.add('qtd2');
@@ -231,11 +323,20 @@ export class VisaoRelatorio{
         );
 
         return tr;
-      }
+    }
     
-    criarCelula(conteudo: any): HTMLTableCellElement {
+
+    /**
+     * Cria uma célula com qualquer conteúdo com seletor de cor opcional e retorna
+     */
+    criarCelula(conteudo: any, cor = ""): HTMLTableCellElement {
         const td = document.createElement('td');
         td.innerText = conteudo;
+        if(cor != ""){
+            td.classList.add(cor);
+        }
         return td;
     }
+    //$end
+
 }

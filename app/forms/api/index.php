@@ -33,10 +33,8 @@ require_once 'src/Middleware/middlewareIsLogado.php';
 // Access-Control-Allow-Methods with all allowed methods
 $app->add(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($app): ResponseInterface {
     $allowedOrigins = [
-        'https://11ce-2804-56c-d5ef-6700-a5f1-25b2-748b-58f8.ngrok-free.app',
-        'http://localhost:5173',
-        'http://localhost:8080',
-        'https://be2c-2804-56c-d5ef-6700-a5f1-25b2-748b-58f8.ngrok-free.app'
+        'http://localhost:5174',
+        'http://localhost:8888'
     ];
 
     $origin = $request->getHeaderLine('Origin'); // Obtém o Origin da requisição

@@ -2,24 +2,36 @@ import { OPCOES } from "../modelo/enum-opcoes";
 
 export class CalculadorResultados{
 
-    calcularMediaPergunta(totalDiscordoTotalmente: number, totalDiscordo: number, totalNemConcordoNemDiscordo: number, totalConcordo: number, totalConcordoTotalmente: number) {
-        return ((totalDiscordoTotalmente * 1 + totalDiscordo * 2 + totalNemConcordoNemDiscordo * 3 + totalConcordo * 4 + totalConcordoTotalmente * 5) / (totalDiscordoTotalmente + totalDiscordo + totalNemConcordoNemDiscordo + totalConcordo + totalConcordoTotalmente)).toFixed(2);
+    calcularFeedbackSemaforo(maior: number, totais: number[], totalMuitoBom: number, totalBom: number, totalNeutro: number, totalRuim: number, totalMuitoRuim: number) {
+        if ( maior === totalMuitoBom || maior === totalBom ) {
+            return { 'key': 'success', 'value': "Siga em frente! Você está no caminho certo."};
+        } else if (  maior === totalNeutro ) {
+            return {'key': 'warning', 'value': "Atenção! É hora de refletir sobre suas atitudes e pensamentos."};
+            
+        } else if ( maior === totalRuim || maior === totalMuitoRuim ) {
+            return {'key': 'danger', 'value': "Pare! É preciso conhecer mais sobre as pessoas com deficiência."};
+        }
+        return {'key': 'info', 'value': "Feedback indisponível."};
     }
 
-    calcularDesempenhoGeral(notaGeral: number): string{
+    calcularMediaPergunta(totalDiscordoTotalmente: number, totalDiscordo: number, totalNemConcordoNemDiscordo: number, totalConcordo: number, totalConcordoTotalmente: number) {
+        return ((totalDiscordoTotalmente * 1 + totalDiscordo * 2 + totalNemConcordoNemDiscordo * 3 + totalConcordo * 4 + totalConcordoTotalmente * 5) / (totalDiscordoTotalmente + totalDiscordo + totalNemConcordoNemDiscordo + totalConcordo + totalConcordoTotalmente));
+    }
+
+    calcularFeedback(notaGeral: number): string{
         if(notaGeral < 2){
-            return "O desempenho geral dos pesquisados foi muito alto! 😀";
+            return "O resultado da média das notas atribuídas a cada respondente foi muito alto! 😀";
         }
         if(notaGeral >= 2 && notaGeral < 3){
-            return "O desempenho geral dos pesquisados foi alto! 😊";
+            return "O resultado da média das notas atribuídas a cada respondente foi alto! 😊";
         }
         if(notaGeral >= 3 && notaGeral < 4){
-            return "O desempenho geral dos pesquisados foi moderado. 😯";
+            return "O resultado da média das notas atribuídas a cada respondente foi moderado. 😯";
         }
         if(notaGeral >= 4 && notaGeral < 5){
-            return "O desempenho geral dos pesquisados foi baixo. 🙁";
+            return "O resultado da média das notas atribuídas a cada respondente foi baixo. 🙁";
         }
-        return "O desempenho geral dos pesquisados foi muito baixo. 😢"; // >=5
+        return "O resultado da média das notas atribuídas a cada respondente foi muito baixo. 😢"; // >=5
     }
 
     calcularTotaisGeral(array: { titulo: string, opcao: string, votos: number, desempenho_geral: number }[]) {
