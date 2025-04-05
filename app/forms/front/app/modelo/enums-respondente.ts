@@ -4,13 +4,12 @@ export enum PERFIL {
     VISITANTE = 'Visitante'
 }
 export enum FAIXA_ETARIA {
-    faixa1 = '18...21',
-    faixa2 = '22...25',
-    faixa3 = '26...29',
-    faixa4 = '30...33',
-    faixa5 = '34...37',
-    faixa6 = '38...41',
-    faixa7 = '42+'
+    faixa1 = '18...24',
+    faixa2 = '25...34',
+    faixa3 = '35...44',
+    faixa4 = '45...54',
+    faixa5 = '55...64',
+    faixa7 = '65+'
 }
 export enum ESCOLARIDADE {
     EFI = 'Ensino Fundamental incompleto',
@@ -25,9 +24,9 @@ export enum ESCOLARIDADE {
 }
 export enum CARGO {
     NENHUM = 'Nenhum',
-    OPERACIONAL = 'Operacional',
-    GERENCIAL = 'Gerencial',
-    ADMINISTRATIVO = 'Administrativo'
+    OPERACIONAL = 'Operacional (Analistas, Assistentes, Auxiliares, Estagiários e Trainees)',
+    GERENCIAL = 'Tático (Coordenadores, Gerentes e Supervisores) ',
+    ADMINISTRATIVO = 'Estratégico (CEOs, Presidentes e Diretores)'
 }
 export enum DADOS_RESPONDENTE{
     ESCOLARIDADE = 'Escolaridade',
