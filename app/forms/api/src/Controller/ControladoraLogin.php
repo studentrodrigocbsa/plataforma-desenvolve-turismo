@@ -14,11 +14,13 @@ class ControladoraLogin {
             $dados = $this->repoLogin->login($login);
 
 
-            if($dados === false)
+            if($dados === false){
                 return $dados;
+            }
+            
 
-            session_name( 'sid' );
-            session_start();
+            file_put_contents('php://stderr', print_r(session_get_cookie_params(), TRUE)); // debug
+
             $_SESSION[ 'logado' ] = true;
             $_SESSION[ 'usuario' ] = $usuario;
             return ['success' => $_SESSION[ 'logado' ], 'usuario' => $_SESSION[ 'usuario' ] ]; // envia dados para o front. No futuro pode incluir dados do destino turístico ...

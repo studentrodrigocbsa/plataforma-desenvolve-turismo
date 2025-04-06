@@ -18,22 +18,10 @@ $app->get('/logado',function (Request $req, Response $res) {
 
 
 $app->post('/logout', function( Request $req, Response $res ) {
-    
-    session_name('sid');
-    session_start();
-
-    $cookieParams = $req->getCookieParams();
-    $cookie = $cookieParams['sid'];
-
-    if (isset($_SESSION['logado']) && $_SESSION['logado'] === TRUE && $cookie) {
-        session_unset();
-        setcookie("sid", "", time() - 86400); // deletando o cookie
-        session_destroy();
-        return $res->withHeader('Location', 'https://13b0-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app')->withStatus(302);
-    }
-
-    return $res->withHeader('Location', 'https://13b0-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app')->withStatus(302);
-
+    session_unset();
+    setcookie("sid", "", time() - 86400); // deletando o cookie
+    session_destroy();
+    return $res->withHeader('Location', DOMINIO)->withStatus(302);
 });
 
 
