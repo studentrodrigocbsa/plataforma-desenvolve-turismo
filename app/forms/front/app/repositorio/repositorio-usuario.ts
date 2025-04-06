@@ -6,7 +6,7 @@ import { Login } from "../modelo/login";
 export class RepositorioUsuario {
     
     async login(user: Login){
-        const response = await fetch(`${API}/login`, { method: 'post', body: JSON.stringify(user), headers: {"Origin":DOMINIO,'Content-Type': 'application/json', 'ngrok-skip-browser-warning':'skip it'}, credentials:'include'  } );
+        const response = await fetch(`${API}/api/login`, { method: 'post', body: JSON.stringify(user), headers: {'Content-Type': 'application/json', 'ngrok-skip-browser-warning':'skip it'}, credentials:'include'  } );
 
         const text = await response.text();
         console.log("Resposta do Backend:",text);

@@ -12,10 +12,7 @@ function criarControladoraToken(PDO $pdo): ControladoraToken {
 
 $app->get( '/dashboard/novo/token', function( $req, $res ) use ( $pdo ) 
 {
-    session_name('sid');
-    session_start();
-    //$usuario = $_SESSION['usuario'];
-    $usuario = 'demonstracao';
+    $usuario = $_SESSION[ 'usuario' ];
 
     $controller = criarControladoraToken($pdo);
     $content = $controller->novoToken($usuario);
@@ -27,10 +24,7 @@ $app->get( '/dashboard/novo/token', function( $req, $res ) use ( $pdo )
 
 $app->get( '/dashboard/tokens', function( $req, $res ) use ( $pdo ) 
 {
-    session_name('sid');
-    session_start();
-    //$usuario = $_SESSION['usuario'];
-    $usuario = 'demonstracao';
+    $usuario = $_SESSION[ 'usuario' ];
 
     $controller = criarControladoraToken($pdo);
     $content = $controller->getTokensLinksUsuario($usuario);
