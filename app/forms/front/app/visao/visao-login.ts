@@ -1,4 +1,5 @@
 import { ControladoraLogin } from "../controladora/controladora-login";
+import { DOMINIO } from "../infra/domain";
 import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
 
 
@@ -43,7 +44,7 @@ export class VisaoLogin{
         <div class="container">
             <div class="row mt-6">
                 <div class="col-sm-12">
-                    <h6 class="title">Insira um usuário e uma senha!</h6>
+                    <h6>Para criar uma conta é simples: basta inserir um usuário e uma senha!</h6>
                     <form action="">
                         <div class="input-style-1">
                             <input autocomplete="username" id="usuario" name="usuario" type="text" placeholder="Insira aqui o seu usuário..." required/>
@@ -55,6 +56,9 @@ export class VisaoLogin{
                             <button name="Cadastrar" class="btn btn-info btn-hover w-100 text-center" id="cadastrar">
                             Cadastrar
                             </button>
+                            <a type="button" class="btn btn-light btn-hover w-100 text-center mt-2" href="${DOMINIO}/front/pages/Login.html">
+                            Voltar p/ Login
+                            </a>
                         </div>
                     </form>
                 </div>
