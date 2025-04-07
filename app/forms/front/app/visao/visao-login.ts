@@ -88,6 +88,9 @@ export class VisaoLogin{
     /**
      * Notificações
      */
+    exibirNotificacaoErroExcecaoMensagem(message: string): void{
+        Notificacao.exibirNotificacao([message], TIPOS_NOTIFICACAO.ERRO);
+    }
     exibirNotificacaoErroExcecaoLogin(): void{
         Notificacao.exibirNotificacao(["Ocorreu um erro interno grave e não foi possível concluir a ação."], TIPOS_NOTIFICACAO.ERRO);
     }

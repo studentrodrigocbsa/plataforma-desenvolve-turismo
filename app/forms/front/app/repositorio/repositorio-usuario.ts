@@ -24,7 +24,10 @@ export class RepositorioUsuario {
         console.log("Resposta do Backend:",text);
 
         if (response.status >= 400) {
-            throw new Error(text);
+            const parsed = JSON.parse(text);
+            if (parsed.message) {
+                throw new Error(parsed.message);
+            }
         }
 
         return JSON.parse(text);

@@ -50,8 +50,8 @@ export class ControladoraLogin{
                 this.visao.exibirNotificacaoSucessoCadastro(resposta.message);
             }
         } catch(error: any){
-            console.log(error);
-            this.visao.exibirNotificacaoErroExcecaoLogin();
+            console.log('Mensagem de erro: ',error.message);
+            this.visao.exibirNotificacaoErroExcecaoMensagem(error.message);
         }
         
     }

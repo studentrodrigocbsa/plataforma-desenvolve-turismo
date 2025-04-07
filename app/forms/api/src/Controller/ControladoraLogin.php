@@ -5,6 +5,17 @@ class ControladoraLogin {
     public function __construct(private RepositorioLogin $repoLogin) {}
 
     public function postCadastro($usuario,$senha): bool {
+
+        // Antes, verificar se usuario já existe
+        $resposta = $this->repoLogin->user(new Login($usuario,$senha));
+        if(count($resposta)){
+            throw new Exception('Usuário já existe.');
+        }
+        // Verificar se o usuário e a senha são válidos
+        if($usuario == '' || $senha == ''){
+            throw new Exception('Usuário ou senha inválidos.');
+        }
+
         $login = new Login($usuario,$senha);
         // Gerar o sal e a pimenta, que serão fixos
         $sal = $login->gerarHash40Caracteres();
