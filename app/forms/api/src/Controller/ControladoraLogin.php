@@ -8,7 +8,7 @@ class ControladoraLogin {
 
         // Antes, verificar se usuario já existe
         $resposta = $this->repoLogin->user(new Login($usuario,$senha));
-        if(count($resposta)){
+        if($resposta != false){
             throw new Exception('Usuário já existe.');
         }
         // Verificar se o usuário e a senha são válidos

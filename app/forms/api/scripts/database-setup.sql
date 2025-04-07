@@ -1,6 +1,10 @@
+DROP DATABASE IF EXISTS tcc_base;
+CREATE DATABASE tcc_base;
+USE tcc_base;
+
 DROP USER IF EXISTS 'tcc'@'localhost';
 CREATE USER 'tcc'@'localhost' IDENTIFIED BY 'tcc';
-GRANT ALL PRIVILEGES ON `tcc_base_dados_respondente_token`.* TO 'tcc'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON `tcc_base`.* TO 'tcc'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 SHOW GRANTS FOR 'tcc'@'localhost';
 
