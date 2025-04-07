@@ -51,7 +51,7 @@ class RepositorioMasa
     }
   }
 
-  public function salvarRespondenteSurvey($respondente): bool{
+  public function salvarRespondenteSurvey($respondente): int{
     try{
 
       $this->pdo->beginTransaction();
@@ -65,8 +65,17 @@ class RepositorioMasa
         'cargo' => $respondente->cargo,
         'nota' => $respondente->nota
       ]);
+      /*
+      $ps = $this->pdo->prepare('SELECT id FROM respondente ORDER BY id DESC LIMIT 1');
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      $idRespondente = $result['id'];
+
+      return $idRespondente;
+      */
 
       return $this->pdo->lastInsertId();
+      
     } catch (Exception $ex) {
       throw new Exception('Erro ao salvar respondente no banco de dados.', (int) $ex->getCode(), $ex);
     }
