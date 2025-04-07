@@ -43,8 +43,34 @@ $app->post('/login', function( Request $req, Response $res ) use ($pdo) {
         $payload = json_encode($data);
         $res->getBody()->write($payload);
         return $res->withHeader('Content-Type', 'application/json');
+    }
+    $data = ['success' => true, 'message' => 'Sucesso.'];
+    $payload = json_encode(value: $data);
+    $res->getBody()->write($payload);
+    return $res->withHeader('Content-Type', 'application/json');
+});
+
+$app->post('/cadastro/usuario', function( Request $req, Response $res ) use ($pdo) {
+    
+    $dados = (array) $req->getParsedBody();
+
+    $usuario = htmlspecialchars( $dados[ 'usuario' ] ?? '' );
+    $senha = htmlspecialchars( $dados[ 'senha' ] ?? '' );
+
+
+    $controladora = criarControladoraLogin($pdo);
+    
+
+    $success = $controladora->postCadastro($usuario,$senha);
+
+    if($success){
+        $data = ['success' => true, 'message' => 'Cadastro realizado com sucesso! Você já pode logar.'];
+        $payload = json_encode($data);
+        $res->getBody()->write($payload);
+        return $res->withHeader('Content-Type', 'application/json');
     } else{
-        $payload = json_encode($content);
+        $data = ['success' => false, 'message' => 'Ocorreu um erro ao cadastrar.'];
+        $payload = json_encode($data);
         $res->getBody()->write($payload);
         return $res->withHeader('Content-Type', 'application/json');
     }

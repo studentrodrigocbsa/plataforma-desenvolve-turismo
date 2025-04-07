@@ -15,9 +15,10 @@ export class VisaoLogin{
                 controladora.acaoDeLogin();
         });
 
-        const cadastrar = document.getElementById('cadastrar') as HTMLButtonElement;
+        const cadastrar = document.getElementById('botao-convite-cadastro') as HTMLButtonElement;
         cadastrar.addEventListener('click', (e) => {
-            Notificacao.exibirNotificacao(["Aplicativo de demonstração. Insira o login fornecido."],TIPOS_NOTIFICACAO.AVISO);
+            e.preventDefault();
+            controladora.carregarControlesDeCadastro();
         });
 
 
@@ -35,19 +36,66 @@ export class VisaoLogin{
     }
 
 
+    desenharTelaCadastro(){
+        const corpo = document.getElementById('conteudo') as HTMLDivElement;
+        corpo.innerHTML =
+        `
+        <div class="container">
+            <div class="row mt-6">
+                <div class="col-sm-12">
+                    <h6 class="title">Insira um usuário e uma senha!</h6>
+                    <form action="">
+                        <div class="input-style-1">
+                            <input autocomplete="username" id="usuario" name="usuario" type="text" placeholder="Insira aqui o seu usuário..." required/>
+                        </div>
+                        <div class="input-style-1">
+                            <input autocomplete="current-password" id="senha" name="senha" type="password" placeholder="Insira aqui a sua senha..." required/>
+                        </div>
+                        <div class="button-group d-flex justify-content-center flex-wrap">
+                            <button name="Cadastrar" class="btn btn-info btn-hover w-100 text-center" id="cadastrar">
+                            Cadastrar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        `;
+        document.getElementById('cadastrar')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(!this.camposEstaoVazios()){
+                const controladora = new ControladoraLogin(this);
+                controladora.acaoDeCadastro();
+            }
+        });
+    }
 
+
+    /**
+     * Dados
+     */
     pegarUsuario(): string{
         return (document.getElementById('usuario') as HTMLInputElement).value;
     }
     pegarSenha(): string{
         return (document.getElementById('senha') as HTMLInputElement).value;
     }
-    
-    exibirNotificacaoErroDeLogin(): void{
-        Notificacao.exibirNotificacao(["Insira o login de demonstração fornecido."], TIPOS_NOTIFICACAO.ERRO);
-    }
     camposEstaoVazios(){
         return ( (document.getElementById('senha') as HTMLInputElement).value == '' || (document.getElementById('usuario') as HTMLInputElement).value == '' );
+    }
+
+
+    /**
+     * Notificações
+     */
+    exibirNotificacaoErroExcecaoLogin(): void{
+        Notificacao.exibirNotificacao(["Ocorreu um erro interno grave e não foi possível concluir a ação."], TIPOS_NOTIFICACAO.ERRO);
+    }
+    exibirNotificacaoSucessoCadastro(mensagem: string): void{
+        Notificacao.exibirNotificacao([mensagem], TIPOS_NOTIFICACAO.SUCESSO);
+    }
+    exibirNotificacaoErroLogin(mensagem: string): void{
+        Notificacao.exibirNotificacao([mensagem], TIPOS_NOTIFICACAO.ERRO);
     }
 
 }
