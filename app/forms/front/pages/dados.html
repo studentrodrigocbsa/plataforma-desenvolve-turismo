@@ -30,13 +30,27 @@
 
 <body>
 
+    <!-- Breadcrumb -->
+    <div class="fixed-top m-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent">
+                <li class="breadcrumb-item"><a href="#" class="pe-none" tabindex="-1" aria-disabled="true">Pesquisa Acessibilidade Atitudinal</a></li>
+            </ol>
+        </nav>
+    </div>
+
     <section class="py-7 py-md-0 bg-hero" id="home">
         <div class="container">
             <div class="row vh-md-100">
                 <div class="col-md-10 col-sm-10 col-12 mx-auto my-auto text-center">
 
                     <h1 class="heading-black text-capitalize">Olá!</h1>
-                    <p class="lead py-3">Bem-vindo(a). Preencha as informações anônimas abaixo. Seu gestor poderá utilizá-las para fins de estudo.</p>
+                    <p class="lead py-3">
+                        Bem-vindo(a)!
+                        <br>
+                        <br>
+                        Preencha as informações anônimas abaixo. Elas poderão ser utilizadas para fins de estudo.
+                    </p>
 
                     <hr>
 
@@ -53,6 +67,12 @@
                         <option value="" selected>-- Selecione o seu cargo --</option>
                     </select>
 
+
+                    <p>
+                        Ao continuar, você concorda com o uso das informações, que serão cedidas por você ao término da pesquisa.
+                        <br>
+                        O respondente <strong>não</strong> é identificável.
+                    </p>
                     
 
                     <button id="iniciar" class="btn btn-primary" tabindex="5">Responder à pesquisa</button>

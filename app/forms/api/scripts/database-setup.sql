@@ -1,7 +1,3 @@
-DROP DATABASE IF EXISTS tcc_base_dados_respondente_token;
-CREATE DATABASE tcc_base_dados_respondente_token;
-USE tcc_base_dados_respondente_token;
-
 DROP USER IF EXISTS 'tcc'@'localhost';
 CREATE USER 'tcc'@'localhost' IDENTIFIED BY 'tcc';
 GRANT ALL PRIVILEGES ON `tcc_base_dados_respondente_token`.* TO 'tcc'@'localhost' WITH GRANT OPTION;
@@ -13,7 +9,9 @@ CREATE TABLE login(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(40) NOT NULL,
     senha VARCHAR(200) NOT NULL,
-    CONSTRAINT unq_usuario__usuario UNIQUE (usuario)
+    sal VARCHAR(40) NOT NULL,
+    pimenta VARCHAR(40) NOT NULL,
+    CONSTRAINT unq_login__usuario UNIQUE (usuario)
 ) ENGINE=INNODB;
 
 CREATE TABLE link(
@@ -25,7 +23,8 @@ CREATE TABLE link(
     data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     data_fechamento DATETIME,
     total_respondentes INT NOT NULL DEFAULT 0,
-    CONSTRAINT fk_link__usuario FOREIGN KEY (usuario) REFERENCES login(id) ON UPDATE CASCADE ON DELETE CASCADE
+    CONSTRAINT fk_link__usuario FOREIGN KEY (usuario) REFERENCES login(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT unq_link__token UNIQUE (token)
 ) ENGINE=INNODB;
 
 CREATE TABLE survey(
@@ -72,7 +71,6 @@ CREATE TABLE escolha(
 
 
 /* Dados para configuração inicial do app experimental */
-INSERT INTO login(usuario,senha) VALUES ("demonstracao","demonstracao");
 
 INSERT INTO survey(categoria) VALUES ('Acessibilidade Atitudinal - Escala de Capacitismo');
 

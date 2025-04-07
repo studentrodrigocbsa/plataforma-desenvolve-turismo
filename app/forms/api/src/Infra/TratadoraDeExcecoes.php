@@ -14,7 +14,7 @@ class TratadoraDeExcecoes{
 
     private static function erro($status, $dados) {
         file_put_contents('php://stderr', print_r($dados, TRUE)); // debug
-        http_response_code($status);
+        http_response_code(400);
         header('Content-Type: application/json');
         die( json_encode( ['message' => $dados] ) );
     }

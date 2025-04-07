@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { DOMINIO } from './front/app/infra/domain';
 
 export default defineConfig({
   server: {
@@ -12,10 +13,10 @@ export default defineConfig({
     host: true, // Permite que o Vite seja acessível por outros dispositivos
     port: 5173, // Porta padrão do Vite, altere se necessário
     strictPort: true, // Garante que a porta escolhida será usada
-    allowedHosts: ["13b0-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app"], // Domínio
+    allowedHosts: [DOMINIO.replace('https://','')], // Domínio
     cors: true, // Habilita CORS
     hmr: {
-      clientPort: 443, // Necessário para funcionar corretamente com ngrok
+      clientPort: 443, // Necessário para funcionar corretamente com ngrok (?)
     }
   }
 });

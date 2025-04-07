@@ -21,15 +21,37 @@ export class ControladoraLogin{
             
             const login = new Login(0,usuario,senha);
             const resposta = await this.repo.login(login);
-            if(resposta.success){
-                sessionStorage.setItem('usuario',resposta.usuario);
-                window.location.href = `${DOMINIO}/front/pages/dashboard.html`;
+            if(resposta.success === false){
+                this.visao.exibirNotificacaoErroLogin(resposta.message);
             } else{
-                this.visao.exibirNotificacaoErroDeLogin();
+                window.location.href = `${DOMINIO}/front/pages/dashboard.html`;
             }
         } catch(error: any){
             console.log(error);
-            this.visao.exibirNotificacaoErroDeLogin();
+            this.visao.exibirNotificacaoErroExcecaoLogin();
+        }
+        
+    }
+
+    carregarControlesDeCadastro(){
+        this.visao.desenharTelaCadastro();
+    }
+
+    async acaoDeCadastro(){
+        try{
+            const usuario = this.visao.pegarUsuario();
+            const senha = this.visao.pegarSenha();
+            
+            const login = new Login(0,usuario,senha);
+            const resposta = await this.repo.cadastro(login);
+            if(resposta.success === false){
+                this.visao.exibirNotificacaoErroLogin(resposta.message);
+            } else{
+                this.visao.exibirNotificacaoSucessoCadastro(resposta.message);
+            }
+        } catch(error: any){
+            console.log('Mensagem de erro: ',error.message);
+            this.visao.exibirNotificacaoErroExcecaoMensagem(error.message);
         }
         
     }
