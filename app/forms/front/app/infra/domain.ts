@@ -1,2 +1,2 @@
 //export const DOMINIO = 'http://localhost:5174';
-export const DOMINIO = 'https://13b0-2804-56c-d5dd-4b00-9105-1565-740a-bfb6.ngrok-free.app';
+export const DOMINIO = 'https://ready-summary-quail.ngrok-free.app';
