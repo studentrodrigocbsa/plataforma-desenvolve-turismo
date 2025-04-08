@@ -2,6 +2,11 @@ import { defineConfig } from 'vite';
 import { DOMINIO } from './front/app/infra/domain';
 
 export default defineConfig({
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'esnext'
+    }
+  },
   server: {
     proxy: {
       '/api': {
@@ -17,6 +22,19 @@ export default defineConfig({
     cors: true, // Habilita CORS
     hmr: {
       clientPort: 443, // Necessário para funcionar corretamente com ngrok (?)
+    }
+  },
+  build: {
+    target: 'esnext',
+    rollupOptions: {
+      input: {
+        main: './index.html',
+        dados: './front/pages/dados.html',
+        dashboard: './front/pages/dashboard.html',
+        login: './front/pages/login.html',
+        relatorio: './front/pages/relatorio.html',
+        survey: './front/pages/survey.html',
+      }
     }
   }
 });
