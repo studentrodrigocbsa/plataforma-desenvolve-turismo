@@ -1,5 +1,3 @@
-import 'simple-notify/dist/simple-notify.css'
-
 export enum TIPOS_NOTIFICACAO {
     SUCESSO = "success",
     ERRO = "error",
