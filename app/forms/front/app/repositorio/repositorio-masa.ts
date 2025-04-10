@@ -39,7 +39,7 @@ export class RepositorioMASA{
 
     async enviar(survey: [{titulo: string, respondida: boolean, opcoes: {opcao: string, voto: number}[]}], respondente: Respondente, token: string){
         const dados = [survey,respondente,token];
-        const response = await fetch(`${API}/api/masa/aa`, { method: 'post', body: JSON.stringify(dados), headers: {'Content-Type': 'application/json', 'ngrok-skip-browser-warning':'yoloo'} } );
+        const response = await fetch(`${API}api/masa/aa`, { method: 'post', body: JSON.stringify(dados), headers: {'Content-Type': 'application/json', 'ngrok-skip-browser-warning':'yoloo'} } );
         const text = await response.text();
         if(response.status >= 400){
             throw new Error(text);

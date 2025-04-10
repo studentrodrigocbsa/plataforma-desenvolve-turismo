@@ -6,7 +6,7 @@ import { DOMINIO } from "https://bsi.cefet-rj.br/masa/front/app/infra/domain.ts"
 const res = await isLogado();
 
 if(res == true){
-  window.location.href = `${DOMINIO}/front/pages/dashboard.html`;
+  window.location.href = `${DOMINIO}front/pages/dashboard.html`;
 } else{
   console.log('oi login');
   const visao = new VisaoLogin();

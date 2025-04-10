@@ -37,7 +37,7 @@ export class ControladoraDados{
 
             // Redirecionar para survey com o token
             const token = this.repoSurvey.pegarTokenUrl();
-            window.location.href = `${DOMINIO}/front/pages/survey.html?token=${token}`;
+            window.location.href = `${DOMINIO}front/pages/survey.html?token=${token}`;
         }
     }
 }

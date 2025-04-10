@@ -56,7 +56,7 @@ export class VisaoDashboard {
           if (row) {
             // Obtém o ID do objeto na linha
             const token = row.dataset.id;
-            copy(`${DOMINIO}/front/pages/dados.html?token=${token}`);
+            copy(`${DOMINIO}front/pages/dados.html?token=${token}`);
             this.exibirNotificacaoCopiadoComSucesso();
           }
         });
@@ -74,7 +74,7 @@ export class VisaoDashboard {
           if(row) {
             // Obtém o ID do objeto na linha
             const token = row.dataset.id;
-            window.open(`${DOMINIO}/front/pages/relatorio.html?token=${token}`, '_blank');
+            window.open(`${DOMINIO}front/pages/relatorio.html?token=${token}`, '_blank');
           }
         }));
       });
@@ -105,7 +105,7 @@ export class VisaoDashboard {
   criarLinha(el: Link): HTMLTableRowElement {
     const tr = document.createElement('tr');
 
-    const celulaLink = this.criarCelula(`${DOMINIO}/front/pages/dados.html?token=${el.token}`);
+    const celulaLink = this.criarCelula(`${DOMINIO}front/pages/dados.html?token=${el.token}`);
     celulaLink.classList.add("text-truncate","user-select-all");
 
     const celulaActions = this.criarCelula('');

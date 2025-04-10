@@ -23,7 +23,7 @@ export class ControladoraLogin{
             if(resposta.success === false){
                 this.visao.exibirNotificacaoErroLogin(resposta.message);
             } else{
-                window.location.href = `${DOMINIO}/front/pages/dashboard.html`;
+                window.location.href = `${DOMINIO}front/pages/dashboard.html`;
             }
         } catch(error: any){
             console.log(error);
