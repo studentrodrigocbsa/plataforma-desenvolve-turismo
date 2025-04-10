@@ -1,8 +1,8 @@
-import { DOMINIO } from "../infra/domain";
-import { Respondente } from "../modelo/respondente";
-import { RepositorioMASA } from "../repositorio/repositorio-masa";
-import { RepositorioSurvey } from "../repositorio/repositorio-survey";
-import { VisaoDados } from "../visao/visao-dados";
+import { DOMINIO } from "https://bsi.cefet-rj.br/masa/front/app/infra/domain.ts";
+import { Respondente } from "https://bsi.cefet-rj.br/masa/front/app/modelo/respondente.ts";
+import { RepositorioMASA } from "https://bsi.cefet-rj.br/masa/front/app/repositorio/repositorio-masa.ts";
+import { RepositorioSurvey } from "https://bsi.cefet-rj.br/masa/front/app/repositorio/repositorio-survey.ts";
+import { VisaoDados } from "https://bsi.cefet-rj.br/masa/front/app/visao/visao-dados.ts";
 
 export class ControladoraDados{
 

@@ -1,8 +1,9 @@
-import copy from "copy-to-clipboard";
-import { ControladoraDashboard } from "../controladora/controladora-dashboard";
-import { DOMINIO } from "../infra/domain";
-import { Link } from "../modelo/link";
-import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
+//import copy from "copy-to-clipboard";
+import copy from "https://bsi.cefet-rj.br/masa/node_modules/copy-to-clipboard/index";
+import { ControladoraDashboard } from "https://bsi.cefet-rj.br/masa/front/app/controladora/controladora-dashboard.ts";
+import { DOMINIO } from "https://bsi.cefet-rj.br/masa/front/app/infra/domain.ts";
+import { Link } from "https://bsi.cefet-rj.br/masa/front/app/modelo/link.ts";
+import { Notificacao, TIPOS_NOTIFICACAO } from "https://bsi.cefet-rj.br/masa/front/app/util/notificacao.ts";
 
 
 export class VisaoDashboard {

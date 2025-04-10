@@ -1,7 +1,8 @@
-import { Chart } from "chart.js/auto";
-import { ControladoraRelatorio } from "../controladora/controladora-relatorio";
-import { OPCOES } from "../modelo/enum-opcoes";
-import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
+//import { Chart } from "chart.js/auto";
+import { Chart } from "https://bsi.cefet-rj.br/masa/node_modules/.pnpm/chart.js@4.4.8/node_modules/chart.js/auto/auto";
+import { ControladoraRelatorio } from "https://bsi.cefet-rj.br/masa/front/app/controladora/controladora-relatorio.ts";
+import { OPCOES } from "https://bsi.cefet-rj.br/masa/front/app/modelo/enum-opcoes.ts";
+import { Notificacao, TIPOS_NOTIFICACAO } from "https://bsi.cefet-rj.br/masa/front/app/util/notificacao.ts";
 
 export class VisaoRelatorio{
 

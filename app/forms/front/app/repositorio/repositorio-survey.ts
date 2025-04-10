@@ -1,4 +1,4 @@
-import { Respondente } from "../modelo/respondente";
+import { Respondente } from "https://bsi.cefet-rj.br/masa/front/app/modelo/respondente.ts";
 
 export class RepositorioSurvey{
 

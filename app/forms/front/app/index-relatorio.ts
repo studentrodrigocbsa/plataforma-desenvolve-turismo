@@ -1,6 +1,6 @@
-import { VisaoRelatorio } from "./visao/visao-relatorio";
-import { isLogado } from "./infra/auth";
-import { DOMINIO } from "./infra/domain";
+import { VisaoRelatorio } from "https://bsi.cefet-rj.br/masa/front/app/visao/visao-relatorio.ts";
+import { isLogado } from "https://bsi.cefet-rj.br/masa/front/app/infra/auth.ts";
+import { DOMINIO } from "https://bsi.cefet-rj.br/masa/front/app/infra/domain.ts";
 
 
 const res = await isLogado();

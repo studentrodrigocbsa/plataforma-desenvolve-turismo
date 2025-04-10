@@ -1,4 +1,4 @@
-import { VisaoSurvey } from "./visao/visao-survey";
+import { VisaoSurvey } from "https://bsi.cefet-rj.br/masa/front/app/visao/visao-survey.ts";
 
 console.log('oi visao survey');
 const visao = new VisaoSurvey();

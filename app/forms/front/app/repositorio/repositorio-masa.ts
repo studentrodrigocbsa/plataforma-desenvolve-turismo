@@ -1,5 +1,5 @@
-import { API } from '../infra/api';
-import { Respondente } from '../modelo/respondente';
+import { API } from "https://bsi.cefet-rj.br/masa/front/app/infra/api.ts';
+import { Respondente } from "https://bsi.cefet-rj.br/masa/front/app/modelo/respondente.ts';
 
 export class RepositorioMASA{
 

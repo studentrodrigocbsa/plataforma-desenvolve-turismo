@@ -1,6 +1,6 @@
-import { RepositorioMASA } from "../repositorio/repositorio-masa";
-import { RepositorioSurvey } from "../repositorio/repositorio-survey";
-import { VisaoSurvey } from "../visao/visao-survey";
+import { RepositorioMASA } from "https://bsi.cefet-rj.br/masa/front/app/repositorio/repositorio-masa.ts";
+import { RepositorioSurvey } from "https://bsi.cefet-rj.br/masa/front/app/repositorio/repositorio-survey.ts";
+import { VisaoSurvey } from "https://bsi.cefet-rj.br/masa/front/app/visao/visao-survey.ts";
 
 export class ControladoraSurvey{
 

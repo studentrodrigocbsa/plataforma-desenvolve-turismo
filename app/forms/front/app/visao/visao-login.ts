@@ -1,6 +1,6 @@
-import { ControladoraLogin } from "../controladora/controladora-login";
-import { DOMINIO } from "../infra/domain";
-import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
+import { ControladoraLogin } from "https://bsi.cefet-rj.br/masa/front/app/controladora/controladora-login.ts";
+import { DOMINIO } from "https://bsi.cefet-rj.br/masa/front/app/infra/domain.ts";
+import { Notificacao, TIPOS_NOTIFICACAO } from "https://bsi.cefet-rj.br/masa/front/app/util/notificacao.ts";
 
 
 export class VisaoLogin{

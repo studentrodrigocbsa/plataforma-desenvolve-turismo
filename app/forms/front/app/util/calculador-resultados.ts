@@ -1,4 +1,4 @@
-import { OPCOES } from "../modelo/enum-opcoes";
+import { OPCOES } from "https://bsi.cefet-rj.br/masa/front/app/modelo/enum-opcoes";
 
 export class CalculadorResultados{
 

@@ -1,8 +1,7 @@
-import { OPCOES } from "../modelo/enum-opcoes";
-import { RepositorioMASA } from "../repositorio/repositorio-masa";
-import { RepositorioSurvey } from "../repositorio/repositorio-survey";
-import { CalculadorResultados } from "../util/calculador-resultados";
-import { VisaoRelatorio } from "../visao/visao-relatorio";
+import { RepositorioMASA } from "https://bsi.cefet-rj.br/masa/front/app/repositorio/repositorio-masa.ts";
+import { RepositorioSurvey } from "https://bsi.cefet-rj.br/masa/front/app/repositorio/repositorio-survey.ts";
+import { CalculadorResultados } from "https://bsi.cefet-rj.br/masa/front/app/util/calculador-resultados.ts";
+import { VisaoRelatorio } from "https://bsi.cefet-rj.br/masa/front/app/visao/visao-relatorio.ts";
 
 export class ControladoraRelatorio{
 

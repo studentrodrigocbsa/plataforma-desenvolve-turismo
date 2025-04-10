@@ -1,7 +1,6 @@
-import { ControladoraSurvey } from "../controladora/controladora-survey";
-import { DOMINIO } from "../infra/domain";
-import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
-import { Redirect } from "../infra/redirect";
+import { ControladoraSurvey } from "https://bsi.cefet-rj.br/masa/front/app/controladora/controladora-survey.ts";
+import { DOMINIO } from "https://bsi.cefet-rj.br/masa/front/app/infra/domain.ts";
+import { Notificacao, TIPOS_NOTIFICACAO } from "https://bsi.cefet-rj.br/masa/front/app/util/notificacao.ts";
 
 export class VisaoSurvey{
 

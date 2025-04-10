@@ -1,5 +1,5 @@
-import { RepositorioDashboard } from "../repositorio/repositorio-dashboard";
-import { VisaoDashboard } from "../visao/visao-dashboard";
+import { RepositorioDashboard } from "https://bsi.cefet-rj.br/masa/front/app/repositorio/repositorio-dashboard.ts";
+import { VisaoDashboard } from "https://bsi.cefet-rj.br/masa/front/app/visao/visao-dashboard.ts";
 
 export class ControladoraDashboard {
 

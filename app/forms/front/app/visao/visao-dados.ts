@@ -1,6 +1,6 @@
-import { ControladoraDados } from "../controladora/controladora-dados";
-import { Notificacao, TIPOS_NOTIFICACAO } from "../util/notificacao";
-import { CARGO, ESCOLARIDADE, FAIXA_ETARIA, PERFIL } from "../modelo/enums-respondente";
+import { ControladoraDados } from "https://bsi.cefet-rj.br/masa/front/app/controladora/controladora-dados.ts";
+import { Notificacao, TIPOS_NOTIFICACAO } from "https://bsi.cefet-rj.br/masa/front/app/util/notificacao.ts";
+import { CARGO, ESCOLARIDADE, FAIXA_ETARIA, PERFIL } from "https://bsi.cefet-rj.br/masa/front/app/modelo/enums-respondente.ts";
 
 export class VisaoDados{
 

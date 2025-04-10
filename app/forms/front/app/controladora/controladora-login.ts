@@ -1,8 +1,7 @@
-import { RepositorioUsuario } from "../repositorio/repositorio-usuario";
-import { Login } from "../modelo/login";
-import { VisaoLogin } from "../visao/visao-login";
-import { TIPOS_NOTIFICACAO } from "../util/notificacao";
-import { DOMINIO } from "../infra/domain";
+import { RepositorioUsuario } from "https://bsi.cefet-rj.br/masa/front/app/repositorio/repositorio-usuario.ts";
+import { Login } from "https://bsi.cefet-rj.br/masa/front/app/modelo/login.ts";
+import { VisaoLogin } from "https://bsi.cefet-rj.br/masa/front/app/visao/visao-login.ts";
+import { DOMINIO } from "https://bsi.cefet-rj.br/masa/front/app/infra/domain.ts";
 
 export class ControladoraLogin{
 

@@ -1,5 +1,5 @@
-import { API } from "../infra/api";
-import { Login } from "../modelo/login";
+import { API } from "https://bsi.cefet-rj.br/masa/front/app/infra/api.ts";
+import { Login } from "https://bsi.cefet-rj.br/masa/front/app/modelo/login.ts";
 
 
 export class RepositorioUsuario {

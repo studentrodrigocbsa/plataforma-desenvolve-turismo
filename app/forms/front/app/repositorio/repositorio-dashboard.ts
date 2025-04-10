@@ -1,5 +1,5 @@
-import { API } from "../infra/api";
-import { Link } from "../modelo/link";
+import { API } from "https://bsi.cefet-rj.br/masa/front/app/infra/api.ts";
+import { Link } from "https://bsi.cefet-rj.br/masa/front/app/modelo/link.ts";
 
 
 export class RepositorioDashboard{
