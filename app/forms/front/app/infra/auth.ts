@@ -1,4 +1,4 @@
-import { API } from "./api";
+import { API } from "https://bsi.cefet-rj.br/masa/front/app/infra/api.ts";
 
 export async function isLogado()
 {
