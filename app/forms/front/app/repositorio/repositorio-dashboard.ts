@@ -5,7 +5,7 @@ import { Link } from "https://bsi.cefet-rj.br/masa/front/app/modelo/link.ts";
 export class RepositorioDashboard{
     
     async gerarToken(): Promise<{token: string}> {
-        const response = await fetch(`${API}api/dashboard/novo/token`, { method: 'get', headers:{'ngrok-skip-browser-warning':'skip it'}  } );
+        const response = await fetch(`${API}/dashboard/novo/token`, { method: 'get', headers:{'ngrok-skip-browser-warning':'skip it'}  } );
         const text = await response.text();
         if(response.status >= 400){
             throw new Error(text);
@@ -14,7 +14,7 @@ export class RepositorioDashboard{
     }
 
     async todosTokensLinks(): Promise<Array<Link>> {
-        const response = await fetch(`${API}api/dashboard/tokens`, { method: 'get',headers:{'ngrok-skip-browser-warning':'skip it'}  } );
+        const response = await fetch(`${API}/dashboard/tokens`, { method: 'get',headers:{'ngrok-skip-browser-warning':'skip it'}  } );
         const text = await response.text();
         if(response.status >= 400){
             throw new Error(text);
